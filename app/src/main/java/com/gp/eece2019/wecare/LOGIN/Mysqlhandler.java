@@ -5,6 +5,7 @@ package com.gp.eece2019.wecare.LOGIN;
  * Created by budopest on 15/03/18.
  */
 
+        import android.app.Activity;
         import android.app.AlertDialog;
         import android.content.Context;
         import android.content.Intent;
@@ -153,8 +154,10 @@ public class Mysqlhandler extends AsyncTask<String,Void,String> {
             }
             if (isInserted) {
                 Toast.makeText(context, "Data Inserted", Toast.LENGTH_LONG).show();
+                Activity act = (Activity) context;
                 Intent i = new Intent(context, MainActivity.class);
-                context.startActivity(i);
+                act.startActivity(i);
+                act.finish();
             } else
                 Toast.makeText(context, "Data not Inserted", Toast.LENGTH_LONG).show();
 

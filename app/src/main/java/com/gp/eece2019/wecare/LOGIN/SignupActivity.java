@@ -129,6 +129,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 usql.insertData(firstname_s,lastname_s,username_s,phone_s,datefield_s);
                 Intent im = new Intent(this,MainActivity.class);
                 startActivity(im);
+                finish();
                 }
 
                 break;
