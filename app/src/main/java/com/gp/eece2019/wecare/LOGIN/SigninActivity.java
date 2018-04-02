@@ -70,7 +70,7 @@ public class SigninActivity extends AppCompatActivity implements View.OnClickLis
                     password.setHint("Enter Password");
                     allfields = false;
                 }
-                if(allfields==true)
+                if(allfields)
                 {
                     String type = "login";
 
