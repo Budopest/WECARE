@@ -29,6 +29,7 @@ package com.gp.eece2019.wecare.LOGIN;
 
 public class Mysqlhandler extends AsyncTask<String,Void,String> {
     Context context;
+    int error=0;
     //AlertDialog alertDialog;
     Mysqlhandler (Context ctx) {
         context = ctx;
@@ -68,14 +69,8 @@ public class Mysqlhandler extends AsyncTask<String,Void,String> {
                 httpURLConnection.disconnect();
                 return result;
             }
-            catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (ProtocolException e)
-            {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
+            catch(Exception e){e.printStackTrace(); error++;}
         }
         else if(type.equals("signup"))
         {
@@ -118,11 +113,9 @@ public class Mysqlhandler extends AsyncTask<String,Void,String> {
                 inputStream.close();
                 httpURLConnection.disconnect();
                 return result;
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
             }
+
+            catch(Exception e){e.printStackTrace(); error++;}
         }
         return null;
     }
@@ -136,6 +129,7 @@ public class Mysqlhandler extends AsyncTask<String,Void,String> {
     @Override
     protected void onPostExecute(String result) {
 
+        if(error==0){
         //alertDialog.setMessage(result);
         //alertDialog.show();
         boolean isInserted;
@@ -164,7 +158,7 @@ public class Mysqlhandler extends AsyncTask<String,Void,String> {
             } else
                 Toast.makeText(context, "Data not Inserted", Toast.LENGTH_LONG).show();
 
-        }
+        }}
 
     }
 
