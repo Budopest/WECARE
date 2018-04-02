@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">WECARE</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="username">User Name</string>
+    <string name="signupmessage">Not signed up ? Click here.</string>
+    <string name="actionmonitortext">Monitor that text for changes</string>
+    <string name="log_in_button">Log in</string>
+    <string name="user_hint">Enter user name</string>
+    <string name="password_hint">Enter password</string>
+    <string name="testcase1">The sign in button is clicked</string>
+    <string name="testcase2">The sign up text is clicked</string>
+    <string name="number_hint">Enter your phone number</string>
+    <string name="date_hint">Enter your date of birth</string>
+    <string name="doctor_hint">Enter your doctor ID</string>
+    <string name="sign_up">Sign up</string>
+    <string name="signinmessage">Already signed up? Sign in</string>
+    <string name="date">DATE</string>
+    <string name="radioP">Patient</string>
+    <string name="radioD">Doctor</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="Welcome_message">Please notify your doctor with your accout details so we can take care of you at the best possible way</string>
+    <string name="welcome1">Welcome</string>
+    <string name="Welcome2">To WE CARE</string>
+    <string name="SkipRegestirationText">Click here to skip registeration(TESTING FEATURE)</string>
+
+</resources>
