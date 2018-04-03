@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     USERsqllitehandler usql;
-    DatabaseHelper bybass;
+    //DatabaseHelper bybass;
 
 
     @Override
@@ -36,11 +36,11 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         usql =  new USERsqllitehandler(this);
-        bybass = new DatabaseHelper(this);
+        //bybass = new DatabaseHelper(this);
         boolean Firstusestatus= Checkfirstuse();
 
         if(Firstusestatus) {
-            bybass.insertData("Dummy","00");
+            //bybass.insertData("Dummy","00");
             setContentView(R.layout.activity_main);
         }
         else {

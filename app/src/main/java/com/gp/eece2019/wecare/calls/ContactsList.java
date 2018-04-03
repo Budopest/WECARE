@@ -47,7 +47,7 @@ public class ContactsList extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         myDb = new DatabaseHelper(getActivity());
         Cursor res = myDb.getAllData();
-        if(res.getCount() > 1){
+        if(res.getCount() != 0){
             int j = 0;
             while (res.moveToNext()) {
                 j++;
