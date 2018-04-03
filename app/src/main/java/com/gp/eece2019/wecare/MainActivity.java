@@ -1,10 +1,9 @@
 package com.gp.eece2019.wecare;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,9 +15,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.database.Cursor;
 import android.content.Intent;
-import android.widget.Toast;
 
-import com.gp.eece2019.wecare.calls.Contacts;
+import com.gp.eece2019.wecare.calls.Addcontacts;
+import com.gp.eece2019.wecare.calls.ContactsList;
+import com.gp.eece2019.wecare.calls.DatabaseHelper;
 import com.gp.eece2019.wecare.login.SigninActivity;
 import com.gp.eece2019.wecare.login.USERsqllitehandler;
 
@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     USERsqllitehandler usql;
+    DatabaseHelper bybass;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +36,11 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         usql =  new USERsqllitehandler(this);
+        bybass = new DatabaseHelper(this);
         boolean Firstusestatus= Checkfirstuse();
 
         if(Firstusestatus) {
+            bybass.insertData("Dummy","00");
             setContentView(R.layout.activity_main);
         }
         else {
@@ -125,14 +129,21 @@ public class MainActivity extends AppCompatActivity
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_addcontacts) {
+
+            Addcontacts Add = new Addcontacts();
+            android.support.v4.app.FragmentManager Manager = getSupportFragmentManager();
+            Manager.beginTransaction().replace(R.id.Fragment_container,Add).commit();
 
         } else if (id == R.id.nav_contacts) {
-            Contacts Emergency = new Contacts();
+
+            ContactsList C = new ContactsList();
             android.support.v4.app.FragmentManager Manager = getSupportFragmentManager();
-            Manager.beginTransaction().replace(R.id.Fragment_container,Emergency).commit();
+            Manager.beginTransaction().replace(R.id.Fragment_container,C).commit();
+
 
         } else if (id == R.id.nav_share) {
+
 
         } else if (id == R.id.nav_send) {
 
@@ -164,7 +175,7 @@ public class MainActivity extends AppCompatActivity
         */
         return true;
     }
-    /*
+
     public void showMessage(String title,String Message){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);
@@ -172,7 +183,7 @@ public class MainActivity extends AppCompatActivity
         builder.setMessage(Message);
         builder.show();
     }
-    */
+
 
 
 

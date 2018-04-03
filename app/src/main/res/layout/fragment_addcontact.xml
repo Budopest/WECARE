@@ -1,4 +1,5 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,24 +8,19 @@
     <!-- TODO: Update blank fragment layout -->
     <EditText
         android:id="@+id/editText_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="290dp"
+        android:layout_height="36dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="70dp"
+        android:layout_marginStart="47dp"
+        android:layout_marginTop="120dp"
+        android:background="@android:color/darker_gray"
         android:ems="10"
-        android:inputType="textPersonName" />
-
-    <EditText
-        android:id="@+id/editText_Tel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText_name"
-        android:layout_alignStart="@+id/editText_name"
-        android:layout_below="@+id/editText_name"
-        android:layout_marginTop="33dp"
-        android:ems="10"
-        android:inputType="textPersonName" />
+        android:hint="ENTER The Name"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="47dp" />
 
     <Button
         android:id="@+id/button_add"
@@ -33,10 +29,12 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/editText_Tel"
-        android:layout_marginLeft="52dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="46dp"
-        android:text="Add" />
+        android:layout_marginStart="66dp"
+        android:layout_marginTop="58dp"
+        android:text="Add"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_Tel"
+        android:layout_marginLeft="66dp" />
 
     <Button
         android:id="@+id/button_viewAll"
@@ -45,8 +43,25 @@
         android:layout_alignEnd="@+id/editText_Tel"
         android:layout_alignRight="@+id/editText_Tel"
         android:layout_alignTop="@+id/button_add"
-        android:layout_marginEnd="19dp"
-        android:layout_marginRight="19dp"
-        android:text="Contacts" />
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="58dp"
+        android:text="Contacts"
+        app:layout_constraintStart_toEndOf="@+id/button_add"
+        app:layout_constraintTop_toBottomOf="@+id/editText_Tel"
+        android:layout_marginLeft="33dp" />
 
-</FrameLayout>
+    <EditText
+        android:id="@+id/editText_Tel"
+        android:layout_width="290dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="47dp"
+        android:layout_marginTop="59dp"
+        android:hint="ENTER The Phone Number"
+        android:background="@android:color/darker_gray"
+        android:ems="10"
+        android:inputType="phone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_name"
+        android:layout_marginLeft="47dp" />
+
+</android.support.constraint.ConstraintLayout>

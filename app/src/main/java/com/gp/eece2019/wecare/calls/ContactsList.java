@@ -18,10 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gp.eece2019.wecare.R;
@@ -30,11 +27,13 @@ import com.gp.eece2019.wecare.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Contacts extends Fragment {
+public class ContactsList extends Fragment {
     DatabaseHelper myDb;
 
-    public Contacts() {
+    public ContactsList() {
         // Required empty public constructor
+
+
     }
 
     @Override
@@ -48,38 +47,45 @@ public class Contacts extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         myDb = new DatabaseHelper(getActivity());
         Cursor res = myDb.getAllData();
-        int j = 0;
-        while (res.moveToNext()) {
-            j++;
-        }
-        res.moveToFirst();
-        final String[] A = new String[j];
-        A[0] = res.getString(1);
-        final String[] B = new String[j];
-        B[0] = res.getString(2);
-        int l = 1;
-        while (res.moveToNext()) {
-            A[l] = res.getString(1);
-            B[l] = res.getString(2);
-            l++;
-        }
-        ListView listView = (ListView) getView().findViewById(R.id.mobile_list);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                getActivity(), android.R.layout.simple_list_item_1, A);
-        listView.setAdapter(adapter);
-        registerForContextMenu(listView);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                Intent callIntent = new Intent(Intent.ACTION_CALL);
-                callIntent.setData(Uri.parse("tel:0" + B[position]));
-                if (ActivityCompat.checkSelfPermission(getActivity(),
-                        Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                    return;
-                }
-                getActivity().startActivity(callIntent);
+        if(res.getCount() > 1){
+            int j = 0;
+            while (res.moveToNext()) {
+                j++;
             }
-        });
+            res.moveToFirst();
+            final String[] A = new String[j];
+            A[0] = res.getString(1);
+            final String[] B = new String[j];
+            B[0] = res.getString(2);
+            int l = 1;
+            while (res.moveToNext()) {
+                A[l] = res.getString(1);
+                B[l] = res.getString(2);
+                l++;
+            }
+
+
+
+            ListView listView = (ListView) getView().findViewById(R.id.mobile_list);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                    getActivity(), android.R.layout.simple_list_item_1, A);
+            listView.setAdapter(adapter);
+            registerForContextMenu(listView);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                    Intent callIntent = new Intent(Intent.ACTION_CALL);
+                    callIntent.setData(Uri.parse("tel:0" + B[position]));
+                    if (ActivityCompat.checkSelfPermission(getActivity(),
+                            Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                        return;
+                    }
+                    getActivity().startActivity(callIntent);
+                }
+            });}
+        else {
+            showMessage("Error", "Nothing found");
+        }
         super.onActivityCreated(savedInstanceState);
     }
 
@@ -157,13 +163,55 @@ public class Contacts extends Fragment {
                 Toast.makeText(getActivity(), "Data Deleted", Toast.LENGTH_LONG).show();
             else
                 Toast.makeText(getActivity(), "Data not Deleted", Toast.LENGTH_LONG).show();
-
+            update();
         } else {
             return false;
         }
         return true;
     }
+    public void showMessage(String title,String Message){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setCancelable(true);
+        builder.setTitle(title);
+        builder.setMessage(Message);
+        builder.show();
+    }
+    public void update() {
 
+        Cursor res = myDb.getAllData();
+        if(res.getCount() == 0) {
+            // show message
+            showMessage("Error","Nothing found");
+            ContactsList BlankFragment= new ContactsList();
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.Fragment_container, BlankFragment)
+                    .addToBackStack(null)
+                    .commit();
+            return;
+        }
+
+        int j=0;
+        while (res.moveToNext()) {
+
+            j++;
+        }
+        res.moveToFirst();
+        String[] A = new String[j];
+        String[] B = new String[j];
+        String[] c = new String[j];
+        int l=0;
+        while(res.moveToNext()){
+            A[l]= res.getString(1);
+            B[l]= res.getString(2);
+            c[l]= res.getString(0);
+            l++;
+        }
+        ContactsList BlankFragment= new ContactsList();
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.Fragment_container, BlankFragment)
+                .addToBackStack(null)
+                .commit();
+    }
 }
 
 

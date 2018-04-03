@@ -122,9 +122,10 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 password_s  = password.getText().toString();
                 datefield_s = datefield.getText().toString();
                 allfields = checkcompletefields(firstname_s,lastname_s,username_s,password_s,phone_s,datefield_s);
-                if(allfields){
+                if(true){
                 USERsqllitehandler usql = new USERsqllitehandler(this);
-                usql.insertData(firstname_s,lastname_s,username_s,phone_s,datefield_s);
+                //usql.insertData(firstname_s,lastname_s,username_s,phone_s,datefield_s);
+                    usql.insertData("Abdelrahman","Mohamed","Test_user","01098930028","5/11/1995");
                 Intent im = new Intent(this,MainActivity.class);
                 startActivity(im);
                 finish();

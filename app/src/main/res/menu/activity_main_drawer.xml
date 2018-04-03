@@ -13,12 +13,12 @@
             android:icon="@drawable/ic_menu_gallery"
             android:title="Gallery" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:id="@+id/nav_addcontacts"
+            android:icon="@android:drawable/ic_menu_add"
+            android:title="Add a contact" />
         <item
             android:id="@+id/nav_contacts"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@android:drawable/ic_menu_call"
             android:title="Contacts" />
     </group>
 

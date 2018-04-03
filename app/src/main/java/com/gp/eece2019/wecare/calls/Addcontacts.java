@@ -1,9 +1,6 @@
 package com.gp.eece2019.wecare.calls;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -42,7 +39,8 @@ public class Addcontacts extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_addcontact, container, false);
+        View v = inflater.inflate(R.layout.
+                fragment_addcontact, container, false);
         return v;
     }
 
@@ -63,8 +61,11 @@ public class Addcontacts extends Fragment {
                     public void onClick(View v) {
                         boolean isInserted = myDb.insertData(editName.getText().toString(),
                                 editTel.getText().toString());
-                        if (isInserted == true)
+                        if (isInserted == true){
                             Toast.makeText(getActivity(), "Data Inserted", Toast.LENGTH_LONG).show();
+
+                        }
+
                         else
                             Toast.makeText(getActivity(), "Data not Inserted", Toast.LENGTH_LONG).show();
                         editName.setText("");
@@ -85,7 +86,7 @@ public class Addcontacts extends Fragment {
                             showMessage("Error", "Nothing found");
                             return;
                         }
-                        Contacts blankFragment= new Contacts();
+                        ContactsList blankFragment= new ContactsList();
                         getActivity().getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.Fragment_container, blankFragment)
                                 .addToBackStack(null)
