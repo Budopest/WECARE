@@ -1,9 +1,6 @@
-package com.gp.eece2019.wecare.LOGIN;
+package com.gp.eece2019.wecare.login;
 
-/**
- * Created by budopest on 19/03/18.
- */
-        import android.content.ContentValues;
+import android.content.ContentValues;
         import android.content.Context;
         import android.database.Cursor;
         import android.database.sqlite.SQLiteDatabase;
@@ -44,10 +41,7 @@ public class USERsqllitehandler extends SQLiteOpenHelper {
         contentValues.put(COL_5,phone);
         contentValues.put(COL_6,date);
         long result = db.insert(TABLE_NAME,null ,contentValues);
-        if(result == -1)
-            return false;
-        else
-            return true;
+        return result != -1;
     }
 
     public Cursor getAllData() {

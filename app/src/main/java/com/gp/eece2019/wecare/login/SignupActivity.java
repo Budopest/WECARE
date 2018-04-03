@@ -1,11 +1,10 @@
-package com.gp.eece2019.wecare.LOGIN;
+package com.gp.eece2019.wecare.login;
 
 
 import com.gp.eece2019.wecare.MainActivity;
 import com.gp.eece2019.wecare.R;
 import android.app.DatePickerDialog;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,7 +15,6 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import android.content.Intent;
-import android.widget.Toast;
 
 import java.util.Calendar;
 

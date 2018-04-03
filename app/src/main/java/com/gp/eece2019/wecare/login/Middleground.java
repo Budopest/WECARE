@@ -1,4 +1,4 @@
-package com.gp.eece2019.wecare.LOGIN;
+package com.gp.eece2019.wecare.login;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

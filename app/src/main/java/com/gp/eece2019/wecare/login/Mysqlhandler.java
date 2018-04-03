@@ -1,4 +1,4 @@
-package com.gp.eece2019.wecare.LOGIN;
+package com.gp.eece2019.wecare.login;
 
 
 /**
@@ -6,7 +6,6 @@ package com.gp.eece2019.wecare.LOGIN;
  */
 
         import android.app.Activity;
-        import android.app.AlertDialog;
         import android.content.Context;
         import android.content.Intent;
         import android.os.AsyncTask;
@@ -16,14 +15,11 @@ package com.gp.eece2019.wecare.LOGIN;
 
         import java.io.BufferedReader;
         import java.io.BufferedWriter;
-        import java.io.IOException;
         import java.io.InputStream;
         import java.io.InputStreamReader;
         import java.io.OutputStream;
         import java.io.OutputStreamWriter;
         import java.net.HttpURLConnection;
-        import java.net.MalformedURLException;
-        import java.net.ProtocolException;
         import java.net.URL;
         import java.net.URLEncoder;
 
