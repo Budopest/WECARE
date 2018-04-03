@@ -18,6 +18,7 @@ import android.database.Cursor;
 import android.content.Intent;
 import android.widget.Toast;
 
+import com.gp.eece2019.wecare.calls.Contacts;
 import com.gp.eece2019.wecare.login.SigninActivity;
 import com.gp.eece2019.wecare.login.USERsqllitehandler;
 
@@ -63,8 +64,7 @@ public class MainActivity extends AppCompatActivity
                 //int id = Integer.parseInt(buffer.toString());
                 usql.deleteData(buffer.toString());
                 //Toast.makeText(MainActivity.this,"Logging out",Toast.LENGTH_LONG).show();
-                Snackbar.make(view, "Logging out", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //Snackbar.make(view, "Logging out", Snackbar.LENGTH_LONG).setAction("Action", null).show();
                 Intent i = new Intent(MainActivity.this,SigninActivity.class);
                 startActivity(i);
                 finish();
@@ -127,7 +127,10 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_slideshow) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_contacts) {
+            Contacts Emergency = new Contacts();
+            android.support.v4.app.FragmentManager Manager = getSupportFragmentManager();
+            Manager.beginTransaction().replace(R.id.Fragment_container,Emergency).commit();
 
         } else if (id == R.id.nav_share) {
 
