@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity
         if(Firstusestatus) {
             //bybass.insertData("Dummy","00");
             setContentView(R.layout.activity_main);
+
         }
         else {
             Intent i = new Intent(this,SigninActivity.class);
