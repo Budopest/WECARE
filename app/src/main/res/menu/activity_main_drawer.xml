@@ -36,6 +36,7 @@
                 android:id="@+id/nav_contactus"
                 android:icon="@android:drawable/ic_dialog_email"
                 android:title="Contact us" />
+
         </menu>
     </item>
 
