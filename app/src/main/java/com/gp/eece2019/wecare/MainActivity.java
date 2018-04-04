@@ -125,9 +125,12 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_Patientinfo) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_measurements) {
+
+        }
+        else if (id == R.id.nav_notification) {
 
         } else if (id == R.id.nav_addcontacts) {
 
@@ -142,10 +145,10 @@ public class MainActivity extends AppCompatActivity
             Manager.beginTransaction().replace(R.id.Fragment_container,C).commit();
 
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_about) {
 
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_contactus) {
 
         }
 
