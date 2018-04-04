@@ -22,9 +22,11 @@
         android:layout_marginTop="80dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:editable="false"
         android:text="Contacts List"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="71dp" />
 
 </android.support.constraint.ConstraintLayout>
 
