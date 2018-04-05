@@ -14,7 +14,8 @@ import android.widget.Toast;
 
 import com.gp.eece2019.wecare.R;
 
-public class Addcontacts extends Fragment {
+public class Addcontacts extends Fragment implements View.OnClickListener {
+
 
     public Addcontacts() {
         // Required empty public constructor
@@ -47,56 +48,55 @@ public class Addcontacts extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         myDb = new DatabaseHelper(getActivity());
-        AddData();
-        viewAll();
+        Add.setOnClickListener(this);
+        contacts.setOnClickListener(this);
         super.onActivityCreated(savedInstanceState);
     }
 
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
 
-    public void AddData() {
-        Add.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        boolean isInserted = myDb.insertData(editName.getText().toString(),
-                                editTel.getText().toString());
-                        if (isInserted == true){
-                            Toast.makeText(getActivity(), "Data Inserted", Toast.LENGTH_LONG).show();
+            case R.id.button_add:
 
-                        }
+                boolean isInserted = myDb.insertData(editName.getText().toString(),
+                        editTel.getText().toString());
+                if (isInserted == true){
+                    Toast.makeText(getActivity(), "Data Inserted", Toast.LENGTH_LONG).show();
 
-                        else
-                            Toast.makeText(getActivity(), "Data not Inserted", Toast.LENGTH_LONG).show();
-                        editName.setText("");
-                        editTel.setText("");
-                    }
                 }
-        );
+
+                else
+                    Toast.makeText(getActivity(), "Data not Inserted", Toast.LENGTH_LONG).show();
+                editName.setText("");
+                editTel.setText("");
+
+                break;
+
+            case R.id.button_viewAll:
+
+                Cursor res = myDb.getAllData();
+                if (res.getCount() == 0) {
+                    // show message
+                    showMessage("Error", "Nothing found");
+                    return;
+                }
+                ContactsList blankFragment= new ContactsList();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.Fragment_container, blankFragment)
+                        .addToBackStack(null)
+                        .commit();
+
+                break;
+        }
+
     }
 
-    public void viewAll() {
-        contacts.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Cursor res = myDb.getAllData();
-                        if (res.getCount() == 0) {
-                            // show message
-                            showMessage("Error", "Nothing found");
-                            return;
-                        }
-                        ContactsList blankFragment= new ContactsList();
-                        getActivity().getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.Fragment_container, blankFragment)
-                                .addToBackStack(null)
-                                .commit();
-                    }
-                });
-    }
 
 
     public void showMessage(String title,String Message){
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setCancelable(true);
         builder.setTitle(title);
