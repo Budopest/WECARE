@@ -18,7 +18,6 @@ import android.content.Intent;
 
 import com.gp.eece2019.wecare.calls.Addcontacts;
 import com.gp.eece2019.wecare.calls.ContactsList;
-import com.gp.eece2019.wecare.calls.DatabaseHelper;
 import com.gp.eece2019.wecare.login.SigninActivity;
 import com.gp.eece2019.wecare.login.USERsqllitehandler;
 
@@ -27,7 +26,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     USERsqllitehandler usql;
-    //DatabaseHelper bybass;
+    //Contactssqllitehandler bybass;
 
 
     @Override
@@ -36,7 +35,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         usql =  new USERsqllitehandler(this);
-        //bybass = new DatabaseHelper(this);
+        //bybass = new Contactssqllitehandler(this);
         boolean Firstusestatus= Checkfirstuse();
 
         if(Firstusestatus) {

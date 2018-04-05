@@ -22,7 +22,7 @@ public class Addcontacts extends Fragment implements View.OnClickListener {
     }
 
 
-    DatabaseHelper myDb;
+    Contactssqllitehandler myDb;
     EditText editName, editTel;
     Button Add;
     Button contacts;
@@ -47,7 +47,7 @@ public class Addcontacts extends Fragment implements View.OnClickListener {
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        myDb = new DatabaseHelper(getActivity());
+        myDb = new Contactssqllitehandler(getActivity());
         Add.setOnClickListener(this);
         contacts.setOnClickListener(this);
         super.onActivityCreated(savedInstanceState);

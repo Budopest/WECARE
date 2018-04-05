@@ -28,7 +28,7 @@ import com.gp.eece2019.wecare.R;
  * A simple {@link Fragment} subclass.
  */
 public class ContactsList extends Fragment {
-    DatabaseHelper myDb;
+    Contactssqllitehandler myDb;
 
     public ContactsList() {
         // Required empty public constructor
@@ -45,7 +45,7 @@ public class ContactsList extends Fragment {
     }
 
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        myDb = new DatabaseHelper(getActivity());
+        myDb = new Contactssqllitehandler(getActivity());
         Cursor res = myDb.getAllData();
         if(res.getCount() != 0){
             int j = 0;

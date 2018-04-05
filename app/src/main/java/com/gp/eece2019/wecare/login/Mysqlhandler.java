@@ -1,27 +1,25 @@
 package com.gp.eece2019.wecare.login;
-
-
 /**
  * Created by budopest on 15/03/18.
  */
+    import android.app.Activity;
+    import android.content.Context;
+    import android.content.Intent;
+    import android.os.AsyncTask;
+    import android.widget.Toast;
 
-        import android.app.Activity;
-        import android.content.Context;
-        import android.content.Intent;
-        import android.os.AsyncTask;
-        import android.widget.Toast;
+    import com.gp.eece2019.wecare.MainActivity;
+    import com.gp.eece2019.wecare.calls.Contactssqllitehandler;
 
-        import com.gp.eece2019.wecare.MainActivity;
-
-        import java.io.BufferedReader;
-        import java.io.BufferedWriter;
-        import java.io.InputStream;
-        import java.io.InputStreamReader;
-        import java.io.OutputStream;
-        import java.io.OutputStreamWriter;
-        import java.net.HttpURLConnection;
-        import java.net.URL;
-        import java.net.URLEncoder;
+    import java.io.BufferedReader;
+    import java.io.BufferedWriter;
+    import java.io.InputStream;
+    import java.io.InputStreamReader;
+    import java.io.OutputStream;
+    import java.io.OutputStreamWriter;
+    import java.net.HttpURLConnection;
+    import java.net.URL;
+    import java.net.URLEncoder;
 
 
 public class Mysqlhandler extends AsyncTask<String,Void,String> {
@@ -129,7 +127,7 @@ public class Mysqlhandler extends AsyncTask<String,Void,String> {
         if(error==0){
         //alertDialog.setMessage(result);
         //alertDialog.show();
-        boolean isInserted;
+        boolean isInserted1,isInserted2;
         int indexSTART = 0;
         int indexSTRING = 0;
         int count=0;
@@ -144,11 +142,14 @@ public class Mysqlhandler extends AsyncTask<String,Void,String> {
             }
         }
         USERsqllitehandler usql = new USERsqllitehandler(context);
+        Contactssqllitehandler csql = new Contactssqllitehandler(context);
         if(userDATA[0].equalsIgnoreCase("success")) {
             {
-                isInserted = usql.insertData(userDATA[1], userDATA[2], userDATA[3], userDATA[4], userDATA[5]);
+                isInserted1 = usql.insertData(userDATA[1], userDATA[2], userDATA[3], userDATA[4], userDATA[5]);
+                isInserted2 = csql.insertData("Call an Ambulance (emergency only)","123");
+
             }
-            if (isInserted) {
+            if (isInserted1&&isInserted2) {
                 Toast.makeText(context, "Data Inserted", Toast.LENGTH_LONG).show();
                 Activity act = (Activity) context;
                 Intent i = new Intent(context, MainActivity.class);

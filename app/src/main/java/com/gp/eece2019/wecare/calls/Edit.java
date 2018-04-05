@@ -19,7 +19,7 @@ import com.gp.eece2019.wecare.R;
  */
 public class Edit extends Fragment  {
 
-    DatabaseHelper myDb;
+    Contactssqllitehandler myDb;
     public Edit() {
         // Required empty public constructor
     }
@@ -31,7 +31,7 @@ public class Edit extends Fragment  {
         return inflater.inflate(R.layout.fragment_edit, container, false);
     }
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        myDb = new DatabaseHelper(getActivity());
+        myDb = new Contactssqllitehandler(getActivity());
         Cursor res = myDb.getAllData();
         int j = 0;
         while (res.moveToNext()) {

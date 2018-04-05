@@ -3,6 +3,8 @@ package com.gp.eece2019.wecare.login;
 
 import com.gp.eece2019.wecare.MainActivity;
 import com.gp.eece2019.wecare.R;
+import com.gp.eece2019.wecare.calls.Contactssqllitehandler;
+
 import android.app.DatePickerDialog;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -124,8 +126,10 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 allfields = checkcompletefields(firstname_s,lastname_s,username_s,password_s,phone_s,datefield_s);
                 if(true){
                 USERsqllitehandler usql = new USERsqllitehandler(this);
+                Contactssqllitehandler csql = new Contactssqllitehandler(this);
                 //usql.insertData(firstname_s,lastname_s,username_s,phone_s,datefield_s);
                     usql.insertData("Abdelrahman","Mohamed","Test_user","01098930028","5/11/1995");
+                    csql.insertData("Call an Ambulance (emergency only)","123");
                 Intent im = new Intent(this,MainActivity.class);
                 startActivity(im);
                 finish();

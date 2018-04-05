@@ -12,14 +12,14 @@ import android.database.sqlite.SQLiteOpenHelper;
 /**
  * Created by ProgrammingKnowledge on 4/3/2015.
  */
-public class DatabaseHelper extends SQLiteOpenHelper {
+public class Contactssqllitehandler extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "contacts.db";
     public static final String TABLE_NAME = "contacts_table";
     public static final String COL_1 = "ID";
     public static final String COL_2 = "NAME";
     public static final String COL_3 = "Tel";
 
-    public DatabaseHelper(Context context) {
+    public Contactssqllitehandler(Context context) {
         super(context, DATABASE_NAME, null, 1);
     }
 
