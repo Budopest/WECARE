@@ -6,11 +6,11 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_Patientinfo"
-            android:icon="@android:drawable/ic_menu_save"
+            android:icon="@drawable/ic_person_black_24dp"
             android:title="Patient Information" />
         <item
             android:id="@+id/nav_measurements"
-            android:icon="@android:drawable/ic_menu_zoom"
+            android:icon="@drawable/ic_desktop_windows_black_24dp"
             android:title="Measurments" />
         <item
             android:id="@+id/nav_notification"
@@ -18,11 +18,11 @@
             android:title="Notifications" />
         <item
             android:id="@+id/nav_addcontacts"
-            android:icon="@android:drawable/ic_menu_add"
+            android:icon="@drawable/ic_person_add_black_24dp"
             android:title="Add a contact" />
         <item
             android:id="@+id/nav_contacts"
-            android:icon="@android:drawable/ic_menu_call"
+            android:icon="@drawable/ic_contact_phone_black_24dp"
             android:title="Contacts" />
     </group>
 

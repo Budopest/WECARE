@@ -1,6 +1,5 @@
 package com.gp.eece2019.wecare.calls;
 
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,7 +17,7 @@ import com.gp.eece2019.wecare.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Edit extends Fragment {
+public class Edit extends Fragment  {
 
     DatabaseHelper myDb;
     public Edit() {
@@ -53,16 +52,15 @@ public class Edit extends Fragment {
             c[l] = res.getString(0);
             l++;
         }
-        final EditText editText = (EditText) getView().findViewById(R.id.editText);
-        final EditText editText2 = (EditText) getView().findViewById(R.id.editText2);
-        Button Edit = (Button) getView().findViewById(R.id.button);
+        final EditText editname = (EditText) getView().findViewById(R.id.edit_name);
+        final EditText editnumber = (EditText) getView().findViewById(R.id.edit_number);
+        Button Edit = (Button) getView().findViewById(R.id.edit_button);
         Bundle bundle = this.getArguments();
         //final String [] N  = intent.getStringArrayExtra("Numbers");
         final int index = bundle.getInt("index");
 
-        editText.setText(A[index]);
-        editText2.setText("0"+B[index]);
-
+        editname.setText(A[index]);
+        editnumber.setText("0"+B[index]);
 
         Edit.setOnClickListener(
                 new View.OnClickListener() {
@@ -74,8 +72,8 @@ public class Edit extends Fragment {
                         // int index = l.getIntExtra("index", 0);
                         Integer deletedRows = myDb.deleteData(c[index]);
 
-                        boolean isInserted = myDb.insertData(editText.getText().toString(),
-                                editText2.getText().toString());
+                        boolean isInserted = myDb.insertData(editname.getText().toString(),
+                                editnumber.getText().toString());
 
                         if (isInserted == true)
                             Toast.makeText(getActivity(), "Data Editted", Toast.LENGTH_LONG).show();
@@ -88,4 +86,7 @@ public class Edit extends Fragment {
         );
 
         super.onActivityCreated(savedInstanceState);
-    }}
+    }
+
+
+}
