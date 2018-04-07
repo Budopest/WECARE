@@ -88,6 +88,9 @@ public class MainActivity extends AppCompatActivity
         if(Getuserdetails()) {
             firstfield.setText(Fname+" "+Lname);
             secondfield.setText(Uname+ "  " + phone);
+            Userinfo UI = new Userinfo(Fname,Lname,Uname,phone,Bdate);
+            android.support.v4.app.FragmentManager Manager = getSupportFragmentManager();
+            Manager.beginTransaction().replace(R.id.Fragment_container,UI).commit();
         }
         navigationView.setNavigationItemSelectedListener(this);
     }
