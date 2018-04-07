@@ -5,6 +5,7 @@ package com.gp.eece2019.wecare.login;
     import android.app.Activity;
     import android.content.Context;
     import android.content.Intent;
+    import android.database.Cursor;
     import android.os.AsyncTask;
     import android.widget.Toast;
 
@@ -127,7 +128,8 @@ public class Mysqlhandler extends AsyncTask<String,Void,String> {
         if(error==0){
         //alertDialog.setMessage(result);
         //alertDialog.show();
-        boolean isInserted1,isInserted2;
+        boolean isInserted1 = false;
+        boolean isInserted2 = true;
         int indexSTART = 0;
         int indexSTRING = 0;
         int count=0;
@@ -146,7 +148,10 @@ public class Mysqlhandler extends AsyncTask<String,Void,String> {
         if(userDATA[0].equalsIgnoreCase("success")) {
             {
                 isInserted1 = usql.insertData(userDATA[1], userDATA[2], userDATA[3], userDATA[4], userDATA[5]);
-                isInserted2 = csql.insertData("Call an Ambulance (emergency only)","123");
+
+                Cursor res = csql.getAllData();
+                if(res.getCount()==0){
+                isInserted2 = csql.insertData("Call an Ambulance (emergency only)","123");}
 
             }
             if (isInserted1&&isInserted2) {
