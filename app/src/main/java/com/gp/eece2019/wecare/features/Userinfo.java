@@ -1,6 +1,7 @@
 package com.gp.eece2019.wecare.features;
 
 
+import android.annotation.SuppressLint;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,6 +19,7 @@ import com.gp.eece2019.wecare.login.USERsqllitehandler;
 /**
  * A simple {@link Fragment} subclass.
  */
+@SuppressLint("ValidFragment")
 public class Userinfo extends Fragment {
 
 
@@ -25,8 +27,12 @@ public class Userinfo extends Fragment {
     String Fname,Lname,Uname,phone,Bdate;
     TextView info;
 
-    public Userinfo() {
-        // Required empty public constructor
+    public Userinfo(String f,String l,String u,String p,String d) {
+        Fname = f;
+        Lname = l;
+        Uname = u;
+        phone = p;
+        Bdate = d;
     }
 
 
@@ -49,7 +55,6 @@ public class Userinfo extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 
         usql =new USERsqllitehandler(getActivity());
-        Getuserdetails();
         info.setText("First name: " + Fname + "\n" +
                      "Lastname: "+ Lname + "\n" +
                      "User name: " + Uname + "\n" +

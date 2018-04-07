@@ -28,9 +28,8 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     USERsqllitehandler usql;
-    String Fname,Lame,Uname,phone,Bdate;
+    String Fname,Lname,Uname,phone,Bdate;
     TextView firstfield,secondfield;
-    //Contactssqllitehandler bybass;
 
 
     @Override
@@ -39,17 +38,12 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         usql =  new USERsqllitehandler(this);
-        //bybass = new Contactssqllitehandler(this);
+
         boolean Firstusestatus= Checkfirstuse();
 
         if(Firstusestatus) {
-            //bybass.insertData("Dummy","00");
+
             setContentView(R.layout.activity_main);
-            Getuserdetails();
-
-            TextView flname = findViewById(R.id.name_navdrawer);
-            TextView uname  = findViewById(R.id.email_navdrawer);
-
 
         }
         else {
@@ -92,7 +86,7 @@ public class MainActivity extends AppCompatActivity
         firstfield =  (TextView)headerView.findViewById(R.id.name_navdrawer);
         secondfield =  (TextView)headerView.findViewById(R.id.email_navdrawer);
         if(Getuserdetails()) {
-            firstfield.setText(Fname+" "+Lame);
+            firstfield.setText(Fname+" "+Lname);
             secondfield.setText(Uname+ "  " + phone);
         }
         navigationView.setNavigationItemSelectedListener(this);
@@ -138,7 +132,7 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_Patientinfo) {
 
-            Userinfo UI = new Userinfo();
+            Userinfo UI = new Userinfo(Fname,Lname,Uname,phone,Bdate);
             android.support.v4.app.FragmentManager Manager = getSupportFragmentManager();
             Manager.beginTransaction().replace(R.id.Fragment_container,UI).commit();
             // Handle the camera action
@@ -203,7 +197,7 @@ public class MainActivity extends AppCompatActivity
         while (res.moveToNext()) {
 
             Fname = res.getString(1);
-            Lame  = res.getString(2);
+            Lname  = res.getString(2);
             Uname = res.getString(3);
             phone = res.getString(4);
             Bdate =res.getString(5);
