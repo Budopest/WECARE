@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
+    android:background="#E25C36"
     tools:context="com.gp.eece2019.wecare.login.SignupActivity">
 
     <EditText
@@ -12,10 +14,11 @@
         android:layout_height="36dp"
         android:layout_marginStart="35dp"
         android:layout_marginTop="16dp"
-        android:background="@android:color/darker_gray"
+        android:background="#A04568"
         android:ems="10"
         android:hint="@string/user_hint"
         android:inputType="textPersonName"
+        android:textColor="@color/colorAccent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/firstname"
         android:layout_marginLeft="35dp" />
@@ -26,7 +29,8 @@
         android:layout_height="36dp"
         android:layout_marginStart="35dp"
         android:layout_marginTop="20dp"
-        android:background="@android:color/darker_gray"
+        android:background="#A04568"
+        android:textColor="@android:color/background_light"
         android:ems="10"
         android:hint="@string/password_hint"
         android:inputType="textPassword"
@@ -40,7 +44,8 @@
         android:layout_height="36dp"
         android:layout_marginStart="35dp"
         android:layout_marginTop="20dp"
-        android:background="@android:color/darker_gray"
+        android:background="#A04568"
+        android:textColor="@android:color/background_light"
         android:ems="10"
         android:hint="@string/number_hint"
         android:inputType="phone"
@@ -54,7 +59,8 @@
         android:layout_height="36dp"
         android:layout_marginStart="35dp"
         android:layout_marginTop="20dp"
-        android:background="@android:color/darker_gray"
+        android:background="#A04568"
+        android:textColor="@android:color/background_light"
         android:ems="10"
         android:hint="@string/date_hint"
         android:inputType="date"
@@ -82,6 +88,7 @@
         android:clickable="true"
         android:focusable="true"
         android:text="@string/signinmessage"
+        android:textColor="#A04568"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signupbutton"
         android:layout_marginLeft="111dp" />
@@ -103,7 +110,8 @@
         android:layout_height="36dp"
         android:layout_marginStart="35dp"
         android:layout_marginTop="70dp"
-        android:background="@android:color/darker_gray"
+        android:background="#A04568"
+        android:textColor="@android:color/background_light"
         android:ems="10"
         android:hint="@string/first_name"
         android:inputType="textPersonName"
@@ -117,13 +125,14 @@
         android:layout_height="36dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="70dp"
-        android:background="@android:color/darker_gray"
+        android:background="#A04568"
+        android:textColor="@android:color/background_light"
         android:ems="10"
-
         android:hint="@string/last_name"
         android:inputType="textPersonName"
         app:layout_constraintStart_toEndOf="@+id/firstname"
         app:layout_constraintTop_toTopOf="parent"
+
         android:layout_marginLeft="16dp" />
 
     <RadioGroup
