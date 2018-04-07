@@ -54,6 +54,21 @@ public class USERsqllitehandler extends SQLiteOpenHelper {
         Cursor res = db.rawQuery("select ID from "+TABLE_NAME,null);
         return res;
     }
+    public Cursor getusername(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select USERNAME from "+TABLE_NAME,null);
+        return res;
+    }
+    public Cursor getfirstname(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select FIRSTNAME from "+TABLE_NAME,null);
+        return res;
+    }
+    public Cursor getlastname(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select LASTNAME from "+TABLE_NAME,null);
+        return res;
+    }
 
     /*public boolean updateData(String id,String name,String surname,String marks) {
         SQLiteDatabase db = this.getWritableDatabase();

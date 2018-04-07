@@ -15,9 +15,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.database.Cursor;
 import android.content.Intent;
+import android.widget.TextView;
 
 import com.gp.eece2019.wecare.calls.Addcontacts;
 import com.gp.eece2019.wecare.calls.ContactsList;
+import com.gp.eece2019.wecare.features.Userinfo;
 import com.gp.eece2019.wecare.login.SigninActivity;
 import com.gp.eece2019.wecare.login.USERsqllitehandler;
 
@@ -26,6 +28,8 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     USERsqllitehandler usql;
+    String Fname,Lame,Uname,phone,Bdate;
+    TextView firstfield,secondfield;
     //Contactssqllitehandler bybass;
 
 
@@ -41,6 +45,11 @@ public class MainActivity extends AppCompatActivity
         if(Firstusestatus) {
             //bybass.insertData("Dummy","00");
             setContentView(R.layout.activity_main);
+            Getuserdetails();
+
+            TextView flname = findViewById(R.id.name_navdrawer);
+            TextView uname  = findViewById(R.id.email_navdrawer);
+
 
         }
         else {
@@ -48,8 +57,6 @@ public class MainActivity extends AppCompatActivity
             startActivity(i);
             finish();
         }
-
-
 
 
         Toolbar toolbar =  findViewById(R.id.toolbar);
@@ -65,10 +72,7 @@ public class MainActivity extends AppCompatActivity
                 while (deleteid.moveToNext()) {
                     buffer.append(deleteid.getString(0));
                 }
-                //int id = Integer.parseInt(buffer.toString());
                 usql.deleteData(buffer.toString());
-                //Toast.makeText(MainActivity.this,"Logging out",Toast.LENGTH_LONG).show();
-                //Snackbar.make(view, "Logging out", Snackbar.LENGTH_LONG).setAction("Action", null).show();
                 Intent i = new Intent(MainActivity.this,SigninActivity.class);
                 startActivity(i);
                 finish();
@@ -84,6 +88,13 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView = findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
+        firstfield =  (TextView)headerView.findViewById(R.id.name_navdrawer);
+        secondfield =  (TextView)headerView.findViewById(R.id.email_navdrawer);
+        if(Getuserdetails()) {
+            firstfield.setText(Fname+" "+Lame);
+            secondfield.setText(Uname+ "  " + phone);
+        }
         navigationView.setNavigationItemSelectedListener(this);
     }
 
@@ -126,6 +137,10 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_Patientinfo) {
+
+            Userinfo UI = new Userinfo();
+            android.support.v4.app.FragmentManager Manager = getSupportFragmentManager();
+            Manager.beginTransaction().replace(R.id.Fragment_container,UI).commit();
             // Handle the camera action
         } else if (id == R.id.nav_measurements) {
 
@@ -158,7 +173,7 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    public boolean Checkfirstuse()
+    public boolean Checkfirstuse()  // Return false at first use only
     {
         Cursor res = usql.getid();
         if(res.getCount() == 0) {
@@ -176,6 +191,24 @@ public class MainActivity extends AppCompatActivity
         //Show all data
         //showMessage("Data",buffer.toString());
         */
+        return true;
+    }
+    public boolean Getuserdetails()
+    {
+        Cursor res = usql.getAllData();
+        if(res.getCount() == 0) {
+            return false;
+        }
+
+        while (res.moveToNext()) {
+
+            Fname = res.getString(1);
+            Lame  = res.getString(2);
+            Uname = res.getString(3);
+            phone = res.getString(4);
+            Bdate =res.getString(5);
+        }
+
         return true;
     }
 
