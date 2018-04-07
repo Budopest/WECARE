@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    android:background="#E25C36"
+    android:background="#E76438"
     tools:context="com.gp.eece2019.wecare.login.SignupActivity">
 
     <EditText
