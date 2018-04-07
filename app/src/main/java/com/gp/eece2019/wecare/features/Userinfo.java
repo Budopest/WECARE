@@ -23,7 +23,7 @@ import com.gp.eece2019.wecare.login.USERsqllitehandler;
 public class Userinfo extends Fragment {
 
 
-    USERsqllitehandler usql;
+    //USERsqllitehandler usql;
     String Fname,Lname,Uname,phone,Bdate;
     TextView info;
 
@@ -54,7 +54,7 @@ public class Userinfo extends Fragment {
 
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 
-        usql =new USERsqllitehandler(getActivity());
+
         info.setText("First name: " + Fname + "\n" +
                      "Lastname: "+ Lname + "\n" +
                      "User name: " + Uname + "\n" +
@@ -65,28 +65,6 @@ public class Userinfo extends Fragment {
 
 
         super.onActivityCreated(savedInstanceState);
-    }
-
-
-
-
-    public boolean Getuserdetails()
-    {
-        Cursor res = usql.getAllData();
-        if(res.getCount() == 0) {
-            return false;
-        }
-
-        while (res.moveToNext()) {
-
-            Fname = res.getString(1);
-            Lname  = res.getString(2);
-            Uname = res.getString(3);
-            phone = res.getString(4);
-            Bdate =res.getString(5);
-        }
-
-        return true;
     }
 
 
