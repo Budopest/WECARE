@@ -62,6 +62,8 @@
         android:background="#A04568"
         android:textColor="@android:color/background_light"
         android:ems="10"
+        android:clickable="false"
+        android:focusable="false"
         android:hint="@string/date_hint"
         android:inputType="date"
         app:layout_constraintStart_toStartOf="parent"
