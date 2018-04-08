@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.gp.eece2019.wecare.calls.Addcontacts;
 import com.gp.eece2019.wecare.calls.ContactsList;
+import com.gp.eece2019.wecare.features.Measurements;
 import com.gp.eece2019.wecare.features.Userinfo;
 import com.gp.eece2019.wecare.login.SigninActivity;
 import com.gp.eece2019.wecare.login.USERsqllitehandler;
@@ -140,6 +141,10 @@ public class MainActivity extends AppCompatActivity
             Manager.beginTransaction().replace(R.id.Fragment_container,UI).commit();
             // Handle the camera action
         } else if (id == R.id.nav_measurements) {
+
+            Measurements M = new Measurements(Uname);
+            android.support.v4.app.FragmentManager Manager = getSupportFragmentManager();
+            Manager.beginTransaction().replace(R.id.Fragment_container,M).commit();
 
         }
         else if (id == R.id.nav_notification) {
