@@ -76,8 +76,8 @@ public class MeasureSQLhandler extends AsyncTask<String,Void,String> {
 
     @Override
     protected void onPreExecute() {
-        alertDialog = new AlertDialog.Builder(context).create();
-        alertDialog.setTitle("Connection Status");
+        alertDialog = new AlertDialog.Builder(context).create(); //Alert dialog for testing to show
+        alertDialog.setTitle("Connection Status");               //the recieved response from the data base
     }
 
     @Override
