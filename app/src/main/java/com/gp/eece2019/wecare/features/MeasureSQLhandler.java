@@ -43,7 +43,7 @@ public class MeasureSQLhandler extends AsyncTask<String,Void,String> {
         String login_url = "http://192.168.1.28/test/";  //Add the url here
 
             try {
-                String user_name = params[0]; // the user name
+                String user_name = params[0]; // the user name in case of testing account the user name will be "Test_user"
                 URL url = new URL(login_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
