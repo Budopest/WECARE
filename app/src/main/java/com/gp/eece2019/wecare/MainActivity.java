@@ -149,7 +149,7 @@ public class MainActivity extends AppCompatActivity
 
         }
         else if (id == R.id.nav_notification) {
-            MedicinesList C = new MedicinesList();
+            MedicinesList C = new MedicinesList(Uname);
             android.support.v4.app.FragmentManager Manager = getSupportFragmentManager();
             Manager.beginTransaction().replace(R.id.Fragment_container,C).commit();
 

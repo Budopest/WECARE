@@ -42,7 +42,7 @@ public class MeasureSQLhandler extends AsyncTask<String,Void,String> {
     @Override
     protected String doInBackground(String... params) { // check string params
 
-        String login_url = "http://192.168.1.73/readm.php";  //Add the url here
+        String login_url = "http://192.168.1.121/readm.php";  //Add the url here
 
             try {
                 String user_name = params[0]; // the user name in case of testing account the user name will be "Test_user"
@@ -78,8 +78,8 @@ public class MeasureSQLhandler extends AsyncTask<String,Void,String> {
 
     @Override
     protected void onPreExecute() {
-        alertDialog = new AlertDialog.Builder(ctx).create(); //Alert dialog for testing to show
-        alertDialog.setTitle("Connection Status");               //the recieved response from the data base
+        //alertDialog = new AlertDialog.Builder(ctx).create(); //Alert dialog for testing to show
+        //alertDialog.setTitle("Connection Status");               //the recieved response from the data base
 
     }
 
@@ -87,8 +87,8 @@ public class MeasureSQLhandler extends AsyncTask<String,Void,String> {
     protected void onPostExecute(String result) {
 
         if(error==0){
-            alertDialog.setMessage(result);
-            alertDialog.show();
+            //alertDialog.setMessage(result);
+            //alertDialog.show();
             int indexdatestart=0;   int indexelementstart=0; boolean ins=true;
             boolean end = false;    boolean firstelement =false; boolean inside = false;
             String date="";

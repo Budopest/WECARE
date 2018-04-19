@@ -1,5 +1,6 @@
 package com.gp.eece2019.wecare.notification;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -16,11 +17,14 @@ import android.widget.ListView;
 import com.gp.eece2019.wecare.R;
 
 
+@SuppressLint("ValidFragment")
 public class MedicinesList extends Fragment {
 
+    String username;
+    MedicineSQLhandler MSQL;
+    public MedicinesList(String username) {
 
-    public MedicinesList() {
-        // Required empty public constructor
+        this.username = username;
     }
     Medicinesqllitehandler Db;
 
@@ -33,6 +37,11 @@ public class MedicinesList extends Fragment {
     }
 
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+
+        MSQL = new MedicineSQLhandler(getActivity());
+        MSQL.execute(username);
+
+
         Db = new Medicinesqllitehandler(getActivity());
         Cursor res = Db.getAllData();
         if(res.getCount() != 0){
@@ -56,7 +65,7 @@ public class MedicinesList extends Fragment {
             registerForContextMenu(listView);
         }
         else {
-            showMessage("Error", "Nothing found");
+            //showMessage("Error", "Nothing found");
         }
         super.onActivityCreated(savedInstanceState);
     }
