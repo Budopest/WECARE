@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    android:background="#D24D3C"
+    android:background="#FFCDF7EB"
     tools:context="com.gp.eece2019.wecare.login.SignupActivity">
 
     <EditText
@@ -14,7 +14,7 @@
         android:layout_height="36dp"
         android:layout_marginStart="35dp"
         android:layout_marginTop="16dp"
-        android:background="#AD4C5F"
+        android:background="#FFBCF8AF"
         android:ems="10"
         android:hint="@string/user_hint"
         android:inputType="textPersonName"
@@ -29,7 +29,7 @@
         android:layout_height="36dp"
         android:layout_marginStart="35dp"
         android:layout_marginTop="20dp"
-        android:background="#AD4C5F"
+        android:background="#FFBCF8AF"
         android:textColor="@android:color/background_light"
         android:ems="10"
         android:hint="@string/password_hint"
@@ -44,7 +44,7 @@
         android:layout_height="36dp"
         android:layout_marginStart="35dp"
         android:layout_marginTop="20dp"
-        android:background="#AD4C5F"
+        android:background="#FFBCF8AF"
         android:textColor="@android:color/background_light"
         android:ems="10"
         android:hint="@string/number_hint"
@@ -59,7 +59,7 @@
         android:layout_height="36dp"
         android:layout_marginStart="35dp"
         android:layout_marginTop="20dp"
-        android:background="#AD4C5F"
+        android:background="#FFBCF8AF"
         android:textColor="@android:color/background_light"
         android:ems="10"
         android:clickable="false"
@@ -77,6 +77,7 @@
         android:layout_marginStart="136dp"
         android:layout_marginTop="20dp"
         android:text="@string/sign_up"
+        android:background="#FF0EB482"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup"
         android:layout_marginLeft="136dp" />
@@ -90,7 +91,7 @@
         android:clickable="true"
         android:focusable="true"
         android:text="@string/signinmessage"
-        android:textColor="#AD4C5F"
+        android:textColor="#FF0EB482"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signupbutton"
         android:layout_marginLeft="111dp" />
@@ -102,6 +103,7 @@
         android:layout_marginStart="1dp"
         android:layout_marginTop="18dp"
         android:text="@string/date"
+        android:background="#FF0EB482"
         app:layout_constraintStart_toEndOf="@+id/date"
         app:layout_constraintTop_toBottomOf="@+id/phone"
         android:layout_marginLeft="1dp" />
@@ -112,7 +114,7 @@
         android:layout_height="36dp"
         android:layout_marginStart="35dp"
         android:layout_marginTop="70dp"
-        android:background="#AD4C5F"
+        android:background="#FFBCF8AF"
         android:textColor="@android:color/background_light"
         android:ems="10"
         android:hint="@string/first_name"
@@ -127,15 +129,15 @@
         android:layout_height="36dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="70dp"
-        android:background="#AD4C5F"
-        android:textColor="@android:color/background_light"
+        android:background="#FFBCF8AF"
         android:ems="10"
         android:hint="@string/last_name"
         android:inputType="textPersonName"
+        android:textColor="@color/colorAccent"
         app:layout_constraintStart_toEndOf="@+id/firstname"
         app:layout_constraintTop_toTopOf="parent"
 
-        android:layout_marginLeft="16dp" />
+        />
 
     <RadioGroup
         android:id="@+id/radioGroup"
@@ -174,7 +176,7 @@
         android:clickable="true"
         android:focusable="true"
         android:text="@string/SkipRegestirationText"
-        android:textColor="@android:color/holo_red_dark"
+        android:textColor="#FF0EB482"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signintext"
         android:layout_marginLeft="34dp" />

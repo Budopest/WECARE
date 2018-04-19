@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#AD4C5F"
+    android:background="#FFCDF7EB"
     tools:context="com.gp.eece2019.wecare.login.SigninActivity">
 
     <EditText
@@ -13,7 +13,7 @@
         android:layout_height="36dp"
         android:layout_marginStart="35dp"
         android:layout_marginTop="130dp"
-        android:background="#D24D3C"
+        android:background="#FFBCF8AF"
         android:ems="10"
         android:hint="@string/user_hint"
         android:inputType="textPersonName"
@@ -31,7 +31,7 @@
         android:layout_marginStart="35dp"
         android:layout_marginTop="28dp"
         android:textColor="@android:color/background_light"
-        android:background="#D24D3C"
+        android:background="#FFBCF8AF"
         android:ems="10"
         android:hint="@string/password_hint"
         android:inputType="textPassword"
@@ -46,6 +46,7 @@
         android:layout_marginStart="135dp"
         android:layout_marginTop="35dp"
         android:text="@string/log_in_button"
+        android:background="#FF0EB482"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password" />
 
@@ -59,7 +60,7 @@
         android:clickable="true"
         android:focusable="true"
         android:text="@string/signupmessage"
-        android:textColor="#D24D3C"
+        android:textColor="#FF0EB482"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginbutton" />
 
