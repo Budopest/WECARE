@@ -23,6 +23,7 @@ import com.gp.eece2019.wecare.features.Measurements;
 import com.gp.eece2019.wecare.features.Userinfo;
 import com.gp.eece2019.wecare.login.SigninActivity;
 import com.gp.eece2019.wecare.login.USERsqllitehandler;
+import com.gp.eece2019.wecare.notification.MedicinesList;
 
 
 public class MainActivity extends AppCompatActivity
@@ -148,6 +149,9 @@ public class MainActivity extends AppCompatActivity
 
         }
         else if (id == R.id.nav_notification) {
+            MedicinesList C = new MedicinesList();
+            android.support.v4.app.FragmentManager Manager = getSupportFragmentManager();
+            Manager.beginTransaction().replace(R.id.Fragment_container,C).commit();
 
         } else if (id == R.id.nav_addcontacts) {
 

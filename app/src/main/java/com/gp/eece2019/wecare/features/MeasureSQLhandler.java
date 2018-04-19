@@ -86,37 +86,83 @@ public class MeasureSQLhandler extends AsyncTask<String,Void,String> {
     @Override
     protected void onPostExecute(String result) {
 
-        if(error==0){    //insert the code that handles the result here
-            //alertDialog.setMessage(result);
-            //alertDialog.show();
+        if(error==0){
+            alertDialog.setMessage(result);
+            alertDialog.show();
+            int indexdatestart=0;   int indexelementstart=0; boolean ins=true;
+            boolean end = false;    boolean firstelement =false; boolean inside = false;
+            String date="";
+            String element="";
+            MeasureSQLLITE M = new MeasureSQLLITE(ctx);
+            boolean isinserted = false;
 
-            // The below code display the recieved measures in the form:
-            //temp(1,2,3,4)+hrate(5,6,9,8)  the only thing that matters is the () and what is inside of them
-            // "temp" "+" "hrate" all doesn't matter
-
-
-            TextView temp = (TextView)((Activity)ctx).findViewById(R.id.temptext);
-            TextView hrate = (TextView)((Activity)ctx).findViewById(R.id.hratetext);
-            int indexstart=0; int indexm=0; boolean S=false;
-            String Stemp="";
-            String Shrate="";
             for(int i =0;i<result.length();i++)
             {
-                if(result.charAt(i) == '(')
-                {indexstart=i; S=true;}
-                if(S && result.charAt(i)==')')
-                {S=false;
-                if(indexm==0) {Stemp = result.substring(indexstart+1,i); indexm=1;}
-                else Shrate=result.substring(indexstart+1,i);
+                if(result.charAt(i)=='|' && !end)          {indexdatestart=i+1; end=true;}
+                if(result.charAt(i)==',' && !firstelement) {date = result.substring(indexdatestart,i); firstelement=true;}
+
+                if(result.charAt(i)=='(' && !inside) {indexelementstart=i+1; inside=true;}
+                if(result.charAt(i)==')' && inside)  {
+                    element = result.substring(indexelementstart,i); inside=false;
+
+                    int T; int P; int TF; int PF;
+                    int indexS =0;
+                    String all[] = new String[4];
+                    int indexall=0;
+
+                    for(int j =0;j<element.length();j++)
+                    {
+                        if(element.charAt(j)==',')
+                        {
+                            all[indexall] = element.substring(indexS, j);
+                            indexall++; indexS=j+1;
+                        }
+                        if(j==element.length()-1)
+                        {
+                            all[indexall] = element.substring(indexS, j+1);
+                        }
+                    }
+                    T = Integer.parseInt(all[0]);
+                    TF = Integer.parseInt(all[1]);
+                    P = Integer.parseInt(all[2]);
+                    PF = Integer.parseInt(all[3]);
+
+                    isinserted = M.insertData(T,TF,P,PF);
+                    if (isinserted&&ins){
+                        Toast.makeText(ctx, "Data Inserted", Toast.LENGTH_LONG).show();
+                        ins = false;
+                    }
                 }
             }
-            temp.setText(Stemp);
-            hrate.setText(Shrate);
+            Cursor res = M.getAllData();
+            if(res.getCount() == 0) {
+                // show message
+                showMessage("Error","Nothing found");
+                return;
+            }
 
+            StringBuffer buffer = new StringBuffer();
+            while (res.moveToNext()) {
+                buffer.append("Id :"+ res.getString(0)+"\n");
+                buffer.append("T :"+ res.getString(1)+"\n");
+                buffer.append("TF :"+ res.getString(2)+"\n");
+                buffer.append("P :"+ res.getString(3)+"\n");
+                buffer.append("PF :"+ res.getString(4)+"\n\n");
+            }
 
+            // Show all data
+            showMessage("Data",buffer.toString());
 
         }
 
+    }
+
+    public void showMessage(String title,String Message){
+        AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
+        builder.setCancelable(true);
+        builder.setTitle(title);
+        builder.setMessage(Message);
+        builder.show();
     }
 
     @Override
