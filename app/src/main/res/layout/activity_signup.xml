@@ -176,7 +176,7 @@
         android:clickable="true"
         android:focusable="true"
         android:text="@string/SkipRegestirationText"
-        android:textColor="#FF0EB482"
+        android:textColor="#FF07553D"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signintext"
         android:layout_marginLeft="34dp" />
