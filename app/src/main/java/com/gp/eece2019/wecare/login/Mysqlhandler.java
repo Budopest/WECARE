@@ -34,8 +34,8 @@ public class Mysqlhandler extends AsyncTask<String,Void,String> {
     @Override
     protected String doInBackground(String... params) { // check string params
         String type = params[0];
-        String login_url = "http://192.168.1.28/test/logintest.php";
-        String signup_url = "http://192.168.1.28/test/signuptest.php";
+        String login_url = "http://192.168.1.61/logintest.php";
+        String signup_url = "http://192.168.1.61/signuptest.php";
         if(type.equals("login")) {
             try {
                 String user_name = params[1];
@@ -147,7 +147,7 @@ public class Mysqlhandler extends AsyncTask<String,Void,String> {
         Contactssqllitehandler csql = new Contactssqllitehandler(context);
         if(userDATA[0].equalsIgnoreCase("success")) {
             {
-                isInserted1 = usql.insertData(userDATA[1], userDATA[2], userDATA[3], userDATA[4], userDATA[5]);
+                isInserted1 = usql.insertData(userDATA[1], userDATA[2], userDATA[3], '0'+userDATA[4], userDATA[5]);
 
                 Cursor res = csql.getAllData();
                 if(res.getCount()==0){

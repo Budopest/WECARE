@@ -42,7 +42,7 @@ public class MeasureSQLhandler extends AsyncTask<String,Void,String> {
     @Override
     protected String doInBackground(String... params) { // check string params
 
-        String login_url = "http://192.168.1.28/test/";  //Add the url here
+        String login_url = "http://192.168.1.61/readm.php";  //Add the url here
 
             try {
                 String user_name = params[0]; // the user name in case of testing account the user name will be "Test_user"
@@ -78,8 +78,8 @@ public class MeasureSQLhandler extends AsyncTask<String,Void,String> {
 
     @Override
     protected void onPreExecute() {
-        //alertDialog = new AlertDialog.Builder(context).create(); //Alert dialog for testing to show
-        //alertDialog.setTitle("Connection Status");               //the recieved response from the data base
+        alertDialog = new AlertDialog.Builder(ctx).create(); //Alert dialog for testing to show
+        alertDialog.setTitle("Connection Status");               //the recieved response from the data base
 
     }
 
@@ -94,6 +94,7 @@ public class MeasureSQLhandler extends AsyncTask<String,Void,String> {
             //temp(1,2,3,4)+hrate(5,6,9,8)  the only thing that matters is the () and what is inside of them
             // "temp" "+" "hrate" all doesn't matter
 
+
             TextView temp = (TextView)((Activity)ctx).findViewById(R.id.temptext);
             TextView hrate = (TextView)((Activity)ctx).findViewById(R.id.hratetext);
             int indexstart=0; int indexm=0; boolean S=false;
@@ -106,7 +107,7 @@ public class MeasureSQLhandler extends AsyncTask<String,Void,String> {
                 if(S && result.charAt(i)==')')
                 {S=false;
                 if(indexm==0) {Stemp = result.substring(indexstart+1,i); indexm=1;}
-                else Shrate=result.substring(indexstart,i);
+                else Shrate=result.substring(indexstart+1,i);
                 }
             }
             temp.setText(Stemp);
