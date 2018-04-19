@@ -34,8 +34,8 @@ public class Mysqlhandler extends AsyncTask<String,Void,String> {
     @Override
     protected String doInBackground(String... params) { // check string params
         String type = params[0];
-        String login_url = "http://192.168.1.61/logintest.php";
-        String signup_url = "http://192.168.1.61/signuptest.php";
+        String login_url = "http://192.168.1.73/logintest.php";
+        String signup_url = "http://192.168.1.73/signuptest.php";
         if(type.equals("login")) {
             try {
                 String user_name = params[1];
@@ -161,9 +161,11 @@ public class Mysqlhandler extends AsyncTask<String,Void,String> {
                 act.startActivity(i);
                 act.finish();
             } else
-                Toast.makeText(context, "Data not Inserted", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Data not Inserted(SQL LITE ERROR)", Toast.LENGTH_LONG).show();
 
-        }}
+        }
+        else Toast.makeText(context, "Check your user name and password", Toast.LENGTH_LONG).show();
+        }
 
     }
 

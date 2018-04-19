@@ -42,7 +42,7 @@ public class MeasureSQLhandler extends AsyncTask<String,Void,String> {
     @Override
     protected String doInBackground(String... params) { // check string params
 
-        String login_url = "http://192.168.1.61/readm.php";  //Add the url here
+        String login_url = "http://192.168.1.73/readm.php";  //Add the url here
 
             try {
                 String user_name = params[0]; // the user name in case of testing account the user name will be "Test_user"
