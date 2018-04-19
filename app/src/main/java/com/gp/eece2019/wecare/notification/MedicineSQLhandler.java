@@ -110,7 +110,7 @@ public class MedicineSQLhandler extends AsyncTask<String,Void,String> {
 
             }
             for(int i=0;i<num;i++)
-            {
+            {   //only names for now
                 MSQL.insertData(name[i]);
             }
 
