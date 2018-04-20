@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.gp.eece2019.wecare.MainActivity;
 import com.gp.eece2019.wecare.R;
 import com.gp.eece2019.wecare.calls.Contactssqllitehandler;
+import com.gp.eece2019.wecare.login.IPSTRING;
 import com.gp.eece2019.wecare.login.USERsqllitehandler;
 
 import java.io.BufferedReader;
@@ -35,6 +36,7 @@ public class MeasureSQLhandler extends AsyncTask<String,Void,String> {
     int error=0;
 
     AlertDialog alertDialog;
+    IPSTRING Surl = new IPSTRING();
     MeasureSQLhandler (Context ctx) {
         this.ctx = ctx;
     }
@@ -42,11 +44,11 @@ public class MeasureSQLhandler extends AsyncTask<String,Void,String> {
     @Override
     protected String doInBackground(String... params) { // check string params
 
-        String login_url = "http://192.168.1.121/readm.php";  //Add the url here
+        String measures_url = Surl.Getmeasures();  //Add the url here
 
             try {
                 String user_name = params[0]; // the user name in case of testing account the user name will be "Test_user"
-                URL url = new URL(login_url);
+                URL url = new URL(measures_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
                 httpURLConnection.setDoOutput(true);

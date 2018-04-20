@@ -25,6 +25,7 @@ package com.gp.eece2019.wecare.login;
 
 public class Mysqlhandler extends AsyncTask<String,Void,String> {
     Context context;
+    IPSTRING Surl = new IPSTRING();
     int error=0;
     //AlertDialog alertDialog;
     Mysqlhandler (Context ctx) {
@@ -34,8 +35,8 @@ public class Mysqlhandler extends AsyncTask<String,Void,String> {
     @Override
     protected String doInBackground(String... params) { // check string params
         String type = params[0];
-        String login_url = "http://192.168.1.73/logintest.php";
-        String signup_url = "http://192.168.1.73/signuptest.php";
+        String login_url = Surl.Getlogin();
+        String signup_url = Surl.Getsignup();
         if(type.equals("login")) {
             try {
                 String user_name = params[1];

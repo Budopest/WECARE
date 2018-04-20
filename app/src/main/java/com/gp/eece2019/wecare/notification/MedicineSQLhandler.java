@@ -14,6 +14,7 @@ import com.gp.eece2019.wecare.MainActivity;
 import com.gp.eece2019.wecare.R;
 import com.gp.eece2019.wecare.calls.Contactssqllitehandler;
 import com.gp.eece2019.wecare.features.MeasureSQLLITE;
+import com.gp.eece2019.wecare.login.IPSTRING;
 import com.gp.eece2019.wecare.login.USERsqllitehandler;
 
 import java.io.BufferedReader;
@@ -31,7 +32,7 @@ public class MedicineSQLhandler extends AsyncTask<String,Void,String> {
 
     Context ctx;
     int error=0;
-
+    IPSTRING Surl = new IPSTRING();
     AlertDialog alertDialog;
     MedicineSQLhandler (Context ctx) {
         this.ctx = ctx;
@@ -40,11 +41,11 @@ public class MedicineSQLhandler extends AsyncTask<String,Void,String> {
     @Override
     protected String doInBackground(String... params) { // check string params
 
-        String login_url = "http://192.168.1.121/medicines.php";  //Add the url here
+        String medicine_url = Surl.Getmedicine();  //Add the url here
 
         try {
             String user_name = params[0]; // the user name in case of testing account the user name will be "Test_user"
-            URL url = new URL(login_url);
+            URL url = new URL(medicine_url);
             HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
             httpURLConnection.setRequestMethod("POST");
             httpURLConnection.setDoOutput(true);
