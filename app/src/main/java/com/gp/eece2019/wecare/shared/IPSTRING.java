@@ -1,4 +1,4 @@
-package com.gp.eece2019.wecare.login;
+package com.gp.eece2019.wecare.shared;
 
 /**
  * Created by budopest on 20/04/18.
@@ -29,6 +29,7 @@ public class IPSTRING {
     {
         return measures_url;
     }
+    
 
 
 

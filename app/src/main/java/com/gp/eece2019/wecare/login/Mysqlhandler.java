@@ -11,6 +11,7 @@ package com.gp.eece2019.wecare.login;
 
     import com.gp.eece2019.wecare.MainActivity;
     import com.gp.eece2019.wecare.calls.Contactssqllitehandler;
+    import com.gp.eece2019.wecare.shared.IPSTRING;
 
     import java.io.BufferedReader;
     import java.io.BufferedWriter;
