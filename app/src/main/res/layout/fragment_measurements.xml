@@ -529,15 +529,28 @@
 
     <TextView
         android:id="@+id/updateddate"
-        android:layout_width="348dp"
-        android:layout_height="24dp"
+        android:layout_width="210dp"
+        android:layout_height="30dp"
         android:layout_marginBottom="1dp"
-        android:layout_marginEnd="18dp"
+        android:layout_marginEnd="7dp"
         android:layout_marginStart="18dp"
         android:layout_marginTop="55dp"
         android:text="UPDATED TIME"
         app:layout_constraintBottom_toTopOf="@+id/tableLayout"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/showall"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/showall"
+        android:layout_width="133dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="46dp"
+        android:text="Show all DATA"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/tableLayout"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

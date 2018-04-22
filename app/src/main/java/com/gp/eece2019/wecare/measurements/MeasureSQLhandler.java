@@ -32,7 +32,6 @@ public class MeasureSQLhandler extends AsyncTask<String,Void,String> {
     Context ctx;
     int error=0;
     int idnumber = 0x7f08000d; int idnumber2 = 0x7f080009; int ns =0;
-
     AlertDialog alertDialog;
     IPSTRING Surl = new IPSTRING();
     MeasureSQLhandler (Context ctx) {
@@ -250,4 +249,5 @@ public class MeasureSQLhandler extends AsyncTask<String,Void,String> {
     protected void onProgressUpdate(Void... values) {
         super.onProgressUpdate(values);
     }
+
 }
