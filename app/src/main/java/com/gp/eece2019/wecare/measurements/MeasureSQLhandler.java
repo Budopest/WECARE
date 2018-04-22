@@ -232,7 +232,7 @@ public class MeasureSQLhandler extends AsyncTask<String,Void,String> {
                 f2.setText(tf);
                 f3.setText(p);
                 f4.setText(pf);
-                ns=0;
+                ns=0; idnumber = 0x7f08000d; idnumber2 = 0x7f080009;
             }
 
 
