@@ -1,4 +1,4 @@
-package com.gp.eece2019.wecare.features;
+package com.gp.eece2019.wecare.measurements;
 
 
 import android.annotation.SuppressLint;
@@ -8,12 +8,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.gp.eece2019.wecare.R;
-import com.gp.eece2019.wecare.calls.Contactssqllitehandler;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,8 +36,6 @@ public class Measurements extends Fragment {
 
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
-        temp = (TextView)getView().findViewById(R.id.temptext);
-        hrate = (TextView)getView().findViewById(R.id.hratetext);
 
     }
 

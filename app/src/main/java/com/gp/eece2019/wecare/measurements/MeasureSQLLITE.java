@@ -1,4 +1,4 @@
-package com.gp.eece2019.wecare.features;
+package com.gp.eece2019.wecare.measurements;
 
 import android.content.ContentValues;
 import android.content.Context;

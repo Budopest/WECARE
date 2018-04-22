@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.gp.eece2019.wecare.features.Userinfo">
+    tools:context="com.gp.eece2019.wecare.staticfragments.Userinfo">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -15,6 +15,7 @@
         android:layout_marginTop="120dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="58dp" />
 
 </android.support.constraint.ConstraintLayout>

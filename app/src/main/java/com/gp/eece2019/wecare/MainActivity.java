@@ -19,8 +19,8 @@ import android.widget.TextView;
 
 import com.gp.eece2019.wecare.calls.Addcontacts;
 import com.gp.eece2019.wecare.calls.ContactsList;
-import com.gp.eece2019.wecare.features.Measurements;
-import com.gp.eece2019.wecare.features.Userinfo;
+import com.gp.eece2019.wecare.measurements.Measurements;
+import com.gp.eece2019.wecare.staticfragments.Userinfo;
 import com.gp.eece2019.wecare.login.SigninActivity;
 import com.gp.eece2019.wecare.login.USERsqllitehandler;
 import com.gp.eece2019.wecare.notification.MedicinesList;
