@@ -2,6 +2,7 @@ package com.gp.eece2019.wecare.notification;
 
 
 import android.content.Context;
+import android.database.Cursor;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 
@@ -101,13 +102,29 @@ public class MedicineSQLhandler extends AsyncTask<String,Void,String> {
                 if(i==result.length()-1) { dose[c2]=Integer.parseInt(result.substring(indexstart,i)); }
 
             }
-            for(int i=0;i<num;i++)
-            {   //only names for now
-                MSQL.insertData(name[i]);
+            Cursor res = MSQL.getAllData();
+            if(res.getCount() == 0) {
+                for(int i=0;i<num;i++)
+                {
+                    MSQL.insertData(name[i],dose[i]);
+                }
             }
+            else{
+            StringBuffer buffer = new StringBuffer();
+               boolean found = false;
+            for(int i=0;i<num;i++)
+            {
+                while (res.moveToNext()) {
+                    String s1 = res.getString(0); //ID
+                    String s2= res.getString(1); //name
+                    String s3= res.getString(2); //dose
+                if((s2==name[i])&&(s3.equals(Integer.toString(dose[i])))) {found=true; break;}
+                else if((s2==name[i])&&!(s3.equals(Integer.toString(dose[i])))){MSQL.updateData(s1,name[i],dose[i]); found=true; break;}
+                }
+                if(!found) MSQL.insertData(name[i],dose[i]);
 
-
-
+                }
+            }
 
         }
 

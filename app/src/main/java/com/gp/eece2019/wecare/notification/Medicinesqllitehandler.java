@@ -12,7 +12,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class Medicinesqllitehandler extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "medicines.db";
     public static final String TABLE_NAME = "medicines_table";
-    public static final String COL_1 = "NAME";
+    public static final String COL_1 = "ID";
+    public static final String COL_2 = "NAME";
+    public static final String COL_3 = "DOSE";
 
     public Medicinesqllitehandler(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -20,7 +22,7 @@ public class Medicinesqllitehandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLE_NAME +" (NAME TEXT)");
+        db.execSQL("create table " + TABLE_NAME +" (ID INTEGER PRIMARY KEY AUTOINCREMENT,NAME TEXT,DOSE INTEGER)");
     }
 
     @Override
@@ -29,12 +31,13 @@ public class Medicinesqllitehandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertData(String name) {
+    public boolean insertData(String name, int dose) {
         if(name.equals(""))
             return false;
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_1,name);
+        contentValues.put(COL_2,name);
+        contentValues.put(COL_3,dose);
 
         long result = db.insert(TABLE_NAME,null ,contentValues);
         if(result == -1)
@@ -47,6 +50,15 @@ public class Medicinesqllitehandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("select * from "+TABLE_NAME,null);
         return res;
+    }
+    public boolean updateData(String id,String name,int dose) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_1,id);
+        contentValues.put(COL_2,name);
+        contentValues.put(COL_3,dose);
+        db.update(TABLE_NAME, contentValues, "ID = ?",new String[] { id });
+        return true;
     }
 
 }
