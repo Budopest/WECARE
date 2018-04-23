@@ -73,6 +73,8 @@ public class MedicineSQLhandler extends AsyncTask<String,Void,String> {
 
         //alertDialog = new AlertDialog.Builder(ctx).create(); //Alert dialog for testing to show
         //alertDialog.setTitle("Connection Status");//the recieved response from the data base
+        //Medicinesqllitehandler MSQL = new Medicinesqllitehandler(ctx);
+        //MSQL.insertData("med1",3);
     }
 
     @Override

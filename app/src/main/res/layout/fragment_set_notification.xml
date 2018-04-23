@@ -13,7 +13,7 @@
         android:layout_height="372dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,10 +26,14 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="32dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="19dp"
         android:onClick="setalalrm"
         android:text="Set Alarm"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timePicker2"
         tools:ignore="OnClick" />
 
     <Button
@@ -38,15 +42,16 @@
         android:layout_height="60dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginBottom="16dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="7dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:layout_marginStart="7dp"
         android:onClick="Set repeating alarm"
         android:text="Set repeating alarm"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.021"
-        app:layout_constraintLeft_toRightOf="@+id/setalalrm"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/Turnoff_alarm"
+        app:layout_constraintStart_toEndOf="@+id/setalalrm"
         tools:ignore="OnClick" />
 
     <Button
@@ -57,14 +62,14 @@
 
         android:layout_alignParentRight="true"
         android:layout_marginBottom="32dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="19dp"
         android:onClick="Turnoff_alarm"
         android:text="Unset alarm"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.945"
-        app:layout_constraintLeft_toRightOf="@+id/setalalrm"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timePicker2"
         tools:ignore="OnClick" />
 
 </android.support.constraint.ConstraintLayout>

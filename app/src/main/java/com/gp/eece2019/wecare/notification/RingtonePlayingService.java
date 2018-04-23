@@ -1,5 +1,8 @@
 package com.gp.eece2019.wecare.notification;
 
+/**
+ * Created by Islam on 14/04/2018.
+ */
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -18,7 +21,7 @@ public class RingtonePlayingService extends Service {
 
     private boolean isRunning;
     private Context context;
-    public  MediaPlayer mMediaPlayer;
+    //public  MediaPlayer mMediaPlayer;
     private int startId;
 
 
@@ -43,6 +46,7 @@ public class RingtonePlayingService extends Service {
         Notification mNotify  = new Notification.Builder(this)
                 .setContentTitle("Your medicine's time")
                 .setContentText("Click me!")
+                .setSmallIcon(R.drawable.ic_notifications_active_black_24dp)
                 .setContentIntent(pIntent)
                 .setAutoCancel(true)
                 .build();
@@ -63,8 +67,7 @@ public class RingtonePlayingService extends Service {
 
         if(!this.isRunning && startId == 1) {
 
-            mMediaPlayer = MediaPlayer.create(this, R.raw.iphone_mp3);
-            mMediaPlayer.start();
+            Audio.playAudio(this,R.raw.iphone_mp3);
             mNM.notify(0, mNotify);
             this.isRunning = true;
             this.startId = 0;
@@ -81,8 +84,7 @@ public class RingtonePlayingService extends Service {
             this.startId = 0;
         }
         else {
-            mMediaPlayer.stop();
-            mMediaPlayer.reset();
+            Audio.stopAudio();
 
             this.isRunning = false;
             this.startId = 0;
