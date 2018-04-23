@@ -51,10 +51,10 @@ public class MedicinesList extends Fragment {
             }
             res.moveToFirst();
             final String[] A = new String[j];
-            A[0] = res.getString(0);
+            A[0] = res.getString(1);
             int l = 1;
             while (res.moveToNext()) {
-                A[l] = res.getString(0);
+                A[l] = res.getString(1);
                 l++;
             }
 

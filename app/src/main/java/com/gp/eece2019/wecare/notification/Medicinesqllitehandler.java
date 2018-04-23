@@ -40,10 +40,7 @@ public class Medicinesqllitehandler extends SQLiteOpenHelper {
         contentValues.put(COL_3,dose);
 
         long result = db.insert(TABLE_NAME,null ,contentValues);
-        if(result == -1)
-            return false;
-        else
-            return true;
+        return result != -1;
     }
 
     public Cursor getAllData() {
@@ -59,6 +56,10 @@ public class Medicinesqllitehandler extends SQLiteOpenHelper {
         contentValues.put(COL_3,dose);
         db.update(TABLE_NAME, contentValues, "ID = ?",new String[] { id });
         return true;
+    }
+    public Integer deleteData (String id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(TABLE_NAME, "ID = ?",new String[] {id});
     }
 
 }

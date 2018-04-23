@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
+import android.widget.Toast;
 
 import com.gp.eece2019.wecare.shared.IPSTRING;
 
@@ -70,19 +71,17 @@ public class MedicineSQLhandler extends AsyncTask<String,Void,String> {
     @Override
     protected void onPreExecute() {
 
-        alertDialog = new AlertDialog.Builder(ctx).create(); //Alert dialog for testing to show
-        alertDialog.setTitle("Connection Status");               //the recieved response from the data base
-
+        //alertDialog = new AlertDialog.Builder(ctx).create(); //Alert dialog for testing to show
+        //alertDialog.setTitle("Connection Status");//the recieved response from the data base
     }
 
     @Override
     protected void onPostExecute(String result) {
 
         if(error==0) {
-            alertDialog.setMessage(result);
-            alertDialog.show();
+            //alertDialog.setMessage(result);
+            //alertDialog.show();
             Medicinesqllitehandler MSQL = new Medicinesqllitehandler(ctx);
-
             int num=0; boolean first=false; int indexstart=0;
             for(int i =0;i<result.length();i++)
             {
@@ -102,30 +101,45 @@ public class MedicineSQLhandler extends AsyncTask<String,Void,String> {
                 if(i==result.length()-1) { dose[c2]=Integer.parseInt(result.substring(indexstart,i)); }
 
             }
-            Cursor res = MSQL.getAllData();
-            if(res.getCount() == 0) {
+            Cursor res1 = MSQL.getAllData();
+            if(res1.getCount() == 0) {
                 for(int i=0;i<num;i++)
                 {
                     MSQL.insertData(name[i],dose[i]);
                 }
             }
             else{
-            StringBuffer buffer = new StringBuffer();
-               boolean found = false;
-            for(int i=0;i<num;i++)
-            {
-                while (res.moveToNext()) {
-                    String s1 = res.getString(0); //ID
-                    String s2= res.getString(1); //name
-                    String s3= res.getString(2); //dose
-                if((s2==name[i])&&(s3.equals(Integer.toString(dose[i])))) {found=true; break;}
-                else if((s2==name[i])&&!(s3.equals(Integer.toString(dose[i])))){MSQL.updateData(s1,name[i],dose[i]); found=true; break;}
-                }
-                if(!found) MSQL.insertData(name[i],dose[i]);
+                int c = 0; int cc=0;
+                for(int i=0;i<num;i++)
+                {
+                    //found = false;
+                    Cursor res = MSQL.getAllData();
+                    while (res.moveToNext()) {
 
+                        String s1 = res.getString(0); //ID
+                        String s2= res.getString(1); //name
+                        String s3= res.getString(2); //dose
+
+                        if((s2.equals(name[i]))&&(s3.equals(Integer.toString(dose[i])))) {c++; break;}
+                        else if((s2.equals(name[i]))&&!(s3.equals(Integer.toString(dose[i])))){MSQL.updateData(s1,name[i],dose[i]); c++; break;}
+                    }
+                    if(c==0) {
+                        MSQL.insertData(name[i],dose[i]);
+                    }
+                    else c=0;
+                }
+                Cursor res = MSQL.getAllData();
+                String s1;
+                while (res.moveToNext()) {
+                    s1 = res.getString(0); //ID
+                    String s2 = res.getString(1); //name
+                    String s3 = res.getString(2); //dose
+                    for(int i=0;i<num;i++){
+                        if(s2.equals(name[i]))  cc++;
+                    }
+                    if(cc==0) MSQL.deleteData(s1);
                 }
             }
-
         }
 
     }
