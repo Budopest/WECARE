@@ -20,6 +20,8 @@ import android.widget.TextView;
 import com.gp.eece2019.wecare.calls.Addcontacts;
 import com.gp.eece2019.wecare.calls.ContactsList;
 import com.gp.eece2019.wecare.measurements.Measurements;
+import com.gp.eece2019.wecare.staticfragments.About;
+import com.gp.eece2019.wecare.staticfragments.Contactus;
 import com.gp.eece2019.wecare.staticfragments.Userinfo;
 import com.gp.eece2019.wecare.login.SigninActivity;
 import com.gp.eece2019.wecare.login.USERsqllitehandler;
@@ -167,9 +169,15 @@ public class MainActivity extends AppCompatActivity
 
 
         } else if (id == R.id.nav_about) {
+            About a = new About();
+            android.support.v4.app.FragmentManager Manager = getSupportFragmentManager();
+            Manager.beginTransaction().replace(R.id.Fragment_container,a).commit();
 
 
         } else if (id == R.id.nav_contactus) {
+            Contactus cu = new Contactus();
+            android.support.v4.app.FragmentManager Manager = getSupportFragmentManager();
+            Manager.beginTransaction().replace(R.id.Fragment_container,cu).commit();
 
         }
 
