@@ -26,6 +26,7 @@ public class Userinfo extends Fragment {
     //USERsqllitehandler usql;
     String Fname,Lname,Uname,phone,Bdate;
     TextView info;
+    Doctordetails D;
 
     public Userinfo(String f,String l,String u,String p,String d) {
         Fname = f;
@@ -54,6 +55,8 @@ public class Userinfo extends Fragment {
 
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 
+        D=new Doctordetails(getActivity());
+        D.execute(Uname);
 
         info.setText("First name: " + Fname + "\n" +
                      "Lastname: "+ Lname + "\n" +
@@ -61,8 +64,6 @@ public class Userinfo extends Fragment {
                      "PHONE number: "+ phone + "\n" +
                      "Birth Date: " + Bdate + "\n\n"
         );
-
-
 
         super.onActivityCreated(savedInstanceState);
     }

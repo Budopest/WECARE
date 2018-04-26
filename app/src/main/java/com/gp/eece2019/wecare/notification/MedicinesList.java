@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -77,11 +78,16 @@ public class MedicinesList extends Fragment {
     }
 
     public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        int index = info.position;
 
         if (item.getTitle() == "Set Notification") {
 
             try {
+                Bundle bundle = new Bundle();
+                bundle.putInt("index", index);
                 SetNotification SetNotification = new SetNotification();
+                SetNotification.setArguments(bundle);
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.Fragment_container,SetNotification)
                         .addToBackStack(null)
@@ -106,7 +112,6 @@ public class MedicinesList extends Fragment {
     }
 
 }
-
 
 
 

@@ -21,7 +21,6 @@ public class RingtonePlayingService extends Service {
 
     private boolean isRunning;
     private Context context;
-    //public  MediaPlayer mMediaPlayer;
     private int startId;
 
 
@@ -69,7 +68,7 @@ public class RingtonePlayingService extends Service {
 
             Audio.playAudio(this,R.raw.iphone_mp3);
             mNM.notify(0, mNotify);
-            this.isRunning = true;
+            this.isRunning = false;
             this.startId = 0;
 
         }

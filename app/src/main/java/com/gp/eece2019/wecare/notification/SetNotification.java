@@ -1,6 +1,8 @@
 package com.gp.eece2019.wecare.notification;
 
 
+import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -25,14 +27,13 @@ import static android.content.Context.ALARM_SERVICE;
 
 public class SetNotification extends Fragment {
 
-
     public SetNotification() {
         // Required empty public constructor
     }
     AlarmManager alarmManager;
     private PendingIntent pending_intent;
     private TimePicker alarmTimePicker;
-
+    Medicinesqllitehandler Db;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -41,22 +42,44 @@ public class SetNotification extends Fragment {
     }
     public void onActivityCreated(@Nullable final Bundle savedInstanceState) {
 
-        // set the alarm to the time that you picked
         final Calendar calendar = Calendar.getInstance();
         alarmTimePicker = (TimePicker) getView().findViewById(R.id.timePicker2);
-        // Get the alarm manager service
         alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
         final ArrayList<PendingIntent> intentArray = new ArrayList<PendingIntent>();
 
-        Button start_alarm= (Button) getView().findViewById(R.id.setalalrm);
+        Button start_alarm = (Button) getView().findViewById(R.id.setalalrm);
         final Intent myIntent = new Intent(getActivity(), AlarmReceiver.class);
+        Bundle bundle = this.getArguments();
+        final int Index = bundle.getInt("index");
+        String MyDose = null;
+        Db = new Medicinesqllitehandler(getActivity());
+        Cursor res = Db.getAllData();
+        String[] dose = new String[0];
+        if (res.getCount() != 0) {
+            int j = 0;
+            while (res.moveToNext()) {
+                j++;
+            }
+            res.moveToFirst();
+            final String[] id = new String[j];
+            dose = new String[j];
+            dose[0] = res.getString(2);
+
+            int l = 1;
+            while (res.moveToNext()) {
+                dose[l] = res.getString(2);
+                l++;
+            }
+        }
+        MyDose = dose[Index];
+
+        final int Doses = Integer.parseInt(MyDose);
         start_alarm.setOnClickListener(new View.OnClickListener() {
             @TargetApi(Build.VERSION_CODES.M)
 
             @Override
             public void onClick(View v) {
 
-                //calendar.add(Calendar.SECOND, 3);
                 final int hour = alarmTimePicker.getCurrentHour();
                 final int minute = alarmTimePicker.getCurrentMinute();
                 calendar.set(Calendar.HOUR_OF_DAY, alarmTimePicker.getCurrentHour());
@@ -64,35 +87,15 @@ public class SetNotification extends Fragment {
                 final int id = (int) System.currentTimeMillis();
                 myIntent.putExtra("extra", "alarm on");
                 pending_intent = PendingIntent.getBroadcast(getActivity(), id, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-                alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() , pending_intent);
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 60*60*24/Doses , pending_intent);
                 intentArray.add(pending_intent);
 
                 Toast.makeText(getActivity(), "alarm set to" + " " + hour + " : " + minute, Toast.LENGTH_SHORT).show();
 
-            }});
-        Button Repeating_alarm= (Button) getView().findViewById(R.id.Set_repeating_alarm);
-        Repeating_alarm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                calendar.add(Calendar.SECOND, 3);
-                //setAlarmText("You clicked a button");
-
-                final int hour = alarmTimePicker.getCurrentHour();
-                final int minute = alarmTimePicker.getCurrentMinute();;
-
-                // Log.e("MyActivity", "In the receiver with " + hour + " and " + minute);
-                calendar.set(Calendar.HOUR_OF_DAY, alarmTimePicker.getCurrentHour());
-                calendar.set(Calendar.MINUTE, alarmTimePicker.getCurrentMinute());
-
-                myIntent.putExtra("extra", "alarm on");
-                pending_intent = PendingIntent.getBroadcast(getActivity(), 0, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 60*60*24, pending_intent);
-                Toast.makeText(getActivity(), "alarm set to"+ " " +hour + " : " + minute + "daily", Toast.LENGTH_SHORT).show();
             }
         });
 
-        Button stop_alarm= (Button) getView().findViewById(R.id.Turnoff_alarm);
+        Button stop_alarm = (Button) getView().findViewById(R.id.Turnoff_alarm);
         stop_alarm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

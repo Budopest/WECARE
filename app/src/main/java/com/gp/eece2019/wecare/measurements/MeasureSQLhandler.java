@@ -4,16 +4,22 @@ package com.gp.eece2019.wecare.measurements;
  * Created by budopest on 08/04/18.
  */
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gp.eece2019.wecare.R;
 import com.gp.eece2019.wecare.shared.IPSTRING;
+import com.gp.eece2019.wecare.staticfragments.DOCTORsqllite;
 
 
 import java.io.BufferedReader;
@@ -31,7 +37,8 @@ public class MeasureSQLhandler extends AsyncTask<String,Void,String> {
 
     Context ctx;
     int error=0;
-    int idnumber = 0x7f08000d; int idnumber2 = 0x7f080009; int ns =0;
+    int idnumber = 0x7f080010; int idnumber2 = 0x7f08000c; int ns =0;
+
     AlertDialog alertDialog;
     IPSTRING Surl = new IPSTRING();
     MeasureSQLhandler (Context ctx) {
@@ -94,6 +101,7 @@ public class MeasureSQLhandler extends AsyncTask<String,Void,String> {
             //alertDialog.show();
             int indexdatestart=0;   int indexelementstart=0; boolean firsttime=true;
             boolean end = false;    boolean firstelement =false; boolean inside = false;
+            int WT=0,WTF=0,WP=0,WPF=0;
             String date="";
             String element="";
             MeasureSQLLITE M = new MeasureSQLLITE(ctx);
@@ -147,7 +155,8 @@ public class MeasureSQLhandler extends AsyncTask<String,Void,String> {
                     TF = Integer.parseInt(all[1]);
                     P = Integer.parseInt(all[2]);
                     PF = Integer.parseInt(all[3]);
-
+                    if(TF>WTF){WTF=TF; WT=T;}
+                    if(PF>WPF){WPF=PF; WP=P;}
                     //TakeNeededActions(T,TF,P,PF); //Take actions in emergency cases
 
                     isinserted = M.insertData(T,TF,P,PF);
@@ -158,6 +167,14 @@ public class MeasureSQLhandler extends AsyncTask<String,Void,String> {
                 }
             }
             Displayexistingmeasures();
+            if(WTF==3 || WPF==3){
+                Automaticcall(3);
+            }
+            else if(WTF==2 || WPF==2){
+                Automaticcall(2);
+            }
+
+
             /*
             Cursor res = M.getAllData();
             if(res.getCount() == 0) {
@@ -231,7 +248,7 @@ public class MeasureSQLhandler extends AsyncTask<String,Void,String> {
                 f2.setText(tf);
                 f3.setText(p);
                 f4.setText(pf);
-                ns=0; idnumber = 0x7f08000d; idnumber2 = 0x7f080009;
+                ns=0; idnumber = 0x7f080010; idnumber2 = 0x7f08000c;
             }
 
 
@@ -243,6 +260,42 @@ public class MeasureSQLhandler extends AsyncTask<String,Void,String> {
         builder.setTitle(title);
         builder.setMessage(Message);
         builder.show();
+    }
+
+    private void Automaticcall(int f) {
+        Intent intent = new Intent(Intent.ACTION_CALL);
+        String ph = getDOCTORphone();
+        if(f==2&&ph.equals(null)){return;}
+        else if(f==2) intent.setData(Uri.parse("tel:"+ph));
+        else if (f==3) intent.setData(Uri.parse("tel:123"));
+        else return;
+        if (ActivityCompat.checkSelfPermission(ctx, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        if (ActivityCompat.checkSelfPermission(ctx, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        ctx.startActivity(intent);
+    }
+    private String getDOCTORphone(){
+        DOCTORsqllite Dsql = new DOCTORsqllite(ctx);
+        Cursor res = Dsql.getAllData();
+        while (res.moveToNext()){return res.getString(2);}
+        return null;
     }
 
     @Override

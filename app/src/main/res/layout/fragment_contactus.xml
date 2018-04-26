@@ -52,9 +52,17 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="270dp"
+        android:layout_marginEnd="165dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="165dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="56dp"
+        android:clickable="true"
         android:text="01098930028"
         android:textColor="@android:color/holo_blue_dark"
-        android:clickable="true"
-        tools:layout_editor_absoluteX="131dp"
-        tools:layout_editor_absoluteY="222dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/Phoneword"
+        app:layout_constraintTop_toBottomOf="@+id/CUEMAIL" />
 </android.support.constraint.ConstraintLayout>

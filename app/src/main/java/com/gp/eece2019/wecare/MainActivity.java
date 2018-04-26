@@ -22,6 +22,7 @@ import com.gp.eece2019.wecare.calls.ContactsList;
 import com.gp.eece2019.wecare.measurements.Measurements;
 import com.gp.eece2019.wecare.staticfragments.About;
 import com.gp.eece2019.wecare.staticfragments.Contactus;
+import com.gp.eece2019.wecare.staticfragments.DOCTORsqllite;
 import com.gp.eece2019.wecare.staticfragments.Userinfo;
 import com.gp.eece2019.wecare.login.SigninActivity;
 import com.gp.eece2019.wecare.login.USERsqllitehandler;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     USERsqllitehandler usql;
+    DOCTORsqllite Dsql;
     String Fname,Lname,Uname,phone,Bdate;
     TextView firstfield,secondfield;
 
@@ -42,6 +44,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         usql =  new USERsqllitehandler(this);
+        Dsql =  new DOCTORsqllite(this);
 
         boolean Firstusestatus= Checkfirstuse();
 
@@ -64,13 +67,14 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Cursor Doctor   = Dsql.getAllData();
                 Cursor deleteid = usql.getid();
-                StringBuffer buffer = new StringBuffer();
                 while (deleteid.moveToNext()) {
-                    buffer.append(deleteid.getString(0));
+                    usql.deleteData(deleteid.getString(0));
                 }
-                usql.deleteData(buffer.toString());
+                while (Doctor.moveToNext()){
+                    Dsql.deleteData(Doctor.getString(0));
+                }
                 Intent i = new Intent(MainActivity.this,SigninActivity.class);
                 startActivity(i);
                 finish();
