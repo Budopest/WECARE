@@ -3,4 +3,6 @@
     <color name="colorPrimary">#3d3f50</color>
     <color name="colorPrimaryDark">#585a64</color>
     <color name="colorAccent">#0eb482</color>
+    <color name="dotscolor">#cccccc</color>
+
 </resources>

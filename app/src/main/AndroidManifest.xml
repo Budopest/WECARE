@@ -2,10 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.gp.eece2019.wecare">
 
-    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -25,14 +25,16 @@
             </intent-filter>
         </activity>
         <activity android:name=".login.SigninActivity" />
-        <activity android:name=".login.SignupActivity"/>
+        <activity android:name=".login.SignupActivity" />
+
         <receiver android:name=".notification.AlarmReceiver" />
+
         <service
             android:name=".notification.RingtonePlayingService"
-            android:enabled="true">
-        </service>
-        <activity android:name=".notification.Soundstopping"/>
+            android:enabled="true"></service>
 
+        <activity android:name=".notification.Soundstopping" />
+        <activity android:name=".welcomeslider.WelcomeScreen"></activity>
     </application>
 
 </manifest>

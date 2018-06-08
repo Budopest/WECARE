@@ -2,6 +2,7 @@ package com.gp.eece2019.wecare.login;
 
 
 import com.gp.eece2019.wecare.R;
+import com.gp.eece2019.wecare.welcomeslider.WelcomeScreen;
 
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;

@@ -112,23 +112,23 @@
         android:id="@+id/firstname"
         android:layout_width="137dp"
         android:layout_height="36dp"
+        android:layout_marginLeft="35dp"
         android:layout_marginStart="35dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="90dp"
         android:background="#FFBCF8AF"
-        android:textColor="@android:color/background_light"
         android:ems="10"
         android:hint="@string/first_name"
         android:inputType="textPersonName"
+        android:textColor="@android:color/background_light"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginLeft="35dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/lastname"
         android:layout_width="137dp"
         android:layout_height="36dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="90dp"
         android:background="#FFBCF8AF"
         android:ems="10"
         android:hint="@string/last_name"

@@ -27,6 +27,7 @@ import com.gp.eece2019.wecare.staticfragments.Userinfo;
 import com.gp.eece2019.wecare.login.SigninActivity;
 import com.gp.eece2019.wecare.login.USERsqllitehandler;
 import com.gp.eece2019.wecare.notification.MedicinesList;
+import com.gp.eece2019.wecare.welcomeslider.WelcomeScreen;
 
 
 public class MainActivity extends AppCompatActivity
@@ -54,7 +55,7 @@ public class MainActivity extends AppCompatActivity
 
         }
         else {
-            Intent i = new Intent(this,SigninActivity.class);
+            Intent i = new Intent(this,WelcomeScreen.class);
             startActivity(i);
             finish();
         }
