@@ -174,13 +174,13 @@ public class MainActivity extends AppCompatActivity
             android.support.v4.app.FragmentManager Manager = getSupportFragmentManager();
             Manager.beginTransaction().replace(R.id.Fragment_container,C).commit();
 
-        } else if (id == R.id.nav_addcontacts) {
+        } /*else if (id == R.id.nav_addcontacts) {
 
             Addcontacts Add = new Addcontacts();
             android.support.v4.app.FragmentManager Manager = getSupportFragmentManager();
             Manager.beginTransaction().replace(R.id.Fragment_container,Add).commit();
 
-        } else if (id == R.id.nav_contacts) {
+        }*/ else if (id == R.id.nav_contacts) {
 
             ContactsList C = new ContactsList();
             android.support.v4.app.FragmentManager Manager = getSupportFragmentManager();

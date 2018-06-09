@@ -13,6 +13,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +42,7 @@ public class ContactsList extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        setHasOptionsMenu(true);
         View View = inflater.inflate(R.layout.fragment_contact, container, false);
         return View;
     }
@@ -211,6 +214,30 @@ public class ContactsList extends Fragment {
                 .replace(R.id.Fragment_container, BlankFragment)
                 .addToBackStack(null)
                 .commit();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.addcontacts,menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+
+            case R.id.addcontact:
+                Addcontacts Add = new Addcontacts();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.Fragment_container, Add)
+                        .addToBackStack(null)
+                        .commit();
+
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
 
