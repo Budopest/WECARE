@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFCDF7EB"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.gp.eece2019.wecare.notification.MedicinesList">
 
@@ -17,13 +18,14 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="92dp"
         android:layout_marginStart="92dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="60dp"
         android:text="Medicines List"
+        android:textColor="@android:color/holo_green_dark"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginLeft="92dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
 
 

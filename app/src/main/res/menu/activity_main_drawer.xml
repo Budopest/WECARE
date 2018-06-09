@@ -15,11 +15,7 @@
         <item
             android:id="@+id/nav_notification"
             android:icon="@android:drawable/ic_popup_reminder"
-            android:title="Notifications" />
-        <item
-            android:id="@+id/nav_addcontacts"
-            android:icon="@drawable/ic_person_add_black_24dp"
-            android:title="Add a contact" />
+            android:title="Medicines Time Reminder" />
         <item
             android:id="@+id/nav_contacts"
             android:icon="@drawable/ic_contact_phone_black_24dp"

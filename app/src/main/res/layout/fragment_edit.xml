@@ -4,6 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#FFCDF7EB"
         tools:context="com.gp.eece2019.wecare.calls.Edit">
 
         <EditText
