@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity
                 //show start activity
 
                 startActivity(new Intent(MainActivity.this,WelcomeScreen.class));
+
                 finish();
             }
 
