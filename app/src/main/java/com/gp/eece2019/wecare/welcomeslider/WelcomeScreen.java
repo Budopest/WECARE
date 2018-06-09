@@ -47,7 +47,7 @@ public class WelcomeScreen extends AppCompatActivity {
 
                 if(currentpage==sDots.length-1) {
 
-                    Intent i = new Intent(WelcomeScreen.this,SigninActivity.class);
+                    Intent i = new Intent(WelcomeScreen.this,MainActivity.class);
                     startActivity(i);
                     finish();
                 }

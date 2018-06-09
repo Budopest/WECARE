@@ -51,11 +51,23 @@ public class MainActivity extends AppCompatActivity
 
         if(Firstusestatus) {
 
+            Boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+                    .getBoolean("isFirstRun", true);
+            if (isFirstRun) {
+                //show start activity
+
+                startActivity(new Intent(MainActivity.this,WelcomeScreen.class));
+                finish();
+            }
+
+            getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                    .putBoolean("isFirstRun", false).commit();
+
             setContentView(R.layout.activity_main);
 
         }
         else {
-            Intent i = new Intent(this,WelcomeScreen.class);
+            Intent i = new Intent(this,SigninActivity.class);
             startActivity(i);
             finish();
         }
