@@ -50,14 +50,12 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/addcontacts_Tel"
-        android:layout_marginBottom="238dp"
         android:layout_marginEnd="52dp"
         android:layout_marginLeft="80dp"
         android:layout_marginRight="52dp"
         android:layout_marginStart="80dp"
         android:layout_marginTop="56dp"
         android:text="Add"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button_viewAll"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addcontacts_Tel" />
@@ -69,12 +67,10 @@
         android:layout_alignEnd="@+id/addcontacts_Tel"
         android:layout_alignRight="@+id/addcontacts_Tel"
         android:layout_alignTop="@+id/button_addcontact"
-        android:layout_marginBottom="238dp"
         android:layout_marginEnd="72dp"
         android:layout_marginRight="72dp"
         android:layout_marginTop="56dp"
         android:text="Contacts"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addcontacts_Tel" />
 
