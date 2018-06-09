@@ -30,9 +30,9 @@ public class Addcontacts extends Fragment implements View.OnClickListener {
 
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
-        editName = (EditText) getView().findViewById(R.id.editText_name);
-        editTel = (EditText) getView().findViewById(R.id.editText_Tel);
-        Add = (Button) getView().findViewById(R.id.button_add);
+        editName = (EditText) getView().findViewById(R.id.addcontacts_name);
+        editTel = (EditText) getView().findViewById(R.id.addcontacts_Tel);
+        Add = (Button) getView().findViewById(R.id.button_addcontact);
         contacts = (Button) getView().findViewById(R.id.button_viewAll);
     }
 
@@ -58,7 +58,7 @@ public class Addcontacts extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
 
-            case R.id.button_add:
+            case R.id.button_addcontact:
 
                 boolean isInserted = myDb.insertData(editName.getText().toString(),
                         editTel.getText().toString());

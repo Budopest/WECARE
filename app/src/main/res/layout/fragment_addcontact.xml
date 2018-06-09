@@ -8,7 +8,7 @@
 
     <!-- TODO: Update blank fragment layout -->
     <EditText
-        android:id="@+id/editText_name"
+        android:id="@+id/addcontacts_name"
         android:layout_width="290dp"
         android:layout_height="36dp"
         android:layout_alignParentTop="true"
@@ -27,12 +27,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button_add"
+        android:id="@+id/button_addcontact"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/editText_Tel"
+        android:layout_below="@+id/addcontacts_Tel"
         android:layout_marginEnd="52dp"
         android:layout_marginLeft="80dp"
         android:layout_marginRight="52dp"
@@ -41,24 +41,24 @@
         android:text="Add"
         app:layout_constraintEnd_toStartOf="@+id/button_viewAll"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_Tel" />
+        app:layout_constraintTop_toBottomOf="@+id/addcontacts_Tel" />
 
     <Button
         android:id="@+id/button_viewAll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/editText_Tel"
-        android:layout_alignRight="@+id/editText_Tel"
-        android:layout_alignTop="@+id/button_add"
+        android:layout_alignEnd="@+id/addcontacts_Tel"
+        android:layout_alignRight="@+id/addcontacts_Tel"
+        android:layout_alignTop="@+id/button_addcontact"
         android:layout_marginEnd="68dp"
         android:layout_marginRight="68dp"
         android:layout_marginTop="56dp"
         android:text="Contacts"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_Tel" />
+        app:layout_constraintTop_toBottomOf="@+id/addcontacts_Tel" />
 
     <EditText
-        android:id="@+id/editText_Tel"
+        android:id="@+id/addcontacts_Tel"
         android:layout_width="290dp"
         android:layout_height="36dp"
         android:layout_marginEnd="47dp"
@@ -71,8 +71,7 @@
         android:hint="ENTER The Phone Number"
         android:inputType="phone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_name" />
+        app:layout_constraintTop_toBottomOf="@+id/addcontacts_name" />
 
 </android.support.constraint.ConstraintLayout>
