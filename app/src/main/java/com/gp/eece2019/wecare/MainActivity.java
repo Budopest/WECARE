@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.gp.eece2019.wecare.calls.Addcontacts;
 import com.gp.eece2019.wecare.calls.ContactsList;
+import com.gp.eece2019.wecare.measurements.Calculator;
 import com.gp.eece2019.wecare.measurements.Measurements;
 import com.gp.eece2019.wecare.staticfragments.About;
 import com.gp.eece2019.wecare.staticfragments.Contactus;
@@ -196,6 +197,12 @@ public class MainActivity extends AppCompatActivity
             Contactus cu = new Contactus();
             android.support.v4.app.FragmentManager Manager = getSupportFragmentManager();
             Manager.beginTransaction().replace(R.id.Fragment_container,cu).commit();
+
+        }
+        else if (id == R.id.nav_measurements_calcualator) {
+            Calculator cl = new Calculator();
+            android.support.v4.app.FragmentManager Manager = getSupportFragmentManager();
+            Manager.beginTransaction().replace(R.id.Fragment_container,cl).commit();
 
         }
 

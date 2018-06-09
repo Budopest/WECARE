@@ -24,6 +24,11 @@
             android:id="@+id/nav_contacts"
             android:icon="@drawable/ic_contact_phone_black_24dp"
             android:title="Contacts" />
+        <item
+            android:id="@+id/nav_measurements_calcualator"
+            android:icon="?android:attr/actionModePasteDrawable"
+            android:title="Check Your Measurements" />
+
     </group>
 
     <item android:title="Communicate">
