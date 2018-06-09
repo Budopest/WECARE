@@ -72,6 +72,7 @@ public class WelcomeScreen extends AppCompatActivity {
         {
             sDots[i] = new TextView(this);
             sDots[i].setText(Html.fromHtml("&#8226;"));
+            sDots[i].setTextSize(40);
             sDots[i].setTextColor(getResources().getColor(R.color.dotscolor));
 
             sdotslayout.addView(sDots[i]);
