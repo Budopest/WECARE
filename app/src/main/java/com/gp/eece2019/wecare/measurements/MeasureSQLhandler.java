@@ -265,7 +265,7 @@ public class MeasureSQLhandler extends AsyncTask<String,Void,String> {
     private void Automaticcall(int f) {
         Intent intent = new Intent(Intent.ACTION_CALL);
         String ph = getDOCTORphone();
-        if(f==2&&ph.equals(null)){return;}
+        if(f==2 && ph.equals(null)){return;}
         else if(f==2) intent.setData(Uri.parse("tel:"+ph));
         else if (f==3) intent.setData(Uri.parse("tel:123"));
         else return;
@@ -279,6 +279,7 @@ public class MeasureSQLhandler extends AsyncTask<String,Void,String> {
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
+        /*
         if (ActivityCompat.checkSelfPermission(ctx, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -288,7 +289,7 @@ public class MeasureSQLhandler extends AsyncTask<String,Void,String> {
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
             return;
-        }
+        }*/
         ctx.startActivity(intent);
     }
     private String getDOCTORphone(){

@@ -97,7 +97,7 @@ public class WelcomeScreen extends AppCompatActivity {
                 NXTB.setEnabled(true);
                 PrevB.setEnabled(false);
                 PrevB.setVisibility(View.INVISIBLE);
-                NXTB.setText("Finish");
+                NXTB.setText("Next");
                 PrevB.setText("");
 
             }

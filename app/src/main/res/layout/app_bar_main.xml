@@ -34,9 +34,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:backgroundTint="@android:color/holo_blue_dark"
+        app:backgroundTint="@android:color/holo_red_light"
         app:rippleColor="@android:color/darker_gray"
-        app:srcCompat="@drawable/ic_exit_to_app_black_24dp"
+        app:srcCompat="@drawable/medical_ambulance"
         tools:ignore="VectorDrawableCompat" />
 
 </android.support.design.widget.CoordinatorLayout>

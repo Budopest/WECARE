@@ -1,8 +1,12 @@
 package com.gp.eece2019.wecare;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -36,8 +40,8 @@ public class MainActivity extends AppCompatActivity
 
     USERsqllitehandler usql;
     DOCTORsqllite Dsql;
-    String Fname,Lname,Uname,phone,Bdate;
-    TextView firstfield,secondfield;
+    String Fname, Lname, Uname, phone, Bdate;
+    TextView firstfield, secondfield;
 
 
     @Override
@@ -45,20 +49,19 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        usql =  new USERsqllitehandler(this);
-        Dsql =  new DOCTORsqllite(this);
+        usql = new USERsqllitehandler(this);
+        Dsql = new DOCTORsqllite(this);
 
-        boolean Firstusestatus= Checkfirstuse();
+        boolean Firstusestatus = Checkfirstuse();
 
-        if(Firstusestatus) {
+        if (Firstusestatus) {
 
             Boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                     .getBoolean("isFirstRun", true);
             if (isFirstRun) {
                 //show start activity
 
-                startActivity(new Intent(MainActivity.this,WelcomeScreen.class));
-
+                startActivity(new Intent(MainActivity.this, WelcomeScreen.class));
                 finish();
             }
 
@@ -67,33 +70,34 @@ public class MainActivity extends AppCompatActivity
 
             setContentView(R.layout.activity_main);
 
-        }
-        else {
-            Intent i = new Intent(this,SigninActivity.class);
+        } else {
+            Intent i = new Intent(this, SigninActivity.class);
             startActivity(i);
             finish();
         }
 
 
-        Toolbar toolbar =  findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab =  findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Cursor Doctor   = Dsql.getAllData();
-                Cursor deleteid = usql.getid();
-                while (deleteid.moveToNext()) {
-                    usql.deleteData(deleteid.getString(0));
-                }
-                while (Doctor.moveToNext()){
-                    Dsql.deleteData(Doctor.getString(0));
-                }
-                Intent i = new Intent(MainActivity.this,SigninActivity.class);
-                startActivity(i);
-                finish();
+            public void onClick(View view) { // The floating button action
 
+                Intent Call_ambulance = new Intent(Intent.ACTION_CALL);
+                Call_ambulance.setData(Uri.parse("tel:123"));
+                if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+                    return;
+                }
+                startActivity(Call_ambulance);
 
             }
         });
@@ -145,6 +149,21 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }
+        if(id == R.id.Logout)
+        {
+            Cursor Doctor   = Dsql.getAllData();
+            Cursor deleteid = usql.getid();
+            while (deleteid.moveToNext()) {
+                usql.deleteData(deleteid.getString(0));
+            }
+            while (Doctor.moveToNext()){
+                Dsql.deleteData(Doctor.getString(0));
+            }
+            Intent i = new Intent(MainActivity.this,SigninActivity.class);
+            startActivity(i);
+            finish();
+
         }
 
         return super.onOptionsItemSelected(item);

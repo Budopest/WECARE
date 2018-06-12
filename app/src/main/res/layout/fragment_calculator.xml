@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,9 +8,133 @@
     tools:context=".measurements.Calculator">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+
+    <TextView
+        android:id="@+id/Blood_pressure"
+        android:layout_width="211dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginEnd="86dp"
+        android:layout_marginStart="87dp"
+        android:layout_marginTop="76dp"
+        android:text="Blood pressure"
+        android:gravity="center"
+        android:textColor="@android:color/holo_green_dark"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toTopOf="@+id/High_pressure"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginRight="86dp"
+        android:layout_marginLeft="87dp" />
+
+    <EditText
+        android:id="@+id/High_pressure"
+        android:layout_width="115dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="48dp"
+        android:layout_marginStart="16dp"
+        android:background="#FFBCF8AF"
+        android:ems="10"
+        android:hint="High pressure"
+        android:inputType="textPersonName"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/Check_your_condition"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="16dp" />
+
+    <EditText
+        android:id="@+id/low_pressure"
+        android:layout_width="115dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="48dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginRight="18dp"
+        android:background="#FFBCF8AF"
+        android:cursorVisible="false"
+        android:ems="10"
+        android:hint="Low pressure"
+        android:inputType="textPersonName"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/Check_your_condition"
+        app:layout_constraintEnd_toStartOf="@+id/mm_Hg" />
+
+    <TextView
+        android:id="@+id/mm_Hg"
+        android:layout_width="75dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="48dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:background="#FFBCF8AF"
+        android:text="mmHg"
+        android:textSize="20sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/Check_your_condition"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/Check_your_condition"
+        android:layout_width="189dp"
+        android:layout_height="56dp"
+        android:layout_marginBottom="28dp"
+        android:layout_marginEnd="97dp"
+        android:layout_marginStart="98dp"
+        android:text="Check your condition"
+        app:layout_constraintBottom_toTopOf="@+id/Condition_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="98dp"
+        android:layout_marginRight="97dp" />
+
+    <Button
+        android:id="@+id/Send_to_doctor"
+        android:layout_width="189dp"
+        android:layout_height="56dp"
+        android:layout_marginBottom="123dp"
+        android:layout_marginEnd="97dp"
+        android:layout_marginStart="98dp"
+        android:text="Send to doctor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="98dp"
+        android:layout_marginRight="97dp" />
+
+    <TextView
+        android:id="@+id/Condition_description"
+        android:layout_width="230dp"
+        android:layout_height="42dp"
+        android:layout_marginBottom="27dp"
+        android:layout_marginEnd="67dp"
+        android:layout_marginStart="87dp"
+        android:gravity="center"
+        android:hint="Condition description"
+        android:textSize="24sp"
+        android:textColor="@android:color/holo_green_dark"
+        app:layout_constraintBottom_toTopOf="@+id/Send_to_doctor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginRight="67dp"
+        android:layout_marginLeft="87dp" />
+
+    <TextView
+        android:id="@+id/divforpressure"
+        android:layout_width="15dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="48dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginLeft="11dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginStart="11dp"
+        android:text="/"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/Check_your_condition"
+        app:layout_constraintEnd_toStartOf="@+id/low_pressure"
+        app:layout_constraintStart_toEndOf="@+id/High_pressure" />
+
+</android.support.constraint.ConstraintLayout>

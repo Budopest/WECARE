@@ -108,11 +108,18 @@ public class Doctordetails extends AsyncTask<String,Void,String> {
             Contactssqllitehandler CD = new Contactssqllitehandler(ctx);
             Cursor C = CD.getAllData();
             if(C.getCount()==1){
-                CD.insertData(userDATA[1],userDATA[2]);
+                CD.insertData("Doctor " + userDATA[1],userDATA[2]);
                 //insert doctor details to its own database
                 DOCTORsqllite Dsql = new DOCTORsqllite(ctx);
-                Dsql.insertData(userDATA[1],userDATA[2]);
+                Dsql.insertData("Doctor " +userDATA[1],userDATA[2]);
             }
+            }
+            else
+            {
+                TextView doc_name = ((Activity)ctx).findViewById(R.id.Userfragment_Doctorname);
+                TextView doc_phone = ((Activity)ctx).findViewById(R.id.Userfragment_Doctorphone);
+                doc_name.setText("Confirm with your doctor");
+                doc_phone.setText("Confirm with your doctor");
             }
 
         }
