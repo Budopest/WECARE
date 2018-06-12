@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -21,7 +20,7 @@ import android.database.Cursor;
 import android.content.Intent;
 import android.widget.TextView;
 
-import com.gp.eece2019.wecare.calls.Addcontacts;
+
 import com.gp.eece2019.wecare.calls.ContactsList;
 import com.gp.eece2019.wecare.measurements.Calculator;
 import com.gp.eece2019.wecare.measurements.Measurements;
@@ -66,7 +65,7 @@ public class MainActivity extends AppCompatActivity
             }
 
             getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                    .putBoolean("isFirstRun", false).commit();
+                    .putBoolean("isFirstRun", false).apply();
 
             setContentView(R.layout.activity_main);
 
@@ -110,8 +109,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
-        firstfield =  (TextView)headerView.findViewById(R.id.name_navdrawer);
-        secondfield =  (TextView)headerView.findViewById(R.id.email_navdrawer);
+        firstfield  =  headerView.findViewById(R.id.name_navdrawer);
+        secondfield =  headerView.findViewById(R.id.email_navdrawer);
         if(Getuserdetails()) {
             firstfield.setText(String.format("%s %s", Fname, Lname));
             secondfield.setText(String.format("%s  %s", Uname, phone));
@@ -234,22 +233,7 @@ public class MainActivity extends AppCompatActivity
     public boolean Checkfirstuse()  // Return false at first use only
     {
         Cursor res = usql.getid();
-        if(res.getCount() == 0) {
-            // show message
-            //showMessage("Error","Nothing found");
-            return false;
-        }
-        /*
-        StringBuffer buffer = new StringBuffer();
-        while (res.moveToNext()) {
-            buffer.append("Id :"+ res.getString(0)+"\n");
-
-        }
-
-        //Show all data
-        //showMessage("Data",buffer.toString());
-        */
-        return true;
+        return res.getCount() != 0;
     }
     public boolean Getuserdetails()
     {
@@ -269,16 +253,5 @@ public class MainActivity extends AppCompatActivity
 
         return true;
     }
-
-    public void showMessage(String title,String Message){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setCancelable(true);
-        builder.setTitle(title);
-        builder.setMessage(Message);
-        builder.show();
-    }
-
-
-
 
 }

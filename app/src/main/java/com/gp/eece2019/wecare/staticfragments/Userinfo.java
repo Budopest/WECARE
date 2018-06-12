@@ -1,29 +1,27 @@
 package com.gp.eece2019.wecare.staticfragments;
 
 
-import android.Manifest;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.pm.PackageManager;
+
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.gp.eece2019.wecare.MainActivity;
+
 import com.gp.eece2019.wecare.R;
-import com.gp.eece2019.wecare.login.USERsqllitehandler;
+
 
 import static android.app.Activity.RESULT_OK;
 
