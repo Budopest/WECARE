@@ -80,9 +80,9 @@ public class Userinfo extends Fragment {
             D.execute(Uname);
         }
 
-        user_name.setText(" " + Fname + " "+Lname);
-        user_birthdate.setText(" " + Bdate);
-        user_phone.setText(" "+phone);
+        user_name.setText(String.format(" %s %s", Fname, Lname));
+        user_birthdate.setText(String.format(" %s", Bdate));
+        user_phone.setText(String.format(" %s", phone));
         if(Ddata.moveToNext())
         {
         doctor_name.setText(Ddata.getString(1)); // 0 is the ID
