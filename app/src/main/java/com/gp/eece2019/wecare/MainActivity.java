@@ -113,8 +113,8 @@ public class MainActivity extends AppCompatActivity
         firstfield =  (TextView)headerView.findViewById(R.id.name_navdrawer);
         secondfield =  (TextView)headerView.findViewById(R.id.email_navdrawer);
         if(Getuserdetails()) {
-            firstfield.setText(Fname+" "+Lname);
-            secondfield.setText(Uname+ "  " + phone);
+            firstfield.setText(String.format("%s %s", Fname, Lname));
+            secondfield.setText(String.format("%s  %s", Uname, phone));
             Userinfo UI = new Userinfo(Fname,Lname,Uname,phone,Bdate);
             android.support.v4.app.FragmentManager Manager = getSupportFragmentManager();
             Manager.beginTransaction().replace(R.id.Fragment_container,UI).commit();
