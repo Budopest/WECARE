@@ -22,11 +22,12 @@ import android.widget.TextView;
 
 
 import com.gp.eece2019.wecare.calls.ContactsList;
-import com.gp.eece2019.wecare.measurements.Calculator;
+import com.gp.eece2019.wecare.measurements.Calc_BloodPressure;
 import com.gp.eece2019.wecare.measurements.Measurements;
 import com.gp.eece2019.wecare.staticfragments.About;
 import com.gp.eece2019.wecare.staticfragments.Contactus;
 import com.gp.eece2019.wecare.staticfragments.DOCTORsqllite;
+import com.gp.eece2019.wecare.messanger.Messanger;
 import com.gp.eece2019.wecare.staticfragments.Userinfo;
 import com.gp.eece2019.wecare.login.SigninActivity;
 import com.gp.eece2019.wecare.login.USERsqllitehandler;
@@ -205,6 +206,12 @@ public class MainActivity extends AppCompatActivity
             Manager.beginTransaction().replace(R.id.Fragment_container,C).commit();
 
 
+        }else if (id == R.id.nav_messanger) {
+            Messanger M = new Messanger();
+            android.support.v4.app.FragmentManager Manager = getSupportFragmentManager();
+            Manager.beginTransaction().replace(R.id.Fragment_container,M).commit();
+
+
         } else if (id == R.id.nav_about) {
             About a = new About();
             android.support.v4.app.FragmentManager Manager = getSupportFragmentManager();
@@ -218,7 +225,7 @@ public class MainActivity extends AppCompatActivity
 
         }
         else if (id == R.id.nav_measurements_calcualator) {
-            Calculator cl = new Calculator();
+            Calc_BloodPressure cl = new Calc_BloodPressure();
             android.support.v4.app.FragmentManager Manager = getSupportFragmentManager();
             Manager.beginTransaction().replace(R.id.Fragment_container,cl).commit();
 

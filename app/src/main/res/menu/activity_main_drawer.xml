@@ -30,6 +30,10 @@
     <item android:title="Communicate">
         <menu>
             <item
+                android:id="@+id/nav_messanger"
+                android:icon="@drawable/ic_message_black_24dp"
+                android:title="Messanger" />
+            <item
                 android:id="@+id/nav_about"
                 android:icon="@android:drawable/ic_dialog_info"
                 android:title="About The App" />
@@ -37,6 +41,7 @@
                 android:id="@+id/nav_contactus"
                 android:icon="@android:drawable/ic_dialog_email"
                 android:title="Contact us" />
+
 
         </menu>
     </item>

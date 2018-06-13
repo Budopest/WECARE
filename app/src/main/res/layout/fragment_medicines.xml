@@ -22,7 +22,7 @@
         android:layout_marginStart="92dp"
         android:layout_marginTop="60dp"
         android:text="Medicines List"
-        android:textColor="@android:color/holo_green_dark"
+        android:textColor="#ed5c0d"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

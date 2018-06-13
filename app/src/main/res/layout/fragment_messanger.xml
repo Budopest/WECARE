@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFCDF7EB"
+    tools:context=".messanger.Messanger">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+    <TextView
+        android:id="@+id/messander_header"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="60dp"
+        android:gravity="center"
+        android:text="Send messages with your questions or concerns to your doctor and he will respond to you as soon as possibe (In cases of emergency contact your doctor directly)"
+        android:textColor="@android:color/background_dark" />
+
+    <EditText
+        android:id="@+id/messanger_area"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="80dp"
+        android:background="#FFBCF8AF"
+        android:ems="10"
+        android:hint="Enter Your Messages Here"
+        android:inputType="textPersonName|textMultiLine"
+        android:maxLength="500"
+        android:scrollHorizontally="false"
+        android:singleLine="false" />
+
+    <Button
+        android:id="@+id/send_button"
+        android:layout_width="52dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/ic_send_red_24dp" />
+
+    <ListView
+        android:id="@+id/messages_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="60dp"
+        android:layout_marginTop="120dp" />
+
+</FrameLayout>

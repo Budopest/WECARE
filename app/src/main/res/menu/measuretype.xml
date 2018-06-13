@@ -3,14 +3,11 @@
 
     <group >
         <item
-            android:id="@+id/Calc_temp"
-            android:title="Temperature" />
-        <item
-            android:id="@+id/Calc_HRate"
-            android:title="Heart Rate" />
-        <item
             android:id="@+id/Calc_Bpressure"
             android:title="Blood Pressure" />
+        <item
+            android:id="@+id/Calc_Diabetes"
+            android:title="Diabetes" />
 
     </group>
 </menu>

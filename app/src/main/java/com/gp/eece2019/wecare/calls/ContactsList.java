@@ -73,6 +73,8 @@ public class ContactsList extends Fragment {
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                     getActivity(), android.R.layout.simple_list_item_1, A);
             listView.setAdapter(adapter);
+
+
             registerForContextMenu(listView);
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
