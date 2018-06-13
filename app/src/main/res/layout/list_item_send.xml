@@ -2,11 +2,12 @@
 
 
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/message_container"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginLeft="60dp"
-    android:background="#FFC1D205"
+    android:background="@color/dotscolor"
     android:gravity="right|center_vertical"
     android:minHeight="?android:attr/listPreferredItemHeightSmall"
     android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
