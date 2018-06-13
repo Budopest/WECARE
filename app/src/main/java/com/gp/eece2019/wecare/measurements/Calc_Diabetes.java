@@ -64,18 +64,17 @@ public class Calc_Diabetes extends Fragment {
                         String HDiaMeasure = HDia.getText().toString();
                         // String LDiaMeasure = LDia.getText().toString();
                         if (HDiaMeasure.equals("")) {
-                            Toast.makeText(getActivity(), "Data is incorrect", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity(), "Enter a valid value", Toast.LENGTH_LONG).show();
                             return;
                         }
                         int HDiameasurement = Integer.parseInt(HDiaMeasure);
 
                         int radioId = RG.getCheckedRadioButtonId();
                         RB =(RadioButton) getView().findViewById(radioId);
+
                         if (radioId==R.id.Random) test_type = "R";
                         else if (radioId==R.id.Fasting) test_type = "F";
                         else if (radioId==R.id.two_hour_post_prandial) test_type = "P";
-
-
 
                         if ((HDiameasurement < 200 && test_type == "R") || (HDiameasurement < 140 && test_type == "P") || (HDiameasurement < 100 && test_type == "F")) {
                             CheckCondition.setText("normal");
@@ -86,8 +85,8 @@ public class Calc_Diabetes extends Fragment {
                         } else if ((HDiameasurement >= 200 && test_type == "R") || (HDiameasurement >= 126 && test_type == "F") || (HDiameasurement >= 200 && test_type == "P"))
                         { CheckCondition.setText("Diabetes");
                             CheckCondition.setTextColor(Color.RED);
-                        }}}
-        );
+                        }
+                        }});
         super.onActivityCreated(savedInstanceState);
     }
     @Override
