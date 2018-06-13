@@ -60,6 +60,7 @@ public class Calc_BloodPressure extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+
                         String HPMeasure= HP.getText().toString();
                         String LPMeasure = LP.getText().toString();
                         if(HPMeasure.equals("")|| LPMeasure.equals("")) {
@@ -115,7 +116,7 @@ public class Calc_BloodPressure extends Fragment {
                 return true;
 
             case R.id.Calc_Diabetes:
-                Diabetes Dia= new Diabetes();
+                Calc_Diabetes Dia= new Calc_Diabetes();
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.Fragment_container, Dia)
                         .addToBackStack(null)
