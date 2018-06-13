@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFCDF7EB"
-    tools:context=".measurements.Calculator">
+    tools:context=".measurements.Calc_BloodPressure">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -38,7 +38,7 @@
         android:background="#FFBCF8AF"
         android:ems="10"
         android:hint="High pressure"
-        android:inputType="textPersonName"
+        android:inputType="phone"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/Check_your_condition"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,15 +50,18 @@
         android:layout_height="40dp"
         android:layout_marginBottom="48dp"
         android:layout_marginEnd="18dp"
-        android:layout_marginRight="18dp"
+        android:layout_marginStart="9dp"
         android:background="#FFBCF8AF"
         android:cursorVisible="false"
         android:ems="10"
         android:hint="Low pressure"
-        android:inputType="textPersonName"
+        android:inputType="phone"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/Check_your_condition"
-        app:layout_constraintEnd_toStartOf="@+id/mm_Hg" />
+        app:layout_constraintEnd_toStartOf="@+id/mm_Hg"
+        app:layout_constraintStart_toEndOf="@+id/divforpressure"
+        android:layout_marginRight="18dp"
+        android:layout_marginLeft="9dp" />
 
     <TextView
         android:id="@+id/mm_Hg"
@@ -66,13 +69,13 @@
         android:layout_height="40dp"
         android:layout_marginBottom="48dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
         android:background="#FFBCF8AF"
         android:text="mmHg"
         android:textSize="20sp"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/Check_your_condition"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginRight="16dp" />
 
     <Button
         android:id="@+id/Check_your_condition"
@@ -107,14 +110,14 @@
     <TextView
         android:id="@+id/Condition_description"
         android:layout_width="230dp"
-        android:layout_height="42dp"
+        android:layout_height="65dp"
         android:layout_marginBottom="27dp"
         android:layout_marginEnd="67dp"
         android:layout_marginStart="87dp"
         android:gravity="center"
         android:hint="Condition description"
-        android:textSize="24sp"
         android:textColor="@android:color/holo_green_dark"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/Send_to_doctor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -127,14 +130,11 @@
         android:layout_width="15dp"
         android:layout_height="40dp"
         android:layout_marginBottom="48dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginLeft="11dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginStart="11dp"
+        android:layout_marginStart="5dp"
         android:text="/"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/Check_your_condition"
-        app:layout_constraintEnd_toStartOf="@+id/low_pressure"
-        app:layout_constraintStart_toEndOf="@+id/High_pressure" />
+        app:layout_constraintStart_toEndOf="@+id/High_pressure"
+        android:layout_marginLeft="5dp" />
 
 </android.support.constraint.ConstraintLayout>
