@@ -207,7 +207,7 @@ public class MainActivity extends AppCompatActivity
 
 
         }else if (id == R.id.nav_messanger) {
-            Messanger M = new Messanger();
+            Messanger M = new Messanger(Uname);
             android.support.v4.app.FragmentManager Manager = getSupportFragmentManager();
             Manager.beginTransaction().replace(R.id.Fragment_container,M).commit();
 

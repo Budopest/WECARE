@@ -37,7 +37,7 @@ public class MeasureSQLhandler extends AsyncTask<String,Void,String> {
 
     Context ctx;
     int error=0;
-    int idnumber = 0x7f080010; int idnumber2 = 0x7f08000c; int ns =0;
+    int idnumber = R.id.T11; int idnumber2 = R.id.T101; int ns =0;
 
     AlertDialog alertDialog;
     IPSTRING Surl = new IPSTRING();
@@ -248,7 +248,7 @@ public class MeasureSQLhandler extends AsyncTask<String,Void,String> {
                 f2.setText(tf);
                 f3.setText(p);
                 f4.setText(pf);
-                ns=0; idnumber = 0x7f080010; idnumber2 = 0x7f08000c;
+                ns=0; idnumber = R.id.T11; idnumber2 =R.id.T101;
             }
 
 
