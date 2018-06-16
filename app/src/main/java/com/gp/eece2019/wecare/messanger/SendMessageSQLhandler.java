@@ -93,72 +93,77 @@ public class SendMessageSQLhandler extends AsyncTask<String,Void,String> {
     @Override
     protected void onPostExecute(String result) {
 
-        if(error==0){
+        if(error==0) {
 
             //alertDialog.setMessage(result);
             //alertDialog.show();
 
             int length = result.length();
-            String conf ="",time = "",id="";
-            boolean ft=true;
-            int c=0;
-            int start=0;
-            for(int i=0;i<length;i++)
-            {
-                if(result.charAt(i)=='|'&& ft){
-                    start=i;
+            String conf = "", time = "", id = "";
+            boolean ft = true;
+            int c = 0;
+            int start = 0;
+            for (int i = 0; i < length; i++) {
+                if (result.charAt(i) == '|' && ft) {
+                    start = i;
                     ft = false;
                     continue;
                 }
-                if(result.charAt(i)=='|'&& (!ft)) {
+                if (result.charAt(i) == '|' && (!ft)) {
 
-                    if(c==0) { conf = result.substring(start+1,i); c++; start=i+1;}
-                    else if(c==1) {time=result.substring(start,i); c++; start=i+1;}
-                    else if(c==2) {id=result.substring(start,i);}
+                    if (c == 0) {
+                        conf = result.substring(start + 1, i);
+                        c++;
+                        start = i + 1;
+                    } else if (c == 1) {
+                        time = result.substring(start, i);
+                        c++;
+                        start = i + 1;
+                    } else if (c == 2) {
+                        id = result.substring(start, i);
+                    }
 
                 }
             }
             //alertDialog.setMessage(conf + time +id);
             //alertDialog.show();
 
+            if (conf.equals("success")) {
+                MSQLLITE = new MessagesSqlLitehandler(context);
+                MSQLLITE.insertData(message_final, time, id, "send");
 
-            MSQLLITE = new MessagesSqlLitehandler(context);
-            MSQLLITE.insertData(message_final,time,id,"send");
+                TextView ms_area = ((Activity) context).findViewById(R.id.messanger_area);
+                ListView mesaage_list = ((Activity) context).findViewById(R.id.messages_list);
+                ms_area.setText("");
 
-            TextView ms_area = ((Activity)context).findViewById(R.id.messanger_area);
-            ListView mesaage_list = ((Activity)context).findViewById(R.id.messages_list);
-            ms_area.setText("");
+                Cursor res = MSQLLITE.getAllData();
 
-            Cursor res =MSQLLITE.getAllData();
+                final ListViewItem[] items = new ListViewItem[res.getCount()];
 
-            final ListViewItem[] items = new ListViewItem[res.getCount()];
+                if (res.getCount() == 0) {
+                    // show message
+                    showMessage("Error", "Nothing found");
 
-            if(res.getCount() == 0) {
-                // show message
-                showMessage("Error","Nothing found");
-                return;
-            }
-
-
-            int i=0;
-            while (res.moveToNext()) {
-
-                if(res.getString(4).equals("send"))
-                {
-                    items[i] = new ListViewItem(res.getString(1), CustomAdapter.TYPE_send);
                 }
-                else
-                {
-                    items[i] = new ListViewItem(res.getString(1)+ i, CustomAdapter.TYPE_rec);
+
+
+                int i = 0;
+                while (res.moveToNext()) {
+
+                    if (res.getString(4).equals("send")) {
+                        items[i] = new ListViewItem(res.getString(1), CustomAdapter.TYPE_send);
+                    } else {
+                        items[i] = new ListViewItem(res.getString(1) + i, CustomAdapter.TYPE_rec);
+                    }
+                    i++;
                 }
-                i++;
+
+
+                CustomAdapter customAdapter = new CustomAdapter(context, R.id.message_container, items);
+                mesaage_list.setAdapter(customAdapter);
+
+                //else Toast.makeText(context, "Check your user name and password", Toast.LENGTH_LONG).show();
             }
-
-
-            CustomAdapter customAdapter = new CustomAdapter(context, R.id.message_container, items);
-            mesaage_list.setAdapter(customAdapter);
-
-            //else Toast.makeText(context, "Check your user name and password", Toast.LENGTH_LONG).show();
         }
 
     }

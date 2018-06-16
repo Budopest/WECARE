@@ -22,7 +22,9 @@ import com.gp.eece2019.wecare.R;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Locale;
 import java.util.zip.DataFormatException;
@@ -65,9 +67,9 @@ public class Messanger extends Fragment {
         if(res.getCount() == 0) {
             // show message
             showMessage("Error","Nothing found");
-            return;
-        }
 
+        }
+        else{
         int i=0;
         while (res.moveToNext()) {
 
@@ -82,9 +84,11 @@ public class Messanger extends Fragment {
             i++;
         }
 
-
+        //Collections.reverse(Arrays.asList(items)); 
         CustomAdapter customAdapter = new CustomAdapter(getContext(), R.id.message_container, items);
         mesaage_list.setAdapter(customAdapter);
+        customAdapter.notifyDataSetChanged();
+        }
 
 
         send_message.setOnClickListener(new View.OnClickListener() {
