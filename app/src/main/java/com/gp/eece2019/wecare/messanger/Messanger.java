@@ -1,28 +1,44 @@
 package com.gp.eece2019.wecare.messanger;
 
 
+import android.annotation.SuppressLint;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gp.eece2019.wecare.R;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.zip.DataFormatException;
+
 /**
  * A simple {@link Fragment} subclass.
  */
+@SuppressLint("ValidFragment")
 public class Messanger extends Fragment {
 
+    MessagesSqlLitehandler MSQLLITE;
 
-    public Messanger() {
+    String Uname;
+    public Messanger(String Uname) {
         // Required empty public constructor
+        this.Uname = Uname;
     }
 
 
@@ -37,23 +53,66 @@ public class Messanger extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 
         ListView mesaage_list = getView().findViewById(R.id.messages_list);
+        Button   send_message = getView().findViewById(R.id.send_button);
+        final TextView message_area = getView().findViewById(R.id.messanger_area);
 
-        //testing to be changerd later.
-        boolean turn = false;
-        final ListViewItem[] items = new ListViewItem[20];
-        for (int i = 0; i < items.length; i++){
+        MSQLLITE = new MessagesSqlLitehandler(getContext());
 
-            if(turn)  items[i] = new ListViewItem("sent message " + i, CustomAdapter.TYPE_send);
-            else      items[i] = new ListViewItem("Rec  message " + i, CustomAdapter.TYPE_rec);
-            turn = !turn;
+        Cursor res =MSQLLITE.getAllData();
 
+        final ListViewItem[] items = new ListViewItem[res.getCount()];
+
+        if(res.getCount() == 0) {
+            // show message
+            showMessage("Error","Nothing found");
+            return;
         }
-        // the prev part to be modified.
+
+        int i=0;
+        while (res.moveToNext()) {
+
+            if(res.getString(4).equals("send"))
+            {
+                items[i] = new ListViewItem(res.getString(1), CustomAdapter.TYPE_send);
+            }
+            else
+            {
+                items[i] = new ListViewItem(res.getString(1)+ i, CustomAdapter.TYPE_rec);
+            }
+            i++;
+        }
+
+
         CustomAdapter customAdapter = new CustomAdapter(getContext(), R.id.message_container, items);
         mesaage_list.setAdapter(customAdapter);
 
 
+        send_message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String msg  = message_area.getText().toString();
+                if(!msg.equals("")) {
+                    //String time = DateFormat.getDateTimeInstance().format(new Date());
+                    Date cal = Calendar.getInstance().getTime();
+                    SimpleDateFormat D = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss.sss");
+                    String time = D.format(cal);
+
+
+                    SendMessageSQLhandler SMS = new SendMessageSQLhandler(getContext());
+                    SMS.execute(Uname, msg, time);
+                }
+            }
+        });
+
+
 
         super.onActivityCreated(savedInstanceState);
+    }
+    public void showMessage(String title,String Message){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setCancelable(true);
+        builder.setTitle(title);
+        builder.setMessage(Message);
+        builder.show();
     }
 }
