@@ -88,6 +88,7 @@ public class Messanger extends Fragment {
         CustomAdapter customAdapter = new CustomAdapter(getContext(), R.id.message_container, items);
         mesaage_list.setAdapter(customAdapter);
         customAdapter.notifyDataSetChanged();
+
         }
 
 
