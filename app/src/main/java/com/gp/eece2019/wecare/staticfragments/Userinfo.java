@@ -76,7 +76,7 @@ public class Userinfo extends Fragment {
         if(Ddata.getCount()==0) {
             D = new Doctordetails(getActivity());
             D.execute(Uname);
-        }
+            }
 
         user_name.setText(String.format(" %s %s", Fname, Lname));
         user_birthdate.setText(String.format(" %s", Bdate));

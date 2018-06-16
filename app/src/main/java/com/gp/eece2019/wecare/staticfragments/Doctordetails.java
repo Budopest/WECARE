@@ -9,6 +9,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -104,21 +106,28 @@ public class Doctordetails extends AsyncTask<String,Void,String> {
                     indexSTRING++;
                    }
             }
-            if(userDATA[0].equals("sucess")){
+            if(userDATA[0].equals("success")){
             Contactssqllitehandler CD = new Contactssqllitehandler(ctx);
             Cursor C = CD.getAllData();
             if(C.getCount()==1){
-                CD.insertData("Doctor " + userDATA[1],userDATA[2]);
+                CD.insertData("Doctor " + userDATA[1],"0"+userDATA[2]);
                 //insert doctor details to its own database
                 DOCTORsqllite Dsql = new DOCTORsqllite(ctx);
-                Dsql.insertData("Doctor " +userDATA[1],userDATA[2]);
+                Dsql.insertData("Doctor " +userDATA[1],"0"+userDATA[2]);
+
+                TextView doc_name  = ((Activity)ctx).findViewById(R.id.Userfragment_Doctorname);
+                TextView doc_phone = ((Activity)ctx).findViewById(R.id.Userfragment_Doctorphone);
+                Button call_doctor =  ((Activity)ctx).findViewById(R.id.call_doctor);
+                doc_name.setText(userDATA[1]);
+                doc_phone.setText("0"+userDATA[2]);
+                call_doctor.setVisibility(View.VISIBLE);
             }
             }
             else
             {
                 TextView doc_name = ((Activity)ctx).findViewById(R.id.Userfragment_Doctorname);
                 TextView doc_phone = ((Activity)ctx).findViewById(R.id.Userfragment_Doctorphone);
-                doc_name.setText("Confirm with your doctor");
+                doc_name.setText("Confirm with  your doctor");
                 doc_phone.setText("Confirm with your doctor");
             }
 
