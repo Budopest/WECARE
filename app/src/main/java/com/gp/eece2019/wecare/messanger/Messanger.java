@@ -10,24 +10,18 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gp.eece2019.wecare.R;
 
-import java.text.DateFormat;
+
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
-import java.util.Locale;
-import java.util.zip.DataFormatException;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,7 +31,7 @@ public class Messanger extends Fragment {
 
     MessagesSqlLitehandler MSQLLITE;
 
-    String Uname;
+    String Uname,LatestID;
     public Messanger(String Uname) {
         // Required empty public constructor
         this.Uname = Uname;
@@ -81,7 +75,7 @@ public class Messanger extends Fragment {
             {
                 items[i] = new ListViewItem(res.getString(1)+ i, CustomAdapter.TYPE_rec);
             }
-            i++;
+            i++; LatestID=res.getString(3);
         }
 
         //Collections.reverse(Arrays.asList(items)); 
@@ -90,6 +84,10 @@ public class Messanger extends Fragment {
         customAdapter.notifyDataSetChanged();
 
         }
+
+
+        RecMessageSQLhandler RecCheck = new RecMessageSQLhandler(getContext());
+        RecCheck.execute(Uname,LatestID);
 
 
         send_message.setOnClickListener(new View.OnClickListener() {

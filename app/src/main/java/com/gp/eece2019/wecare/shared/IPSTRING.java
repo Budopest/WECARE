@@ -14,6 +14,8 @@ public class IPSTRING {
     private final String measures_url = Sip+"readm.php";
     private final String doctor_url   = Sip+"doctors.php";
     private final String sendMessage_url = Sip+"chat.php";
+    private final String recMessage_url = Sip+"chat.php";
+
 
 
     public String Getlogin()
@@ -37,5 +39,8 @@ public class IPSTRING {
     }
     public String getSendMessage_url() {
         return sendMessage_url;
+    }
+    public String getRecMessage_url() {
+        return recMessage_url;
     }
 }
