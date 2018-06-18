@@ -22,8 +22,12 @@ import android.widget.TextView;
 
 
 import com.gp.eece2019.wecare.calls.ContactsList;
+import com.gp.eece2019.wecare.calls.Contactssqllitehandler;
 import com.gp.eece2019.wecare.measurements.Calc_BloodPressure;
+import com.gp.eece2019.wecare.measurements.MeasureSQLLITE;
+import com.gp.eece2019.wecare.measurements.MeasureSQLhandler;
 import com.gp.eece2019.wecare.measurements.Measurements;
+import com.gp.eece2019.wecare.messanger.MessagesSqlLitehandler;
 import com.gp.eece2019.wecare.staticfragments.About;
 import com.gp.eece2019.wecare.staticfragments.Contactus;
 import com.gp.eece2019.wecare.staticfragments.DOCTORsqllite;
@@ -40,6 +44,10 @@ public class MainActivity extends AppCompatActivity
 
     USERsqllitehandler usql;
     DOCTORsqllite Dsql;
+    MessagesSqlLitehandler smssql;
+    MeasureSQLLITE msql;
+    Contactssqllitehandler csql;
+
     String Fname, Lname, Uname, phone, Bdate;
     TextView firstfield, secondfield;
 
@@ -49,8 +57,11 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        usql = new USERsqllitehandler(this);
-        Dsql = new DOCTORsqllite(this);
+        usql   = new USERsqllitehandler(this);
+        Dsql   = new DOCTORsqllite(this);
+        smssql = new MessagesSqlLitehandler(this);
+        msql   = new MeasureSQLLITE(this);
+        csql   = new Contactssqllitehandler(this);
 
         boolean Firstusestatus = Checkfirstuse();
 
@@ -152,18 +163,7 @@ public class MainActivity extends AppCompatActivity
         }
         if(id == R.id.Logout)
         {
-            Cursor Doctor   = Dsql.getAllData();
-            Cursor deleteid = usql.getid();
-            while (deleteid.moveToNext()) {
-                usql.deleteData(deleteid.getString(0));
-            }
-            while (Doctor.moveToNext()){
-                Dsql.deleteData(Doctor.getString(0));
-            }
-            Intent i = new Intent(MainActivity.this,SigninActivity.class);
-            startActivity(i);
-            finish();
-
+            Logout();
         }
 
         return super.onOptionsItemSelected(item);
@@ -193,13 +193,8 @@ public class MainActivity extends AppCompatActivity
             android.support.v4.app.FragmentManager Manager = getSupportFragmentManager();
             Manager.beginTransaction().replace(R.id.Fragment_container,C).commit();
 
-        } /*else if (id == R.id.nav_addcontacts) {
-
-            Addcontacts Add = new Addcontacts();
-            android.support.v4.app.FragmentManager Manager = getSupportFragmentManager();
-            Manager.beginTransaction().replace(R.id.Fragment_container,Add).commit();
-
-        }*/ else if (id == R.id.nav_contacts) {
+        }
+        else if (id == R.id.nav_contacts) {
 
             ContactsList C = new ContactsList();
             android.support.v4.app.FragmentManager Manager = getSupportFragmentManager();
@@ -230,6 +225,9 @@ public class MainActivity extends AppCompatActivity
             Manager.beginTransaction().replace(R.id.Fragment_container,cl).commit();
 
         }
+        else if (id == R.id.nav_hospitals_location){}
+        else if (id == R.id.nav_settings){}
+        else if (id == R.id.nav_logout){ Logout(); }
 
         DrawerLayout drawer =  findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -259,6 +257,32 @@ public class MainActivity extends AppCompatActivity
         }
 
         return true;
+    }
+    public void Logout(){  // Clear all SQL LITE databases and direct the user to the login screen
+
+        Cursor Doctor   = Dsql.getAllData();
+        Cursor user     = usql.getid();
+        Cursor contacts = csql.getAllData();
+        Cursor sms      = smssql.getAllData();
+        Cursor measure  = msql.getAllData();
+        while (user.moveToNext()) {
+            usql.deleteData(user.getString(0));
+        }
+        while (Doctor.moveToNext()){
+            Dsql.deleteData(Doctor.getString(0));
+        }
+        while (contacts.moveToNext()){
+            csql.deleteData(contacts.getString(0));
+        }
+        while (sms.moveToNext()){
+            smssql.deleteData(Doctor.getString(0));
+        }
+        while (measure.moveToNext()){
+            msql.deleteData(Doctor.getString(0));
+        }
+        Intent i = new Intent(MainActivity.this,SigninActivity.class);
+        startActivity(i);
+        finish();
     }
 
 }
