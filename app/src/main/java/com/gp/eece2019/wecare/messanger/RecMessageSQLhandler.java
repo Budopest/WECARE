@@ -32,8 +32,9 @@ public class RecMessageSQLhandler extends AsyncTask<String,Void,String> {
 
     Context context;
     AlertDialog alertDialog;
-    MessagesSqlLitehandler MSQLLITE;
+    MessagesSqlLitehandler MSQLLITE,IDRECHECK;
     IPSTRING Surl = new IPSTRING();
+    String UN,ID;
 
     int error=0;
     //AlertDialog alertDialog;
@@ -49,6 +50,8 @@ public class RecMessageSQLhandler extends AsyncTask<String,Void,String> {
         try {
             String user_name = params[0];
             String LatestID  = params[1];
+            UN= params[0];
+            ID=params[1];
 
             URL url = new URL(message_url);
             HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
@@ -84,8 +87,8 @@ public class RecMessageSQLhandler extends AsyncTask<String,Void,String> {
 
     @Override
     protected void onPreExecute() {
-        alertDialog = new AlertDialog.Builder(context).create();
-        alertDialog.setTitle("Connection Status");
+        //alertDialog = new AlertDialog.Builder(context).create();
+        //alertDialog.setTitle("Connection Status");
 
     }
 
@@ -161,8 +164,9 @@ public class RecMessageSQLhandler extends AsyncTask<String,Void,String> {
                 if (res.getString(4).equals("send")) {
                     items[i] = new ListViewItem(res.getString(1), CustomAdapter.TYPE_send);
                 } else {
-                    items[i] = new ListViewItem(res.getString(1) + i, CustomAdapter.TYPE_rec);
+                    items[i] = new ListViewItem(res.getString(1) , CustomAdapter.TYPE_rec);
                 }
+                ID=res.getString(3);
                 i++;
             }
 

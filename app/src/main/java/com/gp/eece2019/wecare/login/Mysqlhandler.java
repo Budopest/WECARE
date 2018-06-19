@@ -157,7 +157,7 @@ public class Mysqlhandler extends AsyncTask<String,Void,String> {
 
             }
             if (isInserted1&&isInserted2) {
-                Toast.makeText(context, "Data Inserted", Toast.LENGTH_LONG).show();
+                //Toast.makeText(context, "Data Inserted", Toast.LENGTH_LONG).show();
                 Activity act = (Activity) context;
                 Intent i = new Intent(context, MainActivity.class);
                 act.startActivity(i);

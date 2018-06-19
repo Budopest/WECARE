@@ -6,7 +6,10 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-feature android:name="android.hardware.camera"  android:required="false" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
 
     <application
         android:allowBackup="true"
@@ -32,10 +35,12 @@
 
         <service
             android:name=".notification.RingtonePlayingService"
-            android:enabled="true"></service>
+            android:enabled="true" />
 
         <activity android:name=".notification.Soundstopping" />
-        <activity android:name=".welcomeslider.WelcomeScreen"></activity>
+        <activity android:name=".welcomeslider.WelcomeScreen" />
+
+
     </application>
 
 </manifest>

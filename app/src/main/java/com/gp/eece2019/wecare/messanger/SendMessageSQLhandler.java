@@ -85,8 +85,8 @@ public class SendMessageSQLhandler extends AsyncTask<String,Void,String> {
 
     @Override
     protected void onPreExecute() {
-        alertDialog = new AlertDialog.Builder(context).create();
-        alertDialog.setTitle("Connection Status");
+        //alertDialog = new AlertDialog.Builder(context).create();
+        //alertDialog.setTitle("Connection Status");
 
     }
 
@@ -153,7 +153,7 @@ public class SendMessageSQLhandler extends AsyncTask<String,Void,String> {
                     if (res.getString(4).equals("send")) {
                         items[i] = new ListViewItem(res.getString(1), CustomAdapter.TYPE_send);
                     } else {
-                        items[i] = new ListViewItem(res.getString(1) + i, CustomAdapter.TYPE_rec);
+                        items[i] = new ListViewItem(res.getString(1) , CustomAdapter.TYPE_rec);
                     }
                     i++;
                 }

@@ -25,7 +25,6 @@ import com.gp.eece2019.wecare.calls.ContactsList;
 import com.gp.eece2019.wecare.calls.Contactssqllitehandler;
 import com.gp.eece2019.wecare.measurements.Calc_BloodPressure;
 import com.gp.eece2019.wecare.measurements.MeasureSQLLITE;
-import com.gp.eece2019.wecare.measurements.MeasureSQLhandler;
 import com.gp.eece2019.wecare.measurements.Measurements;
 import com.gp.eece2019.wecare.messanger.MessagesSqlLitehandler;
 import com.gp.eece2019.wecare.staticfragments.About;
@@ -225,7 +224,9 @@ public class MainActivity extends AppCompatActivity
             Manager.beginTransaction().replace(R.id.Fragment_container,cl).commit();
 
         }
-        else if (id == R.id.nav_hospitals_location){}
+        else if (id == R.id.nav_hospitals_location){
+
+        }
         else if (id == R.id.nav_settings){}
         else if (id == R.id.nav_logout){ Logout(); }
 
@@ -271,15 +272,18 @@ public class MainActivity extends AppCompatActivity
         while (Doctor.moveToNext()){
             Dsql.deleteData(Doctor.getString(0));
         }
+
         while (contacts.moveToNext()){
             csql.deleteData(contacts.getString(0));
         }
+        /*
         while (sms.moveToNext()){
             smssql.deleteData(Doctor.getString(0));
         }
         while (measure.moveToNext()){
             msql.deleteData(Doctor.getString(0));
         }
+        */
         Intent i = new Intent(MainActivity.this,SigninActivity.class);
         startActivity(i);
         finish();

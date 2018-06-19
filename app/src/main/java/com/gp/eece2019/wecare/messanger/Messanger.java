@@ -60,7 +60,8 @@ public class Messanger extends Fragment {
 
         if(res.getCount() == 0) {
             // show message
-            showMessage("Error","Nothing found");
+            //showMessage("Error","Nothing found");
+            LatestID="0";
 
         }
         else{
@@ -73,7 +74,7 @@ public class Messanger extends Fragment {
             }
             else
             {
-                items[i] = new ListViewItem(res.getString(1)+ i, CustomAdapter.TYPE_rec);
+                items[i] = new ListViewItem(res.getString(1), CustomAdapter.TYPE_rec);
             }
             i++; LatestID=res.getString(3);
         }
