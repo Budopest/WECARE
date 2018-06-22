@@ -37,7 +37,6 @@ public class Messanger extends Fragment {
         this.Uname = Uname;
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
