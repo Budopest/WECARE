@@ -32,6 +32,7 @@ public class Messanger extends Fragment {
     MessagesSqlLitehandler MSQLLITE;
 
     String Uname,LatestID;
+
     public Messanger(String Uname) {
         // Required empty public constructor
         this.Uname = Uname;
