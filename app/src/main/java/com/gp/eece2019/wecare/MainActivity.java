@@ -23,7 +23,6 @@ import android.widget.TextView;
 
 import com.gp.eece2019.wecare.calls.ContactsList;
 import com.gp.eece2019.wecare.calls.Contactssqllitehandler;
-import com.gp.eece2019.wecare.googlemap.mapfragment;
 import com.gp.eece2019.wecare.measurements.Calc_BloodPressure;
 import com.gp.eece2019.wecare.measurements.MeasureSQLLITE;
 import com.gp.eece2019.wecare.measurements.Measurements;
@@ -226,9 +225,7 @@ public class MainActivity extends AppCompatActivity
 
         }
         else if (id == R.id.nav_hospitals_location){
-            mapfragment map = new mapfragment();
-            android.support.v4.app.FragmentManager Manager = getSupportFragmentManager();
-            Manager.beginTransaction().replace(R.id.Fragment_container,map).commit();
+
         }
         else if (id == R.id.nav_settings){}
         else if (id == R.id.nav_logout){ Logout(); }
