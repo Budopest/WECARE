@@ -36,6 +36,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="aboutus">Welcome to WE CARE.\n WE CARE is a project made by students from Cairo university faculty of engineering, electric communications and electronics department students.\n The project aims to benefit both the doctors and the patients. By providing regular monitoring to the patient condition, help the patient contact his doctor easily, remind him of his medication at the right time and provide a strong database for the patient condition</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_hmaps">Map</string>
+    <string name="title_activity_locations">Map</string>
 
 
 </resources>

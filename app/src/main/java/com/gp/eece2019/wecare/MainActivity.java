@@ -20,7 +20,6 @@ import android.database.Cursor;
 import android.content.Intent;
 import android.widget.TextView;
 
-
 import com.gp.eece2019.wecare.calls.ContactsList;
 import com.gp.eece2019.wecare.calls.Contactssqllitehandler;
 import com.gp.eece2019.wecare.measurements.Calc_BloodPressure;
