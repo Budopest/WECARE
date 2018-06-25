@@ -30,6 +30,7 @@ import com.gp.eece2019.wecare.staticfragments.About;
 import com.gp.eece2019.wecare.staticfragments.Contactus;
 import com.gp.eece2019.wecare.staticfragments.DOCTORsqllite;
 import com.gp.eece2019.wecare.messanger.Messanger;
+import com.gp.eece2019.wecare.staticfragments.Settings;
 import com.gp.eece2019.wecare.staticfragments.Userinfo;
 import com.gp.eece2019.wecare.login.SigninActivity;
 import com.gp.eece2019.wecare.login.USERsqllitehandler;
@@ -95,7 +96,7 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View view) { // The floating button action
 
                 Intent Call_ambulance = new Intent(Intent.ACTION_CALL);
-                Call_ambulance.setData(Uri.parse("tel:123"));
+                Call_ambulance.setData(Uri.parse("tel:"+getSharedPreferences("STATENUMBERS", MODE_PRIVATE).getString("state3",null)));
                 if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                     // TODO: Consider calling
                     //    ActivityCompat#requestPermissions
@@ -140,7 +141,7 @@ public class MainActivity extends AppCompatActivity
             super.onBackPressed();
         }
     }
-
+/*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -166,6 +167,7 @@ public class MainActivity extends AppCompatActivity
 
         return super.onOptionsItemSelected(item);
     }
+    */
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -226,7 +228,11 @@ public class MainActivity extends AppCompatActivity
         else if (id == R.id.nav_hospitals_location){
 
         }
-        else if (id == R.id.nav_settings){}
+        else if (id == R.id.nav_settings){
+            Settings settings = new Settings();
+            android.support.v4.app.FragmentManager Manager = getSupportFragmentManager();
+            Manager.beginTransaction().replace(R.id.Fragment_container,settings).commit();
+        }
         else if (id == R.id.nav_logout){ Logout(); }
 
         DrawerLayout drawer =  findViewById(R.id.drawer_layout);
