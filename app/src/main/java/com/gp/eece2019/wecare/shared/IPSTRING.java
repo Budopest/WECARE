@@ -7,7 +7,7 @@ package com.gp.eece2019.wecare.shared;
 public class IPSTRING {
 
 
-    private final String Sip             = "http://192.168.1.17/";
+    private final String Sip             = "http://192.168.1.21/";
     private final String login_url       = Sip+"logintest.php";
     private final String signup_url      = Sip+"signuptest.php";
     private final String medicine_url    = Sip+"medicines.php";

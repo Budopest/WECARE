@@ -31,6 +31,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
+import static android.content.Context.MODE_PRIVATE;
+
 
 public class Doctordetails extends AsyncTask<String,Void,String> {
 
@@ -114,6 +116,13 @@ public class Doctordetails extends AsyncTask<String,Void,String> {
                 //insert doctor details to its own database
                 DOCTORsqllite Dsql = new DOCTORsqllite(ctx);
                 Dsql.insertData("Doctor " +userDATA[1],"0"+userDATA[2]);
+
+                ctx.getSharedPreferences("STATENUMBERS", MODE_PRIVATE).edit()
+                        .putString("state2","123").apply();
+                ctx.getSharedPreferences("STATENUMBERS", MODE_PRIVATE).edit()
+                        .putString("state1",userDATA[2]).apply();
+                ctx.getSharedPreferences("STATENUMBERS", MODE_PRIVATE).edit()
+                        .putString("state3","123").apply();
 
                 TextView doc_name  = ((Activity)ctx).findViewById(R.id.Userfragment_Doctorname);
                 TextView doc_phone = ((Activity)ctx).findViewById(R.id.Userfragment_Doctorphone);
