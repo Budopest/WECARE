@@ -32,6 +32,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
+import static android.content.Context.MODE_PRIVATE;
+
 
 public class MeasureSQLhandler extends AsyncTask<String,Void,String> {
 
@@ -117,7 +119,7 @@ public class MeasureSQLhandler extends AsyncTask<String,Void,String> {
 
                     Cursor res =  LD.getAllData();
                     TextView timeupdate = (TextView)((Activity)ctx).findViewById(R.id.updateddate);
-                    timeupdate.setText("Updated On \" " + date + " \"");
+                    timeupdate.setText(String.format("Updated On \" %s \"", date));
                     if(res.getCount() == 0) { //the data base is empty
 
                         if(LD.insertData(date)){ Toast.makeText(ctx,"First Data Received Correctly",Toast.LENGTH_LONG).show();}
@@ -151,28 +153,37 @@ public class MeasureSQLhandler extends AsyncTask<String,Void,String> {
                             all[indexall] = element.substring(indexS, j+1);
                         }
                     }
-                    T = Integer.parseInt(all[0]);
-                    TF = Integer.parseInt(all[1]);
-                    P = Integer.parseInt(all[2]);
-                    PF = Integer.parseInt(all[3]);
-                    if(TF>WTF){WTF=TF; WT=T;}
-                    if(PF>WPF){WPF=PF; WP=P;}
-                    //TakeNeededActions(T,TF,P,PF); //Take actions in emergency cases
 
-                    isinserted = M.insertData(T,TF,P,PF);
-                    if (isinserted && firsttime){
-                        Toast.makeText(ctx, "Data Inserted", Toast.LENGTH_LONG).show();
-                        firsttime = false;
+                    try {
+                        T = Integer.parseInt(all[0]);
+                        TF = Integer.parseInt(all[1]);
+                        P = Integer.parseInt(all[2]);
+                        PF = Integer.parseInt(all[3]);
+                        if(TF>WTF){WTF=TF; WT=T;}
+                        if(PF>WPF){WPF=PF; WP=P;}
+                        //TakeNeededActions(T,TF,P,PF); //Take actions in emergency cases
+
+                        isinserted = M.insertData(T,TF,P,PF);
+                        if (isinserted && firsttime){
+                            Toast.makeText(ctx, "Data Inserted", Toast.LENGTH_LONG).show();
+                            firsttime = false;
                         }
+                    }
+                    catch (NumberFormatException e){}
+
                 }
             }
             Displayexistingmeasures();
             if(WTF==3 || WPF==3){
                 Automaticcall(3);
             }
-            else if(WTF==2 || WPF==2){
-                Automaticcall(2);
+            else if(WTF==4 || WPF==4){
+                Automaticcall(4);
             }
+            else if(WTF==5 || WPF==5){
+                Automaticcall(5);
+            }
+
 
 
             /*
@@ -265,9 +276,10 @@ public class MeasureSQLhandler extends AsyncTask<String,Void,String> {
     private void Automaticcall(int f) {
         Intent intent = new Intent(Intent.ACTION_CALL);
         String ph = getDOCTORphone();
-        if(f==2 && ph.equals(null)){return;}
-        else if(f==2) intent.setData(Uri.parse("tel:"+ph));
-        else if (f==3) intent.setData(Uri.parse("tel:123"));
+
+        if(f==3) intent.setData(Uri.parse("tel:"+ctx.getSharedPreferences("STATENUMBERS", MODE_PRIVATE).getString("state1",null)));
+        else if (f==4) intent.setData(Uri.parse("tel:"+ctx.getSharedPreferences("STATENUMBERS", MODE_PRIVATE).getString("state2",null)));
+        else if(f==5) intent.setData(Uri.parse("tel:"+ctx.getSharedPreferences("STATENUMBERS", MODE_PRIVATE).getString("state3",null)));
         else return;
         if (ActivityCompat.checkSelfPermission(ctx, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
