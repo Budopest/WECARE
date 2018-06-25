@@ -153,7 +153,8 @@ public class Mysqlhandler extends AsyncTask<String,Void,String> {
 
                 Cursor res = csql.getAllData();
                 if(res.getCount()==0){
-                isInserted2 = csql.insertData("Call an Ambulance (emergency only)","123");}
+                isInserted2 = csql.insertData("Call an Ambulance (emergency only)","123");
+                }
 
             }
             if (isInserted1&&isInserted2) {
