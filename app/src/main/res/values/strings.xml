@@ -34,10 +34,17 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="aboutus">Welcome to WE CARE.\n WE CARE is a project made by students from Cairo university faculty of engineering, electric communications and electronics department students.\n The project aims to benefit both the doctors and the patients. By providing regular monitoring to the patient condition, help the patient contact his doctor easily, remind him of his medication at the right time and provide a strong database for the patient condition</string>
+    <string name="aboutus">Welcome to WE CARE.\n WE CARE is a project made by students from Cairo university faculty of engineering, electric communications and electronics department students.\n The project aims to benefit both the doctors and the patients. By providing regular monitoring to the patient condition, help the patient contact his doctor easily, remind him of his medication at the right time and provide a strong database for the patient condition
+    </string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_hmaps">Map</string>
     <string name="title_activity_locations">Map</string>
+    <string name="settings_desc">By default the app will call the doctor in dangerous state 1 and call for an ambulance in dangerous state 2 and pressing the emergency button in the app or the medical kit
+    \n Use this page to modify the numbers if you want
+    </string>
+    <string name="state1">Dangerous STATE 1: 5 consecutive dangerous readings</string>
+    <string name="state2">Dangerous STATE 2: 10 consecutive dangerous readings</string>
+    <string name="state3">Default emerency action is to call for an ambulance</string>
 
 
 </resources>
