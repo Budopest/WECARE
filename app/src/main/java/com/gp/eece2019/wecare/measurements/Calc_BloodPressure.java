@@ -1,6 +1,7 @@
 package com.gp.eece2019.wecare.measurements;
 
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -21,11 +22,13 @@ import com.gp.eece2019.wecare.R;
 /**
  * A simple {@link Fragment} subclass.
  */
+@SuppressLint("ValidFragment")
 public class Calc_BloodPressure extends Fragment {
 
-
-    public Calc_BloodPressure() {
+    String uname;
+    public Calc_BloodPressure(String uname) {
         // Required empty public constructor
+        this.uname = uname;
     }
 
     EditText HP, LP;
@@ -92,6 +95,15 @@ public class Calc_BloodPressure extends Fragment {
                     }
                 }
         );
+        sendtodoc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ExtraMeasuresSQLhandler extraMeasuresSQLhandler = new ExtraMeasuresSQLhandler(getContext());
+                String HighOVRLow = String.format("%s/%s", HP.getText().toString(), LP.getText().toString());
+                extraMeasuresSQLhandler.execute("p",uname,HighOVRLow);
+
+            }
+        });
         super.onActivityCreated(savedInstanceState);
     }
 
@@ -107,7 +119,7 @@ public class Calc_BloodPressure extends Fragment {
         switch (item.getItemId()) {
 
             case R.id.Calc_Bpressure:
-                Calc_BloodPressure Cal= new Calc_BloodPressure();
+                Calc_BloodPressure Cal= new Calc_BloodPressure(uname);
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.Fragment_container, Cal)
                         .addToBackStack(null)
@@ -116,7 +128,7 @@ public class Calc_BloodPressure extends Fragment {
                 return true;
 
             case R.id.Calc_Diabetes:
-                Calc_Diabetes Dia= new Calc_Diabetes();
+                Calc_Diabetes Dia= new Calc_Diabetes(uname);
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.Fragment_container, Dia)
                         .addToBackStack(null)

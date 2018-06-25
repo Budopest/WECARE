@@ -15,6 +15,8 @@ public class IPSTRING {
     private final String doctor_url      = Sip+"doctors.php";
     private final String sendMessage_url = Sip+"chat.php";
     private final String recMessage_url  = Sip+"respond.php";
+    private final String pressure_url    = Sip+"pressure.php";
+    private final String diabetes_url    = Sip+"diabetes.php";
 
 
 
@@ -42,5 +44,11 @@ public class IPSTRING {
     }
     public String getRecMessage_url() {
         return recMessage_url;
+    }
+    public String getPressure_url() {
+        return pressure_url;
+    }
+    public String getDiabetes_url() {
+        return diabetes_url;
     }
 }

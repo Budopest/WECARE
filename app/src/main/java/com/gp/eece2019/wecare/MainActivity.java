@@ -220,7 +220,7 @@ public class MainActivity extends AppCompatActivity
 
         }
         else if (id == R.id.nav_measurements_calcualator) {
-            Calc_BloodPressure cl = new Calc_BloodPressure();
+            Calc_BloodPressure cl = new Calc_BloodPressure(Uname);
             android.support.v4.app.FragmentManager Manager = getSupportFragmentManager();
             Manager.beginTransaction().replace(R.id.Fragment_container,cl).commit();
 
