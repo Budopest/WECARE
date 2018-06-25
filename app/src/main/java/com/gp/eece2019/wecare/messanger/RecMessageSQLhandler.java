@@ -35,6 +35,7 @@ public class RecMessageSQLhandler extends AsyncTask<String,Void,String> {
     MessagesSqlLitehandler MSQLLITE,IDRECHECK;
     IPSTRING Surl = new IPSTRING();
     String UN,ID;
+    String id="";
 
     int error=0;
     //AlertDialog alertDialog;
@@ -52,6 +53,7 @@ public class RecMessageSQLhandler extends AsyncTask<String,Void,String> {
             String LatestID  = params[1];
             UN= params[0];
             ID=params[1];
+            id=params[1];
 
             URL url = new URL(message_url);
             HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
@@ -101,11 +103,9 @@ public class RecMessageSQLhandler extends AsyncTask<String,Void,String> {
             //alertDialog.show();
 
             // Handling the response
-
             String conf=""; String messagesCount =""; String messagesOnly="";
             int start =0;   int c=0;
             boolean s = true;
-
 
             for(int i=0;i<result.length();i++) {
 
@@ -119,33 +119,102 @@ public class RecMessageSQLhandler extends AsyncTask<String,Void,String> {
             }
             if(conf.equals("success")) {
 
-                int messageStart=0;
-                String message=""; String date=""; String ID="";
-                boolean inside=false; int segment=0;
+                int messageStart = 0;
+                String message = "";
+                String date = "";
+                String ID = "";
+                String TYPE = "";
+                boolean inside = false;
+                int segment = 0;
+                if(!id.equals("0"))
+                {
+                for (int i = 0; i < messagesOnly.length(); i++) {
 
-                for(int i=0;i<messagesOnly.length();i++) {
-
-                    if(messagesOnly.charAt(i)=='(' && !inside) {messageStart=i+1; inside=true; continue;}
-                    if(messagesOnly.charAt(i)==',' && inside) {
-                        if(segment==0) {message=messagesOnly.substring(messageStart, i); messageStart=i+1; segment++; continue;}
-                        if(segment==1) {date=messagesOnly.substring(messageStart, i); messageStart=i+1; segment++; continue;}
+                    if (messagesOnly.charAt(i) == '(' && !inside) {
+                        messageStart = i + 1;
+                        inside = true;
+                        continue;
                     }
-                    if(messagesOnly.charAt(i)==')' && inside) {
-                        ID=messagesOnly.substring(messageStart, i); inside=false; segment=0;
-                        Insert(message,date,ID); continue;
+                    if (messagesOnly.charAt(i) == ',' && inside) {
+                        if (segment == 0) {
+                            message = messagesOnly.substring(messageStart, i);
+                            messageStart = i + 1;
+                            segment++;
+                            continue;
+                        }
+                        if (segment == 1) {
+                            date = messagesOnly.substring(messageStart, i);
+                            messageStart = i + 1;
+                            segment++;
+                            continue;
+                        }
+                    }
+                    if (messagesOnly.charAt(i) == ')' && inside) {
+                        ID = messagesOnly.substring(messageStart, i);
+                        inside = false;
+                        segment = 0;
+                        Insert(message, date, ID,"rec");
+                        continue;
                     }
 
+                }
+            }
+            else
+                {
+
+
+                    for (int i = 0; i < messagesOnly.length(); i++) {
+
+                        if (messagesOnly.charAt(i) == '(' && !inside) {
+                            messageStart = i + 1;
+                            inside = true;
+                            continue;
+                        }
+                        if (messagesOnly.charAt(i) == ',' && inside) {
+                            if (segment == 0) {
+                                message = messagesOnly.substring(messageStart, i);
+                                messageStart = i + 1;
+                                segment++;
+                                continue;
+                            }
+                            if (segment == 1) {
+                                date = messagesOnly.substring(messageStart, i);
+                                messageStart = i + 1;
+                                segment++;
+                                continue;
+                            }
+                            if(segment==2)
+                            {
+                                ID = messagesOnly.substring(messageStart, i);
+                                messageStart = i + 1;
+                                segment++;
+                                continue;
+                            }
+                        }
+                        if (messagesOnly.charAt(i) == ')' && inside) {
+                            TYPE = messagesOnly.substring(messageStart, i);
+                            inside = false;
+                            segment = 0;
+                            Insert(message, date, ID,TYPE);
+                            continue;
+                        }
+
+                    }
                 }
             }
 
         }
 
+        RecMessageSQLhandler RecCheck = new RecMessageSQLhandler(context);
+        RecCheck.execute(UN,ID);
+
+
     }
 
-    private void Insert(String message, String date, String id) {
+    private void Insert(String message, String date, String id,String type) {
 
         MSQLLITE = new MessagesSqlLitehandler(context);
-        MSQLLITE.insertData(message, date, id, "rec");
+        MSQLLITE.insertData(message, date, id, type);
         ListView mesaage_list = ((Activity) context).findViewById(R.id.messages_list);
 
         Cursor res = MSQLLITE.getAllData();
