@@ -7,11 +7,13 @@ import android.content.Intent;
 
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +25,10 @@ import android.widget.TextView;
 import com.gp.eece2019.wecare.R;
 
 
+import java.io.ByteArrayOutputStream;
+
 import static android.app.Activity.RESULT_OK;
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -88,6 +93,10 @@ public class Userinfo extends Fragment {
         call_doctor.setVisibility(View.VISIBLE);
         }
 
+        String userimage = getContext().getSharedPreferences("Image", MODE_PRIVATE).getString("i","");
+        ImageReloder(userimage);
+
+
         take_photo.setOnClickListener(new View.OnClickListener(){
               @Override
               public void onClick(View v) {
@@ -122,7 +131,25 @@ public class Userinfo extends Fragment {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             user_image.setImageBitmap(imageBitmap);
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+            byte[] b = baos.toByteArray();
+            String encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
+
+            getContext().getSharedPreferences("Image", MODE_PRIVATE).edit()
+                    .putString("i",encodedImage).apply();
+
         }
 
+    }
+    private void ImageReloder(String userimage){
+        try {
+            byte [] encodeByte=Base64.decode(userimage,Base64.DEFAULT);
+            Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            user_image.setImageBitmap(bitmap);
+        } catch(Exception e) {
+            e.getMessage();
+        }
     }
 }

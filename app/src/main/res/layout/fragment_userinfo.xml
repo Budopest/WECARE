@@ -150,7 +150,6 @@
         android:layout_marginLeft="119dp"
         android:layout_marginRight="118dp"
         android:layout_marginStart="119dp"
-        android:background="@drawable/ic_person_black_24dp"
         android:src="@drawable/backtransparent"
         app:layout_constraintBottom_toTopOf="@+id/frameLayout2"
         app:layout_constraintEnd_toEndOf="parent"

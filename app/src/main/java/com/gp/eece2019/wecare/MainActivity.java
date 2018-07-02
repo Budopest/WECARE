@@ -2,11 +2,14 @@ package com.gp.eece2019.wecare;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
+import android.util.Base64;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.database.Cursor;
 import android.content.Intent;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gp.eece2019.wecare.calls.ContactsList;
@@ -49,7 +53,7 @@ public class MainActivity extends AppCompatActivity
 
     String Fname, Lname, Uname, phone, Bdate;
     TextView firstfield, secondfield;
-
+    ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,9 +126,14 @@ public class MainActivity extends AppCompatActivity
         View headerView = navigationView.getHeaderView(0);
         firstfield  =  headerView.findViewById(R.id.name_navdrawer);
         secondfield =  headerView.findViewById(R.id.email_navdrawer);
+        imageView   =  headerView.findViewById(R.id.imageView);
         if(Getuserdetails()) {
             firstfield.setText(String.format("%s %s", Fname, Lname));
             secondfield.setText(String.format("%s  %s", Uname, phone));
+
+            String userimage = getSharedPreferences("Image", MODE_PRIVATE).getString("i","");
+            ImageReloder(userimage);
+
             Userinfo UI = new Userinfo(Fname,Lname,Uname,phone,Bdate);
             android.support.v4.app.FragmentManager Manager = getSupportFragmentManager();
             Manager.beginTransaction().replace(R.id.Fragment_container,UI).commit();
@@ -292,6 +301,15 @@ public class MainActivity extends AppCompatActivity
         Intent i = new Intent(MainActivity.this,SigninActivity.class);
         startActivity(i);
         finish();
+    }
+    private void ImageReloder(String userimage){
+        try {
+            byte [] encodeByte= Base64.decode(userimage,Base64.DEFAULT);
+            Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            imageView.setImageBitmap(bitmap);
+        } catch(Exception e) {
+            e.getMessage();
+        }
     }
 
 }
