@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 import com.gp.eece2019.wecare.R;
 import com.gp.eece2019.wecare.shared.IPSTRING;
-import com.gp.eece2019.wecare.staticfragments.DOCTORsqllite;
+import com.gp.eece2019.wecare.staticfragments.DoctorDetailsSQLliteHandler;
 
 
 import java.io.BufferedReader;
@@ -305,7 +305,7 @@ public class MeasureSQLhandler extends AsyncTask<String,Void,String> {
         ctx.startActivity(intent);
     }
     private String getDOCTORphone(){
-        DOCTORsqllite Dsql = new DOCTORsqllite(ctx);
+        DoctorDetailsSQLliteHandler Dsql = new DoctorDetailsSQLliteHandler(ctx);
         Cursor res = Dsql.getAllData();
         while (res.moveToNext()){return res.getString(2);}
         return null;

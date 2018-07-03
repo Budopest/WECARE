@@ -42,8 +42,8 @@ public class Userinfo extends Fragment {
     TextView user_name,user_phone,user_birthdate,doctor_name,doctor_phone;
     Button take_photo,call_doctor;
     ImageView user_image;
-    Doctordetails D;
-    DOCTORsqllite Dsql;
+    DoctorDetailsMySqlHandler D;
+    DoctorDetailsSQLliteHandler Dsql;
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
     public Userinfo(String f,String l,String u,String p,String d) {
@@ -76,10 +76,10 @@ public class Userinfo extends Fragment {
 
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 
-        Dsql = new DOCTORsqllite(getActivity());
+        Dsql = new DoctorDetailsSQLliteHandler(getActivity());
         final Cursor Ddata = Dsql.getAllData();
         if(Ddata.getCount()==0) {
-            D = new Doctordetails(getActivity());
+            D = new DoctorDetailsMySqlHandler(getActivity());
             D.execute(Uname);
             }
 

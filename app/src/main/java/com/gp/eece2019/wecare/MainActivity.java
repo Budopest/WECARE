@@ -17,7 +17,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.database.Cursor;
 import android.content.Intent;
@@ -32,7 +31,7 @@ import com.gp.eece2019.wecare.measurements.Measurements;
 import com.gp.eece2019.wecare.messanger.MessagesSqlLitehandler;
 import com.gp.eece2019.wecare.staticfragments.About;
 import com.gp.eece2019.wecare.staticfragments.Contactus;
-import com.gp.eece2019.wecare.staticfragments.DOCTORsqllite;
+import com.gp.eece2019.wecare.staticfragments.DoctorDetailsSQLliteHandler;
 import com.gp.eece2019.wecare.messanger.Messanger;
 import com.gp.eece2019.wecare.staticfragments.Settings;
 import com.gp.eece2019.wecare.staticfragments.Userinfo;
@@ -46,7 +45,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     USERsqllitehandler usql;
-    DOCTORsqllite Dsql;
+    DoctorDetailsSQLliteHandler Dsql;
     MessagesSqlLitehandler smssql;
     MeasureSQLLITE msql;
     Contactssqllitehandler csql;
@@ -61,7 +60,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         usql   = new USERsqllitehandler(this);
-        Dsql   = new DOCTORsqllite(this);
+        Dsql   = new DoctorDetailsSQLliteHandler(this);
         smssql = new MessagesSqlLitehandler(this);
         msql   = new MeasureSQLLITE(this);
         csql   = new Contactssqllitehandler(this);
