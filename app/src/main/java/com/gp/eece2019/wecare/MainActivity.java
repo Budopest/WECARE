@@ -43,7 +43,7 @@ import com.gp.eece2019.wecare.welcomeslider.WelcomeScreen;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-	int x;
+
     USERsqllitehandler usql;
     DoctorDetailsSQLliteHandler Dsql;
     MessagesSqlLitehandler smssql;
