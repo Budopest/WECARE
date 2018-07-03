@@ -39,7 +39,7 @@ public class Userinfo extends Fragment {
 
     //USERsqllitehandler usql;
     String Fname,Lname,Uname,phone,Bdate;
-    TextView user_name,user_phone,user_birthdate,doctor_name,doctor_phone;
+    TextView user_name,user_phone,user_birthdate,doctor_name,doctor_phone,cameratext;
     Button take_photo,call_doctor;
     ImageView user_image;
     DoctorDetailsMySqlHandler D;
@@ -72,6 +72,7 @@ public class Userinfo extends Fragment {
         take_photo     =  getView().findViewById(R.id.user_take_photo);
         user_image     =  getView().findViewById(R.id.user_image);
         call_doctor    =  getView().findViewById(R.id.call_doctor);
+        cameratext     =  getView().findViewById(R.id.camerahint);
     }
 
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -94,7 +95,12 @@ public class Userinfo extends Fragment {
         }
 
         String userimage = getContext().getSharedPreferences("Image", MODE_PRIVATE).getString("i","");
-        ImageReloder(userimage);
+
+        if(!userimage.equals("")) ImageReloder(userimage);
+        else {
+            cameratext.setVisibility(View.VISIBLE);
+            user_image.setImageResource(R.drawable.ic_person_black_24dp);
+        }
 
 
         take_photo.setOnClickListener(new View.OnClickListener(){
@@ -131,7 +137,7 @@ public class Userinfo extends Fragment {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             user_image.setImageBitmap(imageBitmap);
-
+            cameratext.setVisibility(View.INVISIBLE);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
             byte[] b = baos.toByteArray();
