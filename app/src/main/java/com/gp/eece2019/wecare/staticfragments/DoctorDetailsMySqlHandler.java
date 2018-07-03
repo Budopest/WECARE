@@ -12,12 +12,9 @@ import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.gp.eece2019.wecare.R;
 import com.gp.eece2019.wecare.calls.Contactssqllitehandler;
-import com.gp.eece2019.wecare.measurements.LastRECdata;
-import com.gp.eece2019.wecare.measurements.MeasureSQLLITE;
 import com.gp.eece2019.wecare.shared.IPSTRING;
 
 
@@ -34,13 +31,13 @@ import java.net.URLEncoder;
 import static android.content.Context.MODE_PRIVATE;
 
 
-public class Doctordetails extends AsyncTask<String,Void,String> {
+public class DoctorDetailsMySqlHandler extends AsyncTask<String,Void,String> {
 
     Context ctx;
     int error=0;
     AlertDialog alertDialog;
     IPSTRING Surl = new IPSTRING();
-    Doctordetails (Context ctx) {
+    DoctorDetailsMySqlHandler(Context ctx) {
         this.ctx = ctx;
     }
 
@@ -114,7 +111,7 @@ public class Doctordetails extends AsyncTask<String,Void,String> {
             if(C.getCount()==1){
                 CD.insertData("Doctor " + userDATA[1],"0"+userDATA[2]);
                 //insert doctor details to its own database
-                DOCTORsqllite Dsql = new DOCTORsqllite(ctx);
+                DoctorDetailsSQLliteHandler Dsql = new DoctorDetailsSQLliteHandler(ctx);
                 Dsql.insertData("Doctor " +userDATA[1],"0"+userDATA[2]);
 
                 ctx.getSharedPreferences("STATENUMBERS", MODE_PRIVATE).edit()
