@@ -1,18 +1,10 @@
 package com.gp.eece2019.wecare.measurements;
 
-import android.app.Activity;
 import android.content.Context;
-import android.database.Cursor;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
-import com.gp.eece2019.wecare.R;
-import com.gp.eece2019.wecare.calls.Contactssqllitehandler;
 import com.gp.eece2019.wecare.shared.IPSTRING;
-import com.gp.eece2019.wecare.staticfragments.DOCTORsqllite;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -23,8 +15,6 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-
-import static android.content.Context.MODE_PRIVATE;
 
 
 public class ExtraMeasuresSQLhandler extends AsyncTask<String,Void,String> {
