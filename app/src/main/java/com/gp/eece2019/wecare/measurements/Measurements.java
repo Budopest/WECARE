@@ -22,8 +22,8 @@ import com.gp.eece2019.wecare.R;
 public class Measurements extends Fragment implements View.OnClickListener{
 
     TextView temp,hrate;
-    MeasureSQLhandler MSQL;
-    MeasureSQLite MLITE;
+    MeasureMySqlHandler MSQL;
+    MeasureSQLiteHandler MLITE;
     String username;
     Button showall;
 
@@ -48,10 +48,10 @@ public class Measurements extends Fragment implements View.OnClickListener{
 
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 
-        MSQL  = new MeasureSQLhandler(getActivity());
+        MSQL  = new MeasureMySqlHandler(getActivity());
         showall.setOnClickListener(this);
-        MLITE = new MeasureSQLite(getActivity());
-        MSQL.execute(username); // user name is passed to func do in backgroung in MeasuseSQLhandler Class
+        MLITE = new MeasureSQLiteHandler(getActivity());
+        MSQL.execute(username,"withDisplay"); // user name is passed to func do in backgroung in MeasuseSQLhandler Class
         super.onActivityCreated(savedInstanceState);
     }
     public void onClick (View v)

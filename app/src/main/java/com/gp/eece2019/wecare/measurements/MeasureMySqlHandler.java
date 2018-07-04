@@ -13,7 +13,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AlertDialog;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,15 +34,17 @@ import java.net.URLEncoder;
 import static android.content.Context.MODE_PRIVATE;
 
 
-public class MeasureSQLhandler extends AsyncTask<String,Void,String> {
+public class MeasureMySqlHandler extends AsyncTask<String,Void,String> {
 
     Context ctx;
     int error=0;
     int idnumber = R.id.T11; int idnumber2 = R.id.T101; int ns =0;
 
-    AlertDialog alertDialog;
+    String type="";
+    String user_name;
+
     IPSTRING Surl = new IPSTRING();
-    MeasureSQLhandler (Context ctx) {
+    public MeasureMySqlHandler(Context ctx) {
         this.ctx = ctx;
     }
 
@@ -53,7 +54,8 @@ public class MeasureSQLhandler extends AsyncTask<String,Void,String> {
         String measures_url = Surl.Getmeasures();  //Add the url here
 
             try {
-                String user_name = params[0]; // the user name in case of testing account the user name will be "Test_user"
+                type = params[1];
+                user_name = params[0]; // the user name in case of testing account the user name will be "Test_user"
                 URL url = new URL(measures_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
@@ -89,6 +91,7 @@ public class MeasureSQLhandler extends AsyncTask<String,Void,String> {
         //alertDialog = new AlertDialog.Builder(ctx).create(); //Alert dialog for testing to show
         //alertDialog.setTitle("Connection Status");
         //String result = "|12/12/1995,(100,2,3,4),(10,20,30,40)";
+        if(type.equalsIgnoreCase("withDisplay"))
         Displayexistingmeasures();
 
     }
@@ -106,7 +109,7 @@ public class MeasureSQLhandler extends AsyncTask<String,Void,String> {
             int WT=0,WTF=0,WP=0,WPF=0;
             String date="";
             String element="";
-            MeasureSQLite M = new MeasureSQLite(ctx);
+            MeasureSQLiteHandler M = new MeasureSQLiteHandler(ctx);
             LastRECdata   LD = new LastRECdata(ctx);
             boolean isinserted = false;
 
@@ -173,7 +176,10 @@ public class MeasureSQLhandler extends AsyncTask<String,Void,String> {
 
                 }
             }
+
+            if(type.equalsIgnoreCase("withDisplay"))
             Displayexistingmeasures();
+
             if(WTF==3 || WPF==3){
                 Automaticcall(3);
             }
@@ -184,36 +190,16 @@ public class MeasureSQLhandler extends AsyncTask<String,Void,String> {
                 Automaticcall(5);
             }
 
-
-
-            /*
-            Cursor res = M.getAllData();
-            if(res.getCount() == 0) {
-                // show message
-                showMessage("Error","Nothing found");
-                return;
-            }
-
-            StringBuffer buffer = new StringBuffer();
-            while (res.moveToNext()) {
-                buffer.append("Id :"+ res.getString(0)+"\n");
-                buffer.append("T :"+ res.getString(1)+"\n");
-                buffer.append("TF :"+ res.getString(2)+"\n");
-                buffer.append("P :"+ res.getString(3)+"\n");
-                buffer.append("PF :"+ res.getString(4)+"\n\n");
-            }
-
-            // Show all data
-            showMessage("Data",buffer.toString());
-            */
-
         }
+
+        MeasureMySqlHandler measureMySqlHandler = new MeasureMySqlHandler(ctx);
+        measureMySqlHandler.execute(user_name,type);
 
     }
 
     private void Displayexistingmeasures() {
 
-        MeasureSQLite EM = new MeasureSQLite(ctx);
+        MeasureSQLiteHandler EM = new MeasureSQLiteHandler(ctx);
         LastRECdata   ELD = new LastRECdata(ctx);
         Cursor date =  ELD.getAllData();
         TextView timeupdate = (TextView)((Activity)ctx).findViewById(R.id.updateddate);
@@ -265,13 +251,14 @@ public class MeasureSQLhandler extends AsyncTask<String,Void,String> {
 
     }
 
+    /*
     public void showMessage(String title,String Message){
         AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
         builder.setCancelable(true);
         builder.setTitle(title);
         builder.setMessage(Message);
         builder.show();
-    }
+    }*/
 
     private void Automaticcall(int f) {
         Intent intent = new Intent(Intent.ACTION_CALL);

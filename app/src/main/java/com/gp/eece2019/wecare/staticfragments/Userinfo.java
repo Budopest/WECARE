@@ -23,6 +23,7 @@ import android.widget.TextView;
 
 
 import com.gp.eece2019.wecare.R;
+import com.gp.eece2019.wecare.measurements.MeasureMySqlHandler;
 import com.gp.eece2019.wecare.shared.InternetConnectionChecker;
 
 
@@ -37,11 +38,10 @@ import static android.content.Context.MODE_PRIVATE;
 @SuppressLint("ValidFragment")
 public class Userinfo extends Fragment {
 
-
-    //UserSQLiteHandler usql;
     String Fname,Lname,Uname,phone,Bdate;
     InternetConnectionChecker internetConnectionChecker;
     TextView user_name,user_phone,user_birthdate,doctor_name,doctor_phone,cameratext;
+    MeasureMySqlHandler measureMySqlHandler;
     Button take_photo,call_doctor;
     ImageView user_image;
     DoctorDetailsMySqlHandler D;
@@ -124,6 +124,9 @@ public class Userinfo extends Fragment {
                 }
             }
         });
+
+        measureMySqlHandler = new MeasureMySqlHandler(getActivity());
+        measureMySqlHandler.execute(Uname,"NoDisplay");
 
 
         super.onActivityCreated(savedInstanceState);

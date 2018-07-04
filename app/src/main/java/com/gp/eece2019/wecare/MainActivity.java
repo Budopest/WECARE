@@ -27,7 +27,7 @@ import com.gp.eece2019.wecare.calls.ContactsList;
 import com.gp.eece2019.wecare.calls.Contactssqllitehandler;
 import com.gp.eece2019.wecare.login.UserSQLiteHandler;
 import com.gp.eece2019.wecare.measurements.Calc_BloodPressure;
-import com.gp.eece2019.wecare.measurements.MeasureSQLite;
+import com.gp.eece2019.wecare.measurements.MeasureSQLiteHandler;
 import com.gp.eece2019.wecare.measurements.Measurements;
 import com.gp.eece2019.wecare.messanger.MessagesSqlLitehandler;
 import com.gp.eece2019.wecare.staticfragments.About;
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity
     UserSQLiteHandler usql;
     DoctorDetailsSQLliteHandler Dsql;
     MessagesSqlLitehandler smssql;
-    MeasureSQLite msql;
+    MeasureSQLiteHandler msql;
     Contactssqllitehandler csql;
 
     String Fname, Lname, Uname, phone, Bdate;
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity
         usql   = new UserSQLiteHandler(this);
         Dsql   = new DoctorDetailsSQLliteHandler(this);
         smssql = new MessagesSqlLitehandler(this);
-        msql   = new MeasureSQLite(this);
+        msql   = new MeasureSQLiteHandler(this);
         csql   = new Contactssqllitehandler(this);
 
         boolean Firstusestatus = Checkfirstuse();
