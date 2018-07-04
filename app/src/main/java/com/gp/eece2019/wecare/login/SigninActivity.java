@@ -2,7 +2,7 @@ package com.gp.eece2019.wecare.login;
 
 
 import com.gp.eece2019.wecare.R;
-import com.gp.eece2019.wecare.welcomeslider.WelcomeScreen;
+import com.gp.eece2019.wecare.shared.InternetConnectionChecker;
 
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -15,8 +15,6 @@ import android.content.Intent;
 
 public class SigninActivity extends AppCompatActivity implements View.OnClickListener{
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +25,7 @@ public class SigninActivity extends AppCompatActivity implements View.OnClickLis
 
         //EditText username =   findViewById(R.id.username);
         //EditText password =   findViewById(R.id.password);
+
 
         loginbutton.setOnClickListener(this);
         signuptext.setOnClickListener(this);
@@ -44,7 +43,7 @@ public class SigninActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.loginbutton:
 
 
-                Middleground m = new Middleground(this);
+                InternetConnectionChecker m = new InternetConnectionChecker(this);
                 if(!m.checkinternetconnection()) break;
 
                 EditText username =   findViewById(R.id.username);

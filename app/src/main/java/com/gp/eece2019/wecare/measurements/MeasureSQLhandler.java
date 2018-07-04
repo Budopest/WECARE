@@ -106,7 +106,7 @@ public class MeasureSQLhandler extends AsyncTask<String,Void,String> {
             int WT=0,WTF=0,WP=0,WPF=0;
             String date="";
             String element="";
-            MeasureSQLLITE M = new MeasureSQLLITE(ctx);
+            MeasureSQLite M = new MeasureSQLite(ctx);
             LastRECdata   LD = new LastRECdata(ctx);
             boolean isinserted = false;
 
@@ -213,7 +213,7 @@ public class MeasureSQLhandler extends AsyncTask<String,Void,String> {
 
     private void Displayexistingmeasures() {
 
-        MeasureSQLLITE EM = new MeasureSQLLITE(ctx);
+        MeasureSQLite EM = new MeasureSQLite(ctx);
         LastRECdata   ELD = new LastRECdata(ctx);
         Cursor date =  ELD.getAllData();
         TextView timeupdate = (TextView)((Activity)ctx).findViewById(R.id.updateddate);

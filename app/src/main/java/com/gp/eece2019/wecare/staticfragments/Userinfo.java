@@ -23,6 +23,7 @@ import android.widget.TextView;
 
 
 import com.gp.eece2019.wecare.R;
+import com.gp.eece2019.wecare.shared.InternetConnectionChecker;
 
 
 import java.io.ByteArrayOutputStream;
@@ -37,8 +38,9 @@ import static android.content.Context.MODE_PRIVATE;
 public class Userinfo extends Fragment {
 
 
-    //USERsqllitehandler usql;
+    //UserSQLiteHandler usql;
     String Fname,Lname,Uname,phone,Bdate;
+    InternetConnectionChecker internetConnectionChecker;
     TextView user_name,user_phone,user_birthdate,doctor_name,doctor_phone,cameratext;
     Button take_photo,call_doctor;
     ImageView user_image;
@@ -78,11 +80,14 @@ public class Userinfo extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 
         Dsql = new DoctorDetailsSQLliteHandler(getActivity());
+        internetConnectionChecker = new InternetConnectionChecker(getContext());
         final Cursor Ddata = Dsql.getAllData();
         if(Ddata.getCount()==0) {
-            D = new DoctorDetailsMySqlHandler(getActivity());
-            D.execute(Uname);
+            if(!internetConnectionChecker.checkinternetconnection()){
+                D = new DoctorDetailsMySqlHandler(getActivity());
+                D.execute(Uname);
             }
+        }
 
         user_name.setText(String.format(" %s %s", Fname, Lname));
         user_birthdate.setText(String.format(" %s", Bdate));

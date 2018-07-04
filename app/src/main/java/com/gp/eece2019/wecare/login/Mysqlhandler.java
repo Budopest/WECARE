@@ -25,6 +25,7 @@ package com.gp.eece2019.wecare.login;
 
 
 public class Mysqlhandler extends AsyncTask<String,Void,String> {
+
     Context context;
     IPSTRING Surl = new IPSTRING();
     int error=0;
@@ -145,7 +146,7 @@ public class Mysqlhandler extends AsyncTask<String,Void,String> {
                 indexSTRING++;
             }
         }
-        USERsqllitehandler usql = new USERsqllitehandler(context);
+        UserSQLiteHandler usql = new UserSQLiteHandler(context);
         Contactssqllitehandler csql = new Contactssqllitehandler(context);
         if(userDATA[0].equalsIgnoreCase("success")) {
             {

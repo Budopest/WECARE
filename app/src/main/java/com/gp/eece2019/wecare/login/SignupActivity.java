@@ -4,6 +4,7 @@ package com.gp.eece2019.wecare.login;
 import com.gp.eece2019.wecare.MainActivity;
 import com.gp.eece2019.wecare.R;
 import com.gp.eece2019.wecare.calls.Contactssqllitehandler;
+import com.gp.eece2019.wecare.shared.InternetConnectionChecker;
 
 import android.app.DatePickerDialog;
 import android.database.Cursor;
@@ -26,6 +27,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     String user_type="P";
     EditText firstname,lastname,username,password,phone,datefield;
     String firstname_s,lastname_s,username_s,password_s,datefield_s,phone_s;
+
 
     private DatePickerDialog.OnDateSetListener birthdate_picker = new DatePickerDialog.OnDateSetListener() {
         @Override
@@ -73,7 +75,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.signupbutton:
 
 
-                Middleground m = new Middleground(this);
+                InternetConnectionChecker m = new InternetConnectionChecker(this);
                 if(!m.checkinternetconnection()) break;
 
                 firstname_s = firstname.getText().toString();
@@ -126,7 +128,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 datefield_s = datefield.getText().toString();
                 allfields = checkcompletefields(firstname_s,lastname_s,username_s,password_s,phone_s,datefield_s);
                 //if(allfields){
-                USERsqllitehandler usql = new USERsqllitehandler(this);
+                UserSQLiteHandler usql = new UserSQLiteHandler(this);
                 Contactssqllitehandler csql = new Contactssqllitehandler(this);
                 //usql.insertData(firstname_s,lastname_s,username_s,phone_s,datefield_s);
                  boolean insert1=   usql.insertData("Abdelrahman","Mohamed","Test_user","01098930028","5/11/1995");

@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class MeasureSQLLITE extends SQLiteOpenHelper {
+public class MeasureSQLite extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "measurements.db";
     public static final String TABLE_NAME = "measurements_table";
@@ -17,7 +17,7 @@ public class MeasureSQLLITE extends SQLiteOpenHelper {
     public static final String COL_5 = "HEARTRATEFLAG";
 
 
-    public MeasureSQLLITE(Context context) {
+    public MeasureSQLite(Context context) {
         super(context, DATABASE_NAME, null, 1);
     }
 

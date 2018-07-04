@@ -3,18 +3,12 @@ package com.gp.eece2019.wecare.messanger;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.gp.eece2019.wecare.MainActivity;
 import com.gp.eece2019.wecare.R;
-import com.gp.eece2019.wecare.calls.Contactssqllitehandler;
-import com.gp.eece2019.wecare.login.USERsqllitehandler;
 import com.gp.eece2019.wecare.shared.IPSTRING;
 
 import java.io.BufferedReader;

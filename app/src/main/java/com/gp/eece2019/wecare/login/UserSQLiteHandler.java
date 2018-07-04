@@ -6,7 +6,7 @@ import android.content.ContentValues;
         import android.database.sqlite.SQLiteDatabase;
         import android.database.sqlite.SQLiteOpenHelper;
 
-public class USERsqllitehandler extends SQLiteOpenHelper {
+public class UserSQLiteHandler extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "User_details.db";
     public static final String TABLE_NAME = "user_table";
     public static final String COL_1 = "ID";
@@ -17,7 +17,7 @@ public class USERsqllitehandler extends SQLiteOpenHelper {
     public static final String COL_6 = "BIRTHDATE";
     public static final String COL_7 = "USERID";
 
-    public USERsqllitehandler(Context context) {
+    public UserSQLiteHandler(Context context) {
         super(context, DATABASE_NAME, null, 1);
     }
 

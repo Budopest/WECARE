@@ -25,8 +25,9 @@ import android.widget.TextView;
 
 import com.gp.eece2019.wecare.calls.ContactsList;
 import com.gp.eece2019.wecare.calls.Contactssqllitehandler;
+import com.gp.eece2019.wecare.login.UserSQLiteHandler;
 import com.gp.eece2019.wecare.measurements.Calc_BloodPressure;
-import com.gp.eece2019.wecare.measurements.MeasureSQLLITE;
+import com.gp.eece2019.wecare.measurements.MeasureSQLite;
 import com.gp.eece2019.wecare.measurements.Measurements;
 import com.gp.eece2019.wecare.messanger.MessagesSqlLitehandler;
 import com.gp.eece2019.wecare.staticfragments.About;
@@ -36,7 +37,6 @@ import com.gp.eece2019.wecare.messanger.Messanger;
 import com.gp.eece2019.wecare.staticfragments.Settings;
 import com.gp.eece2019.wecare.staticfragments.Userinfo;
 import com.gp.eece2019.wecare.login.SigninActivity;
-import com.gp.eece2019.wecare.login.USERsqllitehandler;
 import com.gp.eece2019.wecare.notification.MedicinesList;
 import com.gp.eece2019.wecare.welcomeslider.WelcomeScreen;
 
@@ -44,10 +44,10 @@ import com.gp.eece2019.wecare.welcomeslider.WelcomeScreen;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    USERsqllitehandler usql;
+    UserSQLiteHandler usql;
     DoctorDetailsSQLliteHandler Dsql;
     MessagesSqlLitehandler smssql;
-    MeasureSQLLITE msql;
+    MeasureSQLite msql;
     Contactssqllitehandler csql;
 
     String Fname, Lname, Uname, phone, Bdate;
@@ -59,10 +59,10 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        usql   = new USERsqllitehandler(this);
+        usql   = new UserSQLiteHandler(this);
         Dsql   = new DoctorDetailsSQLliteHandler(this);
         smssql = new MessagesSqlLitehandler(this);
-        msql   = new MeasureSQLLITE(this);
+        msql   = new MeasureSQLite(this);
         csql   = new Contactssqllitehandler(this);
 
         boolean Firstusestatus = Checkfirstuse();

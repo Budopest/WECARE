@@ -23,7 +23,7 @@ public class Measurements extends Fragment implements View.OnClickListener{
 
     TextView temp,hrate;
     MeasureSQLhandler MSQL;
-    MeasureSQLLITE MLITE;
+    MeasureSQLite MLITE;
     String username;
     Button showall;
 
@@ -50,7 +50,7 @@ public class Measurements extends Fragment implements View.OnClickListener{
 
         MSQL  = new MeasureSQLhandler(getActivity());
         showall.setOnClickListener(this);
-        MLITE = new MeasureSQLLITE(getActivity());
+        MLITE = new MeasureSQLite(getActivity());
         MSQL.execute(username); // user name is passed to func do in backgroung in MeasuseSQLhandler Class
         super.onActivityCreated(savedInstanceState);
     }
