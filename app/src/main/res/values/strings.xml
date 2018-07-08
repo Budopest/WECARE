@@ -45,6 +45,7 @@
     <string name="state1">Dangerous STATE 1: 5 consecutive dangerous readings</string>
     <string name="state2">Dangerous STATE 2: 10 consecutive dangerous readings</string>
     <string name="state3">Default emerency action is to call for an ambulance</string>
+    <string name="email_header">If you have any questions feel free to send your questions via e-mail</string>
 
 
 </resources>

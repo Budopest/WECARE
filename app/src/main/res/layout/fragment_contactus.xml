@@ -11,59 +11,74 @@
 
     <TextView
         android:id="@+id/Emailword"
-        android:layout_width="56dp"
-        android:layout_height="23dp"
-        android:layout_marginLeft="55dp"
-        android:layout_marginStart="55dp"
-        android:layout_marginTop="142dp"
+        android:layout_width="63dp"
+        android:layout_height="26dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="28dp"
         android:text="Email: "
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/emailhead" />
 
     <TextView
         android:id="@+id/CUEMAIL"
-        android:layout_width="210dp"
-        android:layout_height="25dp"
-        android:layout_marginEnd="43dp"
+        android:layout_width="253dp"
+        android:layout_height="26dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="43dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="142dp"
+        android:layout_marginTop="28dp"
         android:clickable="true"
         android:text="WECAREsupport@gmail.com"
         android:textColor="@android:color/holo_blue_dark"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/Emailword"
+        app:layout_constraintTop_toBottomOf="@+id/emailhead" />
+
+    <EditText
+        android:id="@+id/feedback"
+        android:layout_width="303dp"
+        android:layout_height="159dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="114dp"
+        android:background="#FFBCF8AF"
+        android:ems="10"
+        android:hint=" Enter your feedback here."
+        android:inputType="textPersonName|textMultiLine"
+        android:maxLength="200"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/Phoneword"
-        android:layout_width="56dp"
-        android:layout_height="23dp"
-        android:layout_marginBottom="266dp"
-        android:layout_marginLeft="55dp"
-        android:layout_marginStart="55dp"
-        android:layout_marginTop="57dp"
-        android:text="Phone: "
-        app:layout_constraintBottom_toBottomOf="parent"
+    <Button
+        android:id="@+id/feedbacksend"
+        android:layout_width="168dp"
+        android:layout_height="38dp"
+        android:layout_marginLeft="108dp"
+        android:layout_marginStart="108dp"
+        android:layout_marginTop="15dp"
+        android:background="#FF0EB482"
+        android:text="Send Your Feedback"
+
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Emailword" />
+        app:layout_constraintTop_toBottomOf="@+id/feedback" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/emailhead"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="270dp"
-        android:layout_marginEnd="165dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="165dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="58dp"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="@string/email_header"
+        android:textSize="18sp"
         android:clickable="true"
-        android:text="01098930028"
-        android:textColor="@android:color/holo_blue_dark"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textStyle="bold|italic"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/Phoneword"
-        app:layout_constraintTop_toBottomOf="@+id/CUEMAIL" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/feedbacksend" />
 </android.support.constraint.ConstraintLayout>

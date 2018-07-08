@@ -13,10 +13,27 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="63dp"
-        android:text="@string/aboutus"
+        android:layout_marginTop="150dp"
         android:gravity="center"
+        android:padding="16dp"
+        android:text="@string/aboutus"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/abouttocontactus"
+        android:layout_width="wrap_content"
+        android:layout_height="17dp"
+        android:layout_marginEnd="61dp"
+        android:layout_marginLeft="62dp"
+        android:layout_marginRight="61dp"
+        android:layout_marginStart="62dp"
+        android:layout_marginTop="58dp"
+        android:clickable="true"
+        android:text="To Contact us or send feedback click here"
+        android:textColor="@android:color/holo_blue_dark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 </android.support.constraint.ConstraintLayout>
