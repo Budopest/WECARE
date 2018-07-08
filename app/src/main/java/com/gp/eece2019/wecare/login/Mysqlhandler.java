@@ -11,7 +11,7 @@ package com.gp.eece2019.wecare.login;
 
     import com.gp.eece2019.wecare.MainActivity;
     import com.gp.eece2019.wecare.calls.Contactssqllitehandler;
-    import com.gp.eece2019.wecare.shared.IPSTRING;
+    import com.gp.eece2019.wecare.shared.URL_STRING;
 
     import java.io.BufferedReader;
     import java.io.BufferedWriter;
@@ -27,7 +27,7 @@ package com.gp.eece2019.wecare.login;
 public class Mysqlhandler extends AsyncTask<String,Void,String> {
 
     Context context;
-    IPSTRING Surl = new IPSTRING();
+    URL_STRING Surl = new URL_STRING();
     int error=0;
     //AlertDialog alertDialog;
     Mysqlhandler (Context ctx) {

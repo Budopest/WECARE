@@ -9,7 +9,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.gp.eece2019.wecare.R;
-import com.gp.eece2019.wecare.shared.IPSTRING;
+import com.gp.eece2019.wecare.shared.URL_STRING;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -28,7 +28,7 @@ public class SendMessageSQLhandler extends AsyncTask<String,Void,String> {
     AlertDialog alertDialog;
     MessagesSqlLitehandler MSQLLITE;
     String message_final;
-    IPSTRING Surl = new IPSTRING();
+    URL_STRING Surl = new URL_STRING();
 
     int error=0;
     //AlertDialog alertDialog;

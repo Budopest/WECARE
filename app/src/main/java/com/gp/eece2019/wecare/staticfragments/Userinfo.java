@@ -83,7 +83,7 @@ public class Userinfo extends Fragment {
         internetConnectionChecker = new InternetConnectionChecker(getContext());
         final Cursor Ddata = Dsql.getAllData();
         if(Ddata.getCount()==0) {
-            if(!internetConnectionChecker.checkinternetconnection()){
+            if(internetConnectionChecker.checkinternetconnection()){
                 D = new DoctorDetailsMySqlHandler(getActivity());
                 D.execute(Uname);
             }
@@ -125,8 +125,8 @@ public class Userinfo extends Fragment {
             }
         });
 
-        measureMySqlHandler = new MeasureMySqlHandler(getActivity());
-        measureMySqlHandler.execute(Uname,"NoDisplay");
+        //measureMySqlHandler = new MeasureMySqlHandler(getActivity());
+        //measureMySqlHandler.execute(Uname);
 
 
         super.onActivityCreated(savedInstanceState);

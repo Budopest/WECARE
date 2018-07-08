@@ -16,6 +16,7 @@ public class Soundstopping extends AppCompatActivity {
         Audio.stopAudio();
         Intent i = new Intent(Soundstopping.this,MainActivity.class);
         Soundstopping.this.startActivity(i);
+        finish();
 
 
     }

@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.gp.eece2019.wecare.R;
 import com.gp.eece2019.wecare.calls.Contactssqllitehandler;
-import com.gp.eece2019.wecare.shared.IPSTRING;
+import com.gp.eece2019.wecare.shared.URL_STRING;
 
 
 import java.io.BufferedReader;
@@ -36,7 +36,7 @@ public class DoctorDetailsMySqlHandler extends AsyncTask<String,Void,String> {
     Context ctx;
     int error=0;
     AlertDialog alertDialog;
-    IPSTRING Surl = new IPSTRING();
+    URL_STRING Surl = new URL_STRING();
     DoctorDetailsMySqlHandler(Context ctx) {
         this.ctx = ctx;
     }
@@ -115,11 +115,11 @@ public class DoctorDetailsMySqlHandler extends AsyncTask<String,Void,String> {
                 Dsql.insertData("Doctor " +userDATA[1],"0"+userDATA[2]);
 
                 ctx.getSharedPreferences("STATENUMBERS", MODE_PRIVATE).edit()
-                        .putString("state2","123").apply();
+                        .putString("state2","01098930028").apply();
                 ctx.getSharedPreferences("STATENUMBERS", MODE_PRIVATE).edit()
                         .putString("state1",userDATA[2]).apply();
                 ctx.getSharedPreferences("STATENUMBERS", MODE_PRIVATE).edit()
-                        .putString("state3","123").apply();
+                        .putString("state3","01098930028").apply();
 
                 TextView doc_name  = ((Activity)ctx).findViewById(R.id.Userfragment_Doctorname);
                 TextView doc_phone = ((Activity)ctx).findViewById(R.id.Userfragment_Doctorphone);

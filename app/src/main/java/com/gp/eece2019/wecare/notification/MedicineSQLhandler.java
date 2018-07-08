@@ -5,9 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
-import android.widget.Toast;
 
-import com.gp.eece2019.wecare.shared.IPSTRING;
+import com.gp.eece2019.wecare.shared.URL_STRING;
 
 
 import java.io.BufferedReader;
@@ -25,7 +24,7 @@ public class MedicineSQLhandler extends AsyncTask<String,Void,String> {
 
     Context ctx;
     int error=0;
-    IPSTRING Surl = new IPSTRING();
+    URL_STRING Surl = new URL_STRING();
     AlertDialog alertDialog;
     MedicineSQLhandler (Context ctx) {
         this.ctx = ctx;

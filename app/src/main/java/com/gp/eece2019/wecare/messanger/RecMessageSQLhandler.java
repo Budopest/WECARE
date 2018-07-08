@@ -9,7 +9,7 @@ import android.support.v7.app.AlertDialog;
 import android.widget.ListView;
 
 import com.gp.eece2019.wecare.R;
-import com.gp.eece2019.wecare.shared.IPSTRING;
+import com.gp.eece2019.wecare.shared.URL_STRING;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -26,8 +26,8 @@ public class RecMessageSQLhandler extends AsyncTask<String,Void,String> {
 
     Context context;
     AlertDialog alertDialog;
-    MessagesSqlLitehandler MSQLLITE,IDRECHECK;
-    IPSTRING Surl = new IPSTRING();
+    MessagesSqlLitehandler MSQLLITE;
+    URL_STRING Surl = new URL_STRING();
     String UN,ID;
     String id="";
 
