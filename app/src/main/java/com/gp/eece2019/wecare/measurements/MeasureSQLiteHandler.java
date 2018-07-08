@@ -15,6 +15,8 @@ public class MeasureSQLiteHandler extends SQLiteOpenHelper {
     public static final String COL_3 = "TEMPERATUREFLAG";
     public static final String COL_4 = "HEARTRATE";
     public static final String COL_5 = "HEARTRATEFLAG";
+    public static final String COL_6 = "LATESTID";
+    public static final String COL_7 = "DATE";
 
 
     public MeasureSQLiteHandler(Context context) {
@@ -23,7 +25,7 @@ public class MeasureSQLiteHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLE_NAME +" (ID INTEGER PRIMARY KEY AUTOINCREMENT,TEMPERATURE INTEGER,TEMPERATUREFLAG INTEGER,HEARTRATE INTEGER,HEARTRATEFLAG INTEGER)");
+        db.execSQL("create table " + TABLE_NAME +" (ID INTEGER PRIMARY KEY AUTOINCREMENT,TEMPERATURE INTEGER,TEMPERATUREFLAG INTEGER,HEARTRATE INTEGER,HEARTRATEFLAG INTEGER, LATESTID TEXT,DATE TEXT)");
     }
 
     @Override

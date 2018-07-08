@@ -107,6 +107,7 @@ public class Calc_BloodPressure extends Fragment {
         super.onActivityCreated(savedInstanceState);
     }
 
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.measuretype,menu);

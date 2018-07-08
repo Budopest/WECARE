@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 
-import com.gp.eece2019.wecare.shared.IPSTRING;
+import com.gp.eece2019.wecare.shared.URL_STRING;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -22,7 +22,7 @@ public class ExtraMeasuresSQLhandler extends AsyncTask<String,Void,String> {
     Context ctx;
     int error=0;
     AlertDialog alertDialog;
-    IPSTRING Surl = new IPSTRING();
+    URL_STRING Surl = new URL_STRING();
     ExtraMeasuresSQLhandler (Context ctx) {
         this.ctx = ctx;
     }

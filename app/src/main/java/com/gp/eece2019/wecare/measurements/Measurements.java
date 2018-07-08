@@ -6,20 +6,26 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.gp.eece2019.wecare.R;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 @SuppressLint("ValidFragment")
-public class Measurements extends Fragment implements View.OnClickListener{
+public class Measurements extends Fragment {
 
     TextView temp,hrate;
     MeasureMySqlHandler MSQL;
@@ -35,13 +41,12 @@ public class Measurements extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_measurements, container, false);
     }
 
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-
-        showall = (Button) getView().findViewById(R.id.showall);
 
 
     }
@@ -49,43 +54,78 @@ public class Measurements extends Fragment implements View.OnClickListener{
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 
         MSQL  = new MeasureMySqlHandler(getActivity());
-        showall.setOnClickListener(this);
         MLITE = new MeasureSQLiteHandler(getActivity());
-        MSQL.execute(username,"withDisplay"); // user name is passed to func do in backgroung in MeasuseSQLhandler Class
+
+        ArrayList<Measurementitem> alldata = new ArrayList<Measurementitem>();
+
+        Cursor res =MLITE.getAllData();
+        if(res.getCount()!=0)
+        {
+            res.moveToLast(); boolean last=true;
+            while(res.moveToPrevious())
+            {
+                if(last) {res.moveToLast(); last=false;}
+                String T_c  = "Normal";
+                String HR_c = "Normal";
+                if(res.getString(2).equals("3"))  T_c="UP NORMAL";
+                else if(res.getString(2).equals("4") || res.getString(2).equals("5")) T_c="DANGEROUS";
+
+                if(res.getString(4).equals("3"))  HR_c="UP NORMAL";
+                else if(res.getString(4).equals("4") || res.getString(4).equals("5")) HR_c="DANGEROUS";
+
+                alldata.add(new Measurementitem(res.getString(1),T_c,res.getString(3),HR_c,res.getString(0)));
+            }
+        }
+        else{
+            Toast toast = Toast.makeText(getActivity(),"No measurement are received yet",Toast.LENGTH_LONG);
+            toast.show();
+        }
+
+        MeasurementsAdapter a = new MeasurementsAdapter(getActivity(), alldata);
+
+        // Get a reference to the ListView, and attach the adapter to the listView.
+        ListView listView = (ListView) getView().findViewById(R.id.measure_list);
+        listView.setAdapter(a);
+
+        MSQL.execute(username); // user name is passed to func do in backgroung in MeasuseSQLhandler Class
+
         super.onActivityCreated(savedInstanceState);
     }
-    public void onClick (View v)
-    {
 
-        Cursor res = MLITE.getAllData();
-        if(res.getCount() == 0) {
-            // show message
-            showMessage("Error","Nothing found");
-            return;
-        }
 
-        StringBuffer buffer = new StringBuffer();
-        while (res.moveToNext()) {
-            buffer.append("Id :"+ res.getString(0)+"\n");
-            buffer.append("T :"+ res.getString(1)+"\n");
-            buffer.append("TF :"+ res.getString(2)+"\n");
-            buffer.append("P :"+ res.getString(3)+"\n");
-            buffer.append("PF :"+ res.getString(4)+"\n\n");
-        }
-
-        // Show all data
-        showMessage("Data",buffer.toString());
-
-    }
-    public void showMessage(String title,String Message){
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setCancelable(true);
-        builder.setTitle(title);
-        builder.setMessage(Message);
-        builder.show();
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.display_type,menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
 
+        switch (item.getItemId()) {
+
+            case R.id.listdisplay:
+
+
+                return true;
+
+            case R.id.tabledisplay:
+
+                MeasurementsTable m= new MeasurementsTable(username);
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.Fragment_container, m)
+                        .addToBackStack(null)
+                        .commit();
+
+                return true;
+
+            case R.id.graphdisplay:
+
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
 
 

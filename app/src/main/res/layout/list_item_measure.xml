@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:minHeight="?android:attr/listPreferredItemHeight"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:paddingLeft="16dp">
+
+
+        <ImageView
+            android:id="@+id/imageViewtemp"
+            android:layout_width="56dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/measurement" />
+
+        <TextView
+            android:id="@+id/temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="20dp"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            tools:text="temperature" />
+
+        <TextView
+            android:id="@+id/tempstate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+
+            android:paddingLeft="5dp"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            tools:text="temp state"
+             />
+        
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:paddingLeft="16dp">
+
+        <ImageView
+            android:id="@+id/imageViewrate"
+            android:layout_width="56dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/heart" />
+        <TextView
+            android:id="@+id/rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:paddingRight="5dp"
+            android:paddingLeft="5dp"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            tools:text="rate"/>
+        <TextView
+            android:id="@+id/ratestate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+
+            android:paddingLeft="5dp"
+            tools:text="rate state"
+            android:textSize="14sp"
+            android:textStyle="bold"/>
+
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/measuredate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:visibility="visible"
+        tools:text="Data id and date" />
+
+
+</LinearLayout>

@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v4.app.ActivityCompat;
@@ -17,7 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gp.eece2019.wecare.R;
-import com.gp.eece2019.wecare.shared.IPSTRING;
+import com.gp.eece2019.wecare.shared.URL_STRING;
 import com.gp.eece2019.wecare.staticfragments.DoctorDetailsSQLliteHandler;
 
 
@@ -38,12 +39,11 @@ public class MeasureMySqlHandler extends AsyncTask<String,Void,String> {
 
     Context ctx;
     int error=0;
-    int idnumber = R.id.T11; int idnumber2 = R.id.T101; int ns =0;
 
-    String type="";
+    //String type="";
     String user_name;
 
-    IPSTRING Surl = new IPSTRING();
+    URL_STRING Surl = new URL_STRING();
     public MeasureMySqlHandler(Context ctx) {
         this.ctx = ctx;
     }
@@ -54,7 +54,7 @@ public class MeasureMySqlHandler extends AsyncTask<String,Void,String> {
         String measures_url = Surl.Getmeasures();  //Add the url here
 
             try {
-                type = params[1];
+                //type = params[1];
                 user_name = params[0]; // the user name in case of testing account the user name will be "Test_user"
                 URL url = new URL(measures_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
@@ -91,8 +91,8 @@ public class MeasureMySqlHandler extends AsyncTask<String,Void,String> {
         //alertDialog = new AlertDialog.Builder(ctx).create(); //Alert dialog for testing to show
         //alertDialog.setTitle("Connection Status");
         //String result = "|12/12/1995,(100,2,3,4),(10,20,30,40)";
-        if(type.equalsIgnoreCase("withDisplay"))
-        Displayexistingmeasures();
+        //if(type.equalsIgnoreCase("withDisplay"))
+        //Displayexistingmeasures();
 
     }
 
@@ -121,17 +121,16 @@ public class MeasureMySqlHandler extends AsyncTask<String,Void,String> {
                     firstelement=true;
 
                     Cursor res =  LD.getAllData();
-                    TextView timeupdate = (TextView)((Activity)ctx).findViewById(R.id.updateddate);
-                    timeupdate.setText(String.format("Updated On \" %s \"", date));
+
                     if(res.getCount() == 0) { //the data base is empty
 
-                        if(LD.insertData(date)){ Toast.makeText(ctx,"First Data Received Correctly",Toast.LENGTH_LONG).show();}
+                        if(LD.insertData(date)){ /*Toast.makeText(ctx,"First Data Received Correctly",Toast.LENGTH_LONG).show();*/}
                     }
                     else{
                         String OLDid="",OLDdate="";
                         while (res.moveToNext()) { OLDid   = res.getString(0);  OLDdate = res.getString(1); }
                         if(OLDdate.equals(date)){break;}
-                        if (LD.updateData(OLDid,date)) { Toast.makeText(ctx,"New data Received",Toast.LENGTH_LONG).show(); }
+                        if (LD.updateData(OLDid,date)) { /*Toast.makeText(ctx,"New data Received",Toast.LENGTH_LONG).show();*/ }
                     }
                 }
 
@@ -168,7 +167,7 @@ public class MeasureMySqlHandler extends AsyncTask<String,Void,String> {
 
                         isinserted = M.insertData(T,TF,P,PF);
                         if (isinserted && firsttime){
-                            Toast.makeText(ctx, "Data Inserted", Toast.LENGTH_LONG).show();
+                            //Toast.makeText(ctx, "Data Inserted", Toast.LENGTH_LONG).show();
                             firsttime = false;
                         }
                     }
@@ -177,8 +176,7 @@ public class MeasureMySqlHandler extends AsyncTask<String,Void,String> {
                 }
             }
 
-            if(type.equalsIgnoreCase("withDisplay"))
-            Displayexistingmeasures();
+
 
             if(WTF==3 || WPF==3){
                 Automaticcall(3);
@@ -191,78 +189,23 @@ public class MeasureMySqlHandler extends AsyncTask<String,Void,String> {
             }
 
         }
+        //if(type.equalsIgnoreCase("withDisplay")){
 
         MeasureMySqlHandler measureMySqlHandler = new MeasureMySqlHandler(ctx);
-        measureMySqlHandler.execute(user_name,type);
-
-    }
-
-    private void Displayexistingmeasures() {
-
-        MeasureSQLiteHandler EM = new MeasureSQLiteHandler(ctx);
-        LastRECdata   ELD = new LastRECdata(ctx);
-        Cursor date =  ELD.getAllData();
-        TextView timeupdate = (TextView)((Activity)ctx).findViewById(R.id.updateddate);
-        if(date.getCount()!=0){
-            while(date.moveToNext()){timeupdate.setText("Updated On \" " + date.getString(1) + " \"");}
+        try {
+            measureMySqlHandler.execute(user_name);
         }
-
-        //timeupdate.setText("Updated On \" " + date + " \"");
-        Cursor res = EM.getAllData();
-        //int c = 0 ;
-        if(res.getCount() != 0) {
-            while (res.moveToNext()) {
-                //res.getString(0);
-                //c++;
-                Fillthetable(res.getString(1),res.getString(2),
-                        res.getString(3),res.getString(4));
-            }
-
-        }
-
-    }
-
-    private void Fillthetable(String t, String tf, String p, String pf) {
-
-        if(ns<9){
-        TextView f1 = (TextView)((Activity)ctx).findViewById(idnumber++);
-        TextView f2 = (TextView)((Activity)ctx).findViewById(idnumber++);
-        TextView f3 = (TextView)((Activity)ctx).findViewById(idnumber++);
-        TextView f4 = (TextView)((Activity)ctx).findViewById(idnumber++);
-        f1.setText(t);
-        f2.setText(tf);
-        f3.setText(p);
-        f4.setText(pf);
-        ns++;
-        }
-        else
-            {
-                TextView f1 = (TextView)((Activity)ctx).findViewById(idnumber2++);
-                TextView f2 = (TextView)((Activity)ctx).findViewById(idnumber2++);
-                TextView f3 = (TextView)((Activity)ctx).findViewById(idnumber2++);
-                TextView f4 = (TextView)((Activity)ctx).findViewById(idnumber2++);
-                f1.setText(t);
-                f2.setText(tf);
-                f3.setText(p);
-                f4.setText(pf);
-                ns=0; idnumber = R.id.T11; idnumber2 =R.id.T101;
-            }
+        catch (Exception e){}
 
 
     }
 
-    /*
-    public void showMessage(String title,String Message){
-        AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
-        builder.setCancelable(true);
-        builder.setTitle(title);
-        builder.setMessage(Message);
-        builder.show();
-    }*/
+
+
+
 
     private void Automaticcall(int f) {
         Intent intent = new Intent(Intent.ACTION_CALL);
-        String ph = getDOCTORphone();
 
         if(f==3) intent.setData(Uri.parse("tel:"+ctx.getSharedPreferences("STATENUMBERS", MODE_PRIVATE).getString("state1",null)));
         else if (f==4) intent.setData(Uri.parse("tel:"+ctx.getSharedPreferences("STATENUMBERS", MODE_PRIVATE).getString("state2",null)));
@@ -290,12 +233,6 @@ public class MeasureMySqlHandler extends AsyncTask<String,Void,String> {
             return;
         }*/
         ctx.startActivity(intent);
-    }
-    private String getDOCTORphone(){
-        DoctorDetailsSQLliteHandler Dsql = new DoctorDetailsSQLliteHandler(ctx);
-        Cursor res = Dsql.getAllData();
-        while (res.moveToNext()){return res.getString(2);}
-        return null;
     }
 
     @Override
