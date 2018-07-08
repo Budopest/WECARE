@@ -120,6 +120,12 @@ public class Measurements extends Fragment {
 
             case R.id.graphdisplay:
 
+                MeasurementsChart c= new MeasurementsChart(username);
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.Fragment_container, c)
+                        .addToBackStack(null)
+                        .commit();
+
                 return true;
 
             default:

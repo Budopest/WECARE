@@ -216,13 +216,13 @@ public class MainActivity extends AppCompatActivity
 
 
         } else if (id == R.id.nav_about) {
-            About a = new About();
+            About a = new About(Uname);
             android.support.v4.app.FragmentManager Manager = getSupportFragmentManager();
             Manager.beginTransaction().replace(R.id.Fragment_container,a).commit();
 
 
         } else if (id == R.id.nav_contactus) {
-            Contactus cu = new Contactus();
+            Contactus cu = new Contactus(Uname);
             android.support.v4.app.FragmentManager Manager = getSupportFragmentManager();
             Manager.beginTransaction().replace(R.id.Fragment_container,cu).commit();
 

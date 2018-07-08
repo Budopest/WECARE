@@ -17,6 +17,7 @@ public class URL_STRING {
     private final String recMessage_url  = Sip+"respond.php";
     private final String pressure_url    = Sip+"pressure.php";
     private final String diabetes_url    = Sip+"diabetes.php";
+    private final String feedback_url    = Sip+"feedbackreceiver.php";
 
 
 
@@ -50,5 +51,8 @@ public class URL_STRING {
     }
     public String getDiabetes_url() {
         return diabetes_url;
+    }
+    public String getFeedback_url() {
+        return feedback_url;
     }
 }
