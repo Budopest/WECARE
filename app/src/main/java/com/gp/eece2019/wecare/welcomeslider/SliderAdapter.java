@@ -32,19 +32,25 @@ public class SliderAdapter extends PagerAdapter {
     public int[] slide_images = {
             R.drawable.calls_purple,
             R.drawable.pills,
-            R.drawable.measurement
+            R.drawable.measurement,
+            R.drawable.hospitalgpscircle,
+            R.drawable.medical_ambulance
 
     };
     public String[] slide_headers = {
             "Easy Communications",
             "Keep Up With Your Medicines",
-            "Monitor Your Condition"
+            "Monitor Your Condition",
+            "Locate hospitals and clinics",
+            "Emergency call"
     };
 
     public String[] slide_description = {
             "Make phone calls and send sms to your doctor or family members is very simple, also automatic cals and sms are send in emergency cases based on how serious the case is.",
             "Update your medicines and their doses with any changes your doctor made, have a notification to remind you with your medication time.",
-            "Monitor your condition closely see your temperature, Heart rate,etc."
+            "Monitor your condition closely see your temperature, Heart rate,etc.",
+            "Use google maps to find all the nearby hospitals and clinic also you can search for any hospital and find it's location on the map",
+            "Call an ambulance with only one click, you can also use the settings to change that to your doctor number or any other number you want"
     };
 
     @Override

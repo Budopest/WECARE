@@ -289,14 +289,14 @@ public class MainActivity extends AppCompatActivity
         while (contacts.moveToNext()){
             csql.deleteData(contacts.getString(0));
         }
-        /*
+
         while (sms.moveToNext()){
-            smssql.deleteData(Doctor.getString(0));
+            smssql.deleteData(sms.getString(0));
         }
         while (measure.moveToNext()){
-            msql.deleteData(Doctor.getString(0));
+            msql.deleteData(measure.getString(0));
         }
-        */
+
         Intent i = new Intent(MainActivity.this,SigninActivity.class);
         startActivity(i);
         finish();
