@@ -7,17 +7,17 @@ package com.gp.eece2019.wecare.shared;
 public class URL_STRING {
 
 
-    private final String Sip             = "http://192.168.1.30/";
+    private final String Sip             = "http://192.168.1.94/";
     private final String login_url       = Sip+"logintest.php";
     private final String signup_url      = Sip+"signuptest.php";
     private final String medicine_url    = Sip+"medicines.php";
-    private final String measures_url    = Sip+"readm.php";
+    private final String measures_url    = Sip+"measurements.php";
     private final String doctor_url      = Sip+"doctors.php";
     private final String sendMessage_url = Sip+"chat.php";
     private final String recMessage_url  = Sip+"respond.php";
     private final String pressure_url    = Sip+"pressure.php";
     private final String diabetes_url    = Sip+"diabetes.php";
-    private final String feedback_url    = Sip+"feedbackreceiver.php";
+    private final String feedback_url    = Sip+"feedback.php";
 
 
 
