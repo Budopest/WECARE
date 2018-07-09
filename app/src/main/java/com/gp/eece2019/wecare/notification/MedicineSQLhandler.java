@@ -1,11 +1,15 @@
 package com.gp.eece2019.wecare.notification;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
+import com.gp.eece2019.wecare.R;
 import com.gp.eece2019.wecare.shared.URL_STRING;
 
 
@@ -26,6 +30,7 @@ public class MedicineSQLhandler extends AsyncTask<String,Void,String> {
     int error=0;
     URL_STRING Surl = new URL_STRING();
     AlertDialog alertDialog;
+    String updatemessage="";
     MedicineSQLhandler (Context ctx) {
         this.ctx = ctx;
     }
@@ -70,8 +75,8 @@ public class MedicineSQLhandler extends AsyncTask<String,Void,String> {
     @Override
     protected void onPreExecute() {
 
-        //alertDialog = new AlertDialog.Builder(ctx).create(); //Alert dialog for testing to show
-        //alertDialog.setTitle("Connection Status");//the recieved response from the data base
+        alertDialog = new AlertDialog.Builder(ctx).create(); //Alert dialog for testing to show
+        alertDialog.setTitle("New updates on your medicines list");//the recieved response from the data base
         //Medicinesqllitehandler MSQL = new Medicinesqllitehandler(ctx);
         //MSQL.insertData("med1",3);
     }
@@ -79,9 +84,13 @@ public class MedicineSQLhandler extends AsyncTask<String,Void,String> {
     @Override
     protected void onPostExecute(String result) {
 
-        if(error==0) {
-            //alertDialog.setMessage(result);
-            //alertDialog.show();
+        //alertDialog.setMessage(result);
+        //alertDialog.show();
+
+        if(error==0&&!result.equals("nothing")) {
+
+            int note=0;
+
             Medicinesqllitehandler MSQL = new Medicinesqllitehandler(ctx);
             int num=0; boolean first=false; int indexstart=0;
             for(int i =0;i<result.length();i++)
@@ -97,9 +106,18 @@ public class MedicineSQLhandler extends AsyncTask<String,Void,String> {
                 if(result.charAt(i)=='|' && !first) {indexstart=i+1; first=true; continue; }
                 if(result.charAt(i)==',') {
                     if(halfc<num) {name[c1]=result.substring(indexstart,i); c1++; indexstart=i+1; halfc++; }
-                    else {dose[c2]=Integer.parseInt(result.substring(indexstart,i)); c2++; indexstart=i+1; halfc++; }
+                    else {
+                       try{
+                        dose[c2]=Integer.parseInt(result.substring(indexstart,i)); }
+                        catch (Exception e){return;}
+                        c2++; indexstart=i+1; halfc++;
+                    }
                 }
-                if(i==result.length()-1) { dose[c2]=Integer.parseInt(result.substring(indexstart,i)); }
+                if(i==result.length()-1) {
+                   try{
+                    dose[c2]=Integer.parseInt(result.substring(indexstart,i));}
+                    catch (Exception e){return;}
+                }
 
             }
             Cursor res1 = MSQL.getAllData();
@@ -107,7 +125,16 @@ public class MedicineSQLhandler extends AsyncTask<String,Void,String> {
                 for(int i=0;i<num;i++)
                 {
                     MSQL.insertData(name[i],dose[i]);
+
+                    updatemessage=updatemessage+"medicine :"+name[i]+"\n"+"Number of doses :"+dose[i]+"\n";
+                    note++;
+
+                    update();
                 }
+                if(note>0){
+                    alertDialog.setMessage(updatemessage);
+                    alertDialog.show();
+                    updatemessage="";}
             }
             else{
                 int c = 0; int cc=0;
@@ -122,23 +149,36 @@ public class MedicineSQLhandler extends AsyncTask<String,Void,String> {
                         String s3= res.getString(2); //dose
 
                         if((s2.equals(name[i]))&&(s3.equals(Integer.toString(dose[i])))) {c++; break;}
-                        else if((s2.equals(name[i]))&&!(s3.equals(Integer.toString(dose[i])))){MSQL.updateData(s1,name[i],dose[i]); c++; break;}
+                        else if((s2.equals(name[i]))&&!(s3.equals(Integer.toString(dose[i])))){
+                            updatemessage=updatemessage+"medicine :"+name[i]+"\n"+"Number of doses :"+dose[i]+"\n";
+                            note++;
+                            MSQL.updateData(s1,name[i],dose[i]); c++; break;
+                        }
                     }
                     if(c==0) {
                         MSQL.insertData(name[i],dose[i]);
+                        updatemessage=updatemessage+"medicine :"+name[i]+"\n"+"Number of doses :"+dose[i]+"\n";
+                        note++;
+                        update();
                     }
                     else c=0;
                 }
+                if(note>0){
+                alertDialog.setMessage(updatemessage);
+                alertDialog.show();
+                updatemessage="";}
+
                 Cursor res = MSQL.getAllData();
                 String s1;
                 while (res.moveToNext()) {
+                    cc=0;
                     s1 = res.getString(0); //ID
                     String s2 = res.getString(1); //name
                     String s3 = res.getString(2); //dose
                     for(int i=0;i<num;i++){
                         if(s2.equals(name[i]))  cc++;
                     }
-                    if(cc==0) MSQL.deleteData(s1);
+                    if(cc==0) {MSQL.deleteData(s1);  update();}
                 }
             }
         }
@@ -151,6 +191,32 @@ public class MedicineSQLhandler extends AsyncTask<String,Void,String> {
         builder.setTitle(title);
         builder.setMessage(Message);
         builder.show();
+    }
+    public void update(){
+
+        Medicinesqllitehandler Db = new Medicinesqllitehandler(ctx);
+        Cursor res = Db.getAllData();
+        if(res.getCount() != 0){
+            int j = 0;
+            while (res.moveToNext()) {
+                j++;
+            }
+            res.moveToFirst();
+            final String[] A = new String[j];
+            A[0] = res.getString(1);
+            int l = 1;
+            while (res.moveToNext()) {
+                A[l] = res.getString(1);
+                l++;
+            }
+
+            ListView listView = (ListView) ((Activity)ctx).findViewById(R.id.medicine_list);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                    ctx, android.R.layout.simple_list_item_1, A);
+            listView.setAdapter(adapter);
+
+        }
+
     }
 
     @Override
