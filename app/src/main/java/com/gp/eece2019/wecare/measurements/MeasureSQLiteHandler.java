@@ -15,8 +15,8 @@ public class MeasureSQLiteHandler extends SQLiteOpenHelper {
     public static final String COL_3 = "TEMPERATUREFLAG";
     public static final String COL_4 = "HEARTRATE";
     public static final String COL_5 = "HEARTRATEFLAG";
-    public static final String COL_6 = "LATESTID";
-    public static final String COL_7 = "DATE";
+    public static final String COL_6 = "DATE";
+    public static final String COL_7 = "LATESTID";
 
 
     public MeasureSQLiteHandler(Context context) {
@@ -25,7 +25,7 @@ public class MeasureSQLiteHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLE_NAME +" (ID INTEGER PRIMARY KEY AUTOINCREMENT,TEMPERATURE INTEGER,TEMPERATUREFLAG INTEGER,HEARTRATE INTEGER,HEARTRATEFLAG INTEGER, LATESTID TEXT,DATE TEXT)");
+        db.execSQL("create table " + TABLE_NAME +" (ID INTEGER PRIMARY KEY AUTOINCREMENT,TEMPERATURE INTEGER,TEMPERATUREFLAG INTEGER,HEARTRATE INTEGER,HEARTRATEFLAG INTEGER, DATE TEXT,LATESTID TEXT)");
     }
 
     @Override
@@ -34,13 +34,15 @@ public class MeasureSQLiteHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertData(int t,int tf, int p , int pf) {
+    public boolean insertData(int t,int tf, int p , int pf,String date,String id) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_2,t);
         contentValues.put(COL_3,tf);
         contentValues.put(COL_4,p);
         contentValues.put(COL_5,pf);
+        contentValues.put(COL_6,date);
+        contentValues.put(COL_7,id);
         long result = db.insert(TABLE_NAME,null ,contentValues);
         return result != -1;
     }

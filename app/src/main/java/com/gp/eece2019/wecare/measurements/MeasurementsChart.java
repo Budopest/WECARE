@@ -31,6 +31,7 @@ import java.util.List;
 public class MeasurementsChart extends Fragment {
 
     String username;
+
     public MeasurementsChart(String usename) {
         // Required empty public constructor
         this.username=usename;
@@ -69,21 +70,23 @@ public class MeasurementsChart extends Fragment {
                 Temperature_entries.add(new Entry(res.getFloat(0),res.getFloat(1)));
                 Rate_entries.add(new Entry(res.getFloat(0),res.getFloat(3)));
             }
+
+            LineDataSet Temperature_dataSet = new LineDataSet(Temperature_entries, "Temperature"); // add entries to dataset
+            Temperature_dataSet.setColor(Color.RED);
+
+            LineDataSet Rate_dataSet = new LineDataSet(Rate_entries, "Heart Rate"); // add entries to dataset
+            Rate_dataSet.setColor(Color.BLUE);
+
+            LineData lineData = new LineData(Temperature_dataSet,Rate_dataSet);
+            chart.setData(lineData);
+            chart.invalidate(); // refresh
         }
         else{
-            Toast toast = Toast.makeText(getActivity(),"No measurement are received yet",Toast.LENGTH_LONG);
+           Toast toast = Toast.makeText(getActivity(),"No measurement are received yet",Toast.LENGTH_LONG);
             toast.show();
         }
 
-        LineDataSet Temperature_dataSet = new LineDataSet(Temperature_entries, "Temperature"); // add entries to dataset
-        Temperature_dataSet.setColor(Color.RED);
 
-        LineDataSet Rate_dataSet = new LineDataSet(Rate_entries, "Heart Rate"); // add entries to dataset
-        Rate_dataSet.setColor(Color.BLUE);
-
-        LineData lineData = new LineData(Temperature_dataSet,Rate_dataSet);
-        chart.setData(lineData);
-        chart.invalidate(); // refresh
 
 
         super.onActivityCreated(savedInstanceState);

@@ -125,6 +125,8 @@ public class MeasurementsTable extends Fragment {
                     if(HR_c.equals("UP NORMAL")) t4.setTextColor(Color.GRAY);
                     if(HR_c.equals("DANGEROUS")) t4.setTextColor(Color.RED);
                     t4.setText(HR_c);
+
+                    tdate.setText(res.getString(5));
                     counter--;
                 }
                 else if(counter==9){
@@ -331,7 +333,8 @@ public class MeasurementsTable extends Fragment {
                     buffer.append("Temperature :"+ res.getString(1)+"\n");
                     buffer.append("Temperature state :"+ res.getString(2)+"\n");
                     buffer.append("Heart rate :"+ res.getString(3)+"\n");
-                    buffer.append("Heart rate state :"+ res.getString(4)+"\n\n");
+                    buffer.append("Heart rate state :"+ res.getString(4)+"\n");
+                    buffer.append("Received Date :"+ res.getString(5)+"\n\n");
                 }
 
                 // Show all data

@@ -48,12 +48,12 @@ public class MeasurementsAdapter extends ArrayAdapter<Measurementitem> {
 
         TextView HRF = (TextView) listItemView.findViewById(R.id.ratestate);
 
-        if(m.getHr_condition().equals("DANGEROUS")) TF.setTextColor(Color.RED);
-        if(m.getHeartrate().equals("UP NORMAL")) TF.setTextColor(Color.GRAY);
+        if(m.getHr_condition().equals("DANGEROUS")) HRF.setTextColor(Color.RED);
+        if(m.getHr_condition().equals("UP NORMAL")) HRF.setTextColor(Color.GRAY);
         HRF.setText("Condition: "+m.getHr_condition());
 
         TextView D = (TextView) listItemView.findViewById(R.id.measuredate);
-        D.setText("Measure number "+m.getID()+ "    Date:");
+        D.setText("Measure number "+m.getID()+ "    Date:"+m.getDATE());
 
         return listItemView;
 

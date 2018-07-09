@@ -21,17 +21,18 @@ import com.gp.eece2019.wecare.R;
 
 import java.util.ArrayList;
 
+import static android.content.Context.MODE_PRIVATE;
+
 /**
  * A simple {@link Fragment} subclass.
  */
 @SuppressLint("ValidFragment")
 public class Measurements extends Fragment {
 
-    TextView temp,hrate;
+
     MeasureMySqlHandler MSQL;
     MeasureSQLiteHandler MLITE;
     String username;
-    Button showall;
 
     public Measurements(String username) {
         this.username = username;
@@ -56,15 +57,21 @@ public class Measurements extends Fragment {
         MSQL  = new MeasureMySqlHandler(getActivity());
         MLITE = new MeasureSQLiteHandler(getActivity());
 
+
+        String LatestID="0";
+
         ArrayList<Measurementitem> alldata = new ArrayList<Measurementitem>();
 
         Cursor res =MLITE.getAllData();
+
+
+
         if(res.getCount()!=0)
         {
             res.moveToLast(); boolean last=true;
             while(res.moveToPrevious())
             {
-                if(last) {res.moveToLast(); last=false;}
+                if(last) {res.moveToLast(); last=false;  LatestID = res.getString(6);}
                 String T_c  = "Normal";
                 String HR_c = "Normal";
                 if(res.getString(2).equals("3"))  T_c="UP NORMAL";
@@ -73,7 +80,7 @@ public class Measurements extends Fragment {
                 if(res.getString(4).equals("3"))  HR_c="UP NORMAL";
                 else if(res.getString(4).equals("4") || res.getString(4).equals("5")) HR_c="DANGEROUS";
 
-                alldata.add(new Measurementitem(res.getString(1),T_c,res.getString(3),HR_c,res.getString(0)));
+                alldata.add(new Measurementitem(res.getString(1),T_c,res.getString(3),HR_c,res.getString(5),res.getString(6)));
             }
         }
         else{
@@ -87,7 +94,14 @@ public class Measurements extends Fragment {
         ListView listView = (ListView) getView().findViewById(R.id.measure_list);
         listView.setAdapter(a);
 
-        MSQL.execute(username); // user name is passed to func do in backgroung in MeasuseSQLhandler Class
+        Boolean First = getContext().getSharedPreferences("THREADOBSERVER", MODE_PRIVATE)
+                .getBoolean("MEASURE", true);
+        if(First) {
+            MSQL.execute(username, LatestID);
+            getActivity().getSharedPreferences("THREADOBSERVER", MODE_PRIVATE).edit()
+                    .putBoolean("MEASURE", false).apply();
+        }
+        //MSQL.execute(username); // user name is passed to func do in backgroung in MeasuseSQLhandler Class
 
         super.onActivityCreated(savedInstanceState);
     }

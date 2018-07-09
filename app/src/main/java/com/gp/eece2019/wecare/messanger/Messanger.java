@@ -22,6 +22,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import static android.content.Context.MODE_PRIVATE;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -87,9 +89,16 @@ public class Messanger extends Fragment {
         }
 
 
-        RecMessageSQLhandler RecCheck = new RecMessageSQLhandler(getContext());
-        RecCheck.execute(Uname,LatestID);
-
+        Boolean First = getContext().getSharedPreferences("THREADOBSERVER", MODE_PRIVATE)
+                .getBoolean("MESSAGE", true);
+        if(First) {
+            RecMessageSQLhandler RecCheck = new RecMessageSQLhandler(getContext());
+            //RecCheck.cancel(true);
+            RecCheck.execute(Uname, LatestID);
+            //RecCheck.cancel(true);
+            getActivity().getSharedPreferences("THREADOBSERVER", MODE_PRIVATE).edit()
+                    .putBoolean("MESSAGE", false).apply();
+        }
 
         send_message.setOnClickListener(new View.OnClickListener() {
             @Override

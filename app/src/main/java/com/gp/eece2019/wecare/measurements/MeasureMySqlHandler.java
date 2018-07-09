@@ -6,6 +6,7 @@ package com.gp.eece2019.wecare.measurements;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -14,6 +15,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v4.app.ActivityCompat;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +33,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -42,6 +45,13 @@ public class MeasureMySqlHandler extends AsyncTask<String,Void,String> {
 
     //String type="";
     String user_name;
+    String idL;
+    AlertDialog alertDialog;
+    boolean casethree=false;
+    boolean casefour=false;
+    boolean casefive=false;
+
+    MeasureSQLiteHandler measureSQLiteHandler;
 
     URL_STRING Surl = new URL_STRING();
     public MeasureMySqlHandler(Context ctx) {
@@ -56,6 +66,7 @@ public class MeasureMySqlHandler extends AsyncTask<String,Void,String> {
             try {
                 //type = params[1];
                 user_name = params[0]; // the user name in case of testing account the user name will be "Test_user"
+                idL = params[1];
                 URL url = new URL(measures_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
@@ -63,7 +74,8 @@ public class MeasureMySqlHandler extends AsyncTask<String,Void,String> {
                 httpURLConnection.setDoInput(true);
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String post_data = URLEncoder.encode("username","UTF-8")+"="+URLEncoder.encode(user_name,"UTF-8");
+                String post_data = URLEncoder.encode("username","UTF-8")+"="+URLEncoder.encode(user_name,"UTF-8")+"&"
+                      + URLEncoder.encode("id","UTF-8")+"="+URLEncoder.encode(idL,"UTF-8") ;
                 bufferedWriter.write(post_data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -90,114 +102,208 @@ public class MeasureMySqlHandler extends AsyncTask<String,Void,String> {
     protected void onPreExecute() {
         //alertDialog = new AlertDialog.Builder(ctx).create(); //Alert dialog for testing to show
         //alertDialog.setTitle("Connection Status");
-        //String result = "|12/12/1995,(100,2,3,4),(10,20,30,40)";
-        //if(type.equalsIgnoreCase("withDisplay"))
-        //Displayexistingmeasures();
-
     }
-
-
 
     @Override
     protected void onPostExecute(String result) {
 
+        //alertDialog.setMessage(result);
+        //alertDialog.show();
+
         if(error==0){
-            //alertDialog.setMessage(result);
-            //alertDialog.show();
-            int indexdatestart=0;   int indexelementstart=0; boolean firsttime=true;
-            boolean end = false;    boolean firstelement =false; boolean inside = false;
-            int WT=0,WTF=0,WP=0,WPF=0;
-            String date="";
-            String element="";
-            MeasureSQLiteHandler M = new MeasureSQLiteHandler(ctx);
-            LastRECdata   LD = new LastRECdata(ctx);
-            boolean isinserted = false;
 
-            for(int i =0;i<result.length();i++)
-            {
-                if(result.charAt(i)=='|' && !end)          {indexdatestart=i+1; end=true;}
-                if(result.charAt(i)==',' && !firstelement) {
-                    date = result.substring(indexdatestart,i);
-                    firstelement=true;
 
-                    Cursor res =  LD.getAllData();
+            // Handling the response
+            String conf=""; String messagesCount =""; String messagesOnly="";
+            int start =0;   int c=0;
+            boolean s = true;
 
-                    if(res.getCount() == 0) { //the data base is empty
+            for(int i=0;i<result.length();i++) {
 
-                        if(LD.insertData(date)){ /*Toast.makeText(ctx,"First Data Received Correctly",Toast.LENGTH_LONG).show();*/}
-                    }
-                    else{
-                        String OLDid="",OLDdate="";
-                        while (res.moveToNext()) { OLDid   = res.getString(0);  OLDdate = res.getString(1); }
-                        if(OLDdate.equals(date)){break;}
-                        if (LD.updateData(OLDid,date)) { /*Toast.makeText(ctx,"New data Received",Toast.LENGTH_LONG).show();*/ }
+                if(result.charAt(i)=='|' && s ) {   start=i+1; s=false; continue;  }
+                if(result.charAt(i)=='|' && !s) {
+                    if(c==0) { conf=result.substring(start, i); if(!conf.equals("success")) break; start=i+1; c++; continue;  }
+                    if(c==1) { messagesCount= result.substring(start, i); start=i+1; c++; continue;}
+                    if(c==2) { messagesOnly= result.substring(start, i); break;}
+                }
+
+            }
+            if(conf.equals("success")) {
+
+                int messageStart = 0;
+                String temperature = "";
+                String temperature_condition = "";
+                String heartrate = "";
+                String heartrate_condition = "";
+                String date="";
+                String id="";
+                boolean inside = false;
+                int segment = 0;
+                {
+
+                    for (int i = 0; i < messagesOnly.length(); i++) {
+
+                        if (messagesOnly.charAt(i) == '(' && !inside) {
+                            messageStart = i + 1;
+                            inside = true;
+                            continue;
+                        }
+                        if (messagesOnly.charAt(i) == ',' && inside) {
+                            if (segment == 0) {
+                                temperature = messagesOnly.substring(messageStart, i);
+                                messageStart = i + 1;
+                                segment++;
+                                continue;
+                            }
+                            if (segment == 1) {
+                                temperature_condition = messagesOnly.substring(messageStart, i);
+                                messageStart = i + 1;
+                                segment++;
+                                continue;
+                            }
+                            if(segment==2)
+                            {
+                                heartrate = messagesOnly.substring(messageStart, i);
+                                messageStart = i + 1;
+                                segment++;
+                                continue;
+                            }
+                            if(segment==3){
+                                heartrate_condition = messagesOnly.substring(messageStart, i);
+                                messageStart = i + 1;
+                                segment++;
+                                continue;
+                            }
+                            if(segment==4){
+                                date = messagesOnly.substring(messageStart, i);
+                                messageStart = i + 1;
+                                segment++;
+                                continue;
+                            }
+                            /*
+                            if(segment==5){
+                                id = messagesOnly.substring(messageStart, i);
+                                messageStart = i + 1;
+                                segment++;
+                                continue;
+                            }
+                            */
+                        }
+                        if (messagesOnly.charAt(i) == ')' && inside) {
+                            id = messagesOnly.substring(messageStart, i);
+                            inside = false;
+                            segment = 0;
+                            Insert(temperature, temperature_condition, heartrate,heartrate_condition,date,id);
+                            continue;
+                        }
+
                     }
                 }
 
-                if(result.charAt(i)=='(' && !inside) {indexelementstart=i+1; inside=true;}
-                if(result.charAt(i)==')' && inside)  {
-                    element = result.substring(indexelementstart,i); inside=false;
-
-                    int T; int P; int TF; int PF;
-                    int indexS =0;
-                    String all[] = new String[4];
-                    int indexall=0;
-
-                    for(int j =0;j<element.length();j++)
-                    {
-                        if(element.charAt(j)==',')
-                        {
-                            all[indexall] = element.substring(indexS, j);
-                            indexall++; indexS=j+1;
-                        }
-                        if(j==element.length()-1)
-                        {
-                            all[indexall] = element.substring(indexS, j+1);
-                        }
-                    }
-
-                    try {
-                        T = Integer.parseInt(all[0]);
-                        TF = Integer.parseInt(all[1]);
-                        P = Integer.parseInt(all[2]);
-                        PF = Integer.parseInt(all[3]);
-                        if(TF>WTF){WTF=TF; WT=T;}
-                        if(PF>WPF){WPF=PF; WP=P;}
-                        //TakeNeededActions(T,TF,P,PF); //Take actions in emergency cases
-
-                        isinserted = M.insertData(T,TF,P,PF);
-                        if (isinserted && firsttime){
-                            //Toast.makeText(ctx, "Data Inserted", Toast.LENGTH_LONG).show();
-                            firsttime = false;
-                        }
-                    }
-                    catch (NumberFormatException e){}
-
-                }
+                if(casefive) Automaticcall(5);
+                else if (casefour) Automaticcall(4);
+                else if (casethree) Automaticcall(3);
             }
 
+            MeasureMySqlHandler measureMySqlHandler = new MeasureMySqlHandler(ctx);
+            measureMySqlHandler.execute(user_name,idL);
 
 
-            if(WTF==3 || WPF==3){
-                Automaticcall(3);
-            }
-            else if(WTF==4 || WPF==4){
-                Automaticcall(4);
-            }
-            else if(WTF==5 || WPF==5){
-                Automaticcall(5);
-            }
 
         }
-        //if(type.equalsIgnoreCase("withDisplay")){
 
-        MeasureMySqlHandler measureMySqlHandler = new MeasureMySqlHandler(ctx);
-        try {
-            measureMySqlHandler.execute(user_name);
+    }
+
+    private void Insert(String t, String t_c, String hr,String hr_c,String date, String id) {
+
+        measureSQLiteHandler = new MeasureSQLiteHandler(ctx);
+
+        try{
+
+            int I_t = Integer.parseInt(t);
+            int I_tc = Integer.parseInt(t_c);
+            int I_hr = Integer.parseInt(hr);
+            int I_hrc = Integer.parseInt(hr_c);
+
+            if(I_tc==3 || I_hrc==3){
+                casethree = true;
+            }
+            else if(I_tc==4 || I_hrc==4){
+                casefour =true;
+            }
+            else if(I_tc==5 || I_hrc==5){
+                casefive = true;
+            }
+
+            measureSQLiteHandler.insertData(I_t,I_tc,I_hr,I_hrc,date,id);
+            //
+            ArrayList<Measurementitem> alldata = new ArrayList<Measurementitem>();
+
+            Cursor res =measureSQLiteHandler.getAllData();
+
+            if(res.getCount()!=0)
+            {
+                res.moveToLast(); boolean last=true;
+                while(res.moveToPrevious())
+                {
+                    if(last) {res.moveToLast(); last=false;  idL = res.getString(6);}
+                    String T_c  = "Normal";
+                    String HR_c = "Normal";
+                    if(res.getString(2).equals("3"))  T_c="UP NORMAL";
+                    else if(res.getString(2).equals("4") || res.getString(2).equals("5")) T_c="DANGEROUS";
+
+                    if(res.getString(4).equals("3"))  HR_c="UP NORMAL";
+                    else if(res.getString(4).equals("4") || res.getString(4).equals("5")) HR_c="DANGEROUS";
+
+                    alldata.add(new Measurementitem(res.getString(1),T_c,res.getString(3),HR_c,res.getString(5),res.getString(6)));
+                }
+            }
+            else{
+                Toast toast = Toast.makeText(ctx,"No measurement are received yet",Toast.LENGTH_LONG);
+                toast.show();
+            }
+
+            MeasurementsAdapter a = new MeasurementsAdapter(ctx, alldata);
+
+            // Get a reference to the ListView, and attach the adapter to the listView.
+            ListView listView = (ListView)((Activity)ctx).findViewById(R.id.measure_list);
+            listView.setAdapter(a);
+
         }
         catch (Exception e){}
 
+        /*
 
+        ListView mesaage_list = ((Activity) context).findViewById(R.id.messages_list);
+
+        Cursor res = MSQLLITE.getAllData();
+
+        final ListViewItem[] items = new ListViewItem[res.getCount()];
+
+        if (res.getCount() == 0) {
+            // show message
+            showMessage("Error", "Nothing found");
+
+        }
+        else {
+            int i = 0;
+            while (res.moveToNext()) {
+
+                if (res.getString(4).equals("send")) {
+                    items[i] = new ListViewItem(res.getString(1), CustomAdapter.TYPE_send);
+                } else {
+                    items[i] = new ListViewItem(res.getString(1) , CustomAdapter.TYPE_rec);
+                }
+                ID=res.getString(3);
+                i++;
+            }
+
+
+            CustomAdapter customAdapter = new CustomAdapter(context, R.id.message_container, items);
+            mesaage_list.setAdapter(customAdapter);
+        }
+
+        */
     }
 
 

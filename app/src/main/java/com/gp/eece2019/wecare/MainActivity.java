@@ -30,6 +30,7 @@ import com.gp.eece2019.wecare.measurements.Calc_BloodPressure;
 import com.gp.eece2019.wecare.measurements.MeasureSQLiteHandler;
 import com.gp.eece2019.wecare.measurements.Measurements;
 import com.gp.eece2019.wecare.messanger.MessagesSqlLitehandler;
+import com.gp.eece2019.wecare.notification.Medicinesqllitehandler;
 import com.gp.eece2019.wecare.staticfragments.About;
 import com.gp.eece2019.wecare.staticfragments.Contactus;
 import com.gp.eece2019.wecare.staticfragments.DoctorDetailsSQLliteHandler;
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity
     MessagesSqlLitehandler smssql;
     MeasureSQLiteHandler msql;
     Contactssqllitehandler csql;
+    Medicinesqllitehandler nsql;
 
     String Fname, Lname, Uname, phone, Bdate;
     TextView firstfield, secondfield;
@@ -64,6 +66,7 @@ public class MainActivity extends AppCompatActivity
         smssql = new MessagesSqlLitehandler(this);
         msql   = new MeasureSQLiteHandler(this);
         csql   = new Contactssqllitehandler(this);
+        nsql   = new Medicinesqllitehandler(this);
 
         boolean Firstusestatus = Checkfirstuse();
 
@@ -89,6 +92,11 @@ public class MainActivity extends AppCompatActivity
             finish();
         }
 
+
+        getSharedPreferences("THREADOBSERVER", MODE_PRIVATE).edit()
+                .putBoolean("MESSAGE", true).apply();
+        getSharedPreferences("THREADOBSERVER", MODE_PRIVATE).edit()
+                .putBoolean("MEASURE", true).apply();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -279,6 +287,7 @@ public class MainActivity extends AppCompatActivity
         Cursor contacts = csql.getAllData();
         Cursor sms      = smssql.getAllData();
         Cursor measure  = msql.getAllData();
+        Cursor medicines= nsql.getAllData();
         while (user.moveToNext()) {
             usql.deleteData(user.getString(0));
         }
@@ -293,10 +302,12 @@ public class MainActivity extends AppCompatActivity
         while (sms.moveToNext()){
             smssql.deleteData(sms.getString(0));
         }
+        while (medicines.moveToNext()){
+            nsql.deleteData(medicines.getString(0));
+        }
         while (measure.moveToNext()){
             msql.deleteData(measure.getString(0));
         }
-
         Intent i = new Intent(MainActivity.this,SigninActivity.class);
         startActivity(i);
         finish();

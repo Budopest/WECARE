@@ -1,5 +1,7 @@
 package com.gp.eece2019.wecare.measurements;
 
+import java.util.Date;
+
 public class Measurementitem {
 
     private  String temperature;
@@ -12,13 +14,16 @@ public class Measurementitem {
 
     private String ID;
 
-    public Measurementitem(String t, String t_c, String hr, String hr_c, String id)
+    private String DATE;
+
+    public Measurementitem(String t, String t_c, String hr, String hr_c,String date, String id)
     {
         temperature = t;
         heartrate   =hr;
         t_condition = t_c;
         hr_condition = hr_c;
         ID=id;
+        DATE= date;
     }
 
     public String getTemperature() {
@@ -39,5 +44,9 @@ public class Measurementitem {
 
     public String getID() {
         return ID;
+    }
+
+    public String getDATE() {
+        return DATE;
     }
 }
