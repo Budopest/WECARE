@@ -31,10 +31,11 @@ import com.gp.eece2019.wecare.measurements.MeasureSQLiteHandler;
 import com.gp.eece2019.wecare.measurements.Measurements;
 import com.gp.eece2019.wecare.messanger.MessagesSqlLitehandler;
 import com.gp.eece2019.wecare.notification.Medicinesqllitehandler;
+import com.gp.eece2019.wecare.skin.skincheck;
 import com.gp.eece2019.wecare.staticfragments.About;
 import com.gp.eece2019.wecare.staticfragments.Contactus;
 import com.gp.eece2019.wecare.staticfragments.DoctorDetailsSQLliteHandler;
-import com.gp.eece2019.wecare.messanger.Messanger;
+import com.gp.eece2019.wecare.messanger.Messenger;
 import com.gp.eece2019.wecare.staticfragments.Settings;
 import com.gp.eece2019.wecare.staticfragments.Userinfo;
 import com.gp.eece2019.wecare.login.SigninActivity;
@@ -116,6 +117,9 @@ public class MainActivity extends AppCompatActivity
                     //                                          int[] grantResults)
                     // to handle the case where the user grants the permission. See the documentation
                     // for ActivityCompat#requestPermissions for more details.
+
+                    //ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.CALL_PHONE}, 101);
+
                     return;
                 }
                 startActivity(Call_ambulance);
@@ -218,7 +222,7 @@ public class MainActivity extends AppCompatActivity
 
 
         }else if (id == R.id.nav_messanger) {
-            Messanger M = new Messanger(Uname);
+            Messenger M = new Messenger(Uname);
             android.support.v4.app.FragmentManager Manager = getSupportFragmentManager();
             Manager.beginTransaction().replace(R.id.Fragment_container,M).commit();
 
@@ -242,6 +246,12 @@ public class MainActivity extends AppCompatActivity
 
         }
         else if (id == R.id.nav_hospitals_location){
+
+
+        } else if (id == R.id.skin) {
+            skincheck M = new skincheck(Uname);
+            android.support.v4.app.FragmentManager Manager = getSupportFragmentManager();
+            Manager.beginTransaction().replace(R.id.Fragment_container,M).commit();
 
         }
         else if (id == R.id.nav_settings){

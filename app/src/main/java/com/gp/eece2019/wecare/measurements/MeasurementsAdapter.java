@@ -39,7 +39,8 @@ public class MeasurementsAdapter extends ArrayAdapter<Measurementitem> {
         TextView TF = (TextView) listItemView.findViewById(R.id.tempstate);
 
         if(m.getT_condition().equals("DANGEROUS")) TF.setTextColor(Color.RED);
-        if(m.getT_condition().equals("UP NORMAL")) TF.setTextColor(Color.GRAY);
+        else if(m.getT_condition().equals("UP NORMAL")) TF.setTextColor(Color.GRAY);
+        else TF.setTextColor(Color.BLACK);
         TF.setText("Condition: "+m.getT_condition());
 
 
@@ -49,7 +50,8 @@ public class MeasurementsAdapter extends ArrayAdapter<Measurementitem> {
         TextView HRF = (TextView) listItemView.findViewById(R.id.ratestate);
 
         if(m.getHr_condition().equals("DANGEROUS")) HRF.setTextColor(Color.RED);
-        if(m.getHr_condition().equals("UP NORMAL")) HRF.setTextColor(Color.GRAY);
+        else if(m.getHr_condition().equals("UP NORMAL")) HRF.setTextColor(Color.GRAY);
+        else HRF.setTextColor(Color.BLACK);
         HRF.setText("Condition: "+m.getHr_condition());
 
         TextView D = (TextView) listItemView.findViewById(R.id.measuredate);

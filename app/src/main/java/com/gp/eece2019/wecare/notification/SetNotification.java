@@ -52,8 +52,10 @@ public class SetNotification extends Fragment {
         Bundle bundle = this.getArguments();
         final int Index = bundle.getInt("index");
         String MyDose = null;
+
         Db = new Medicinesqllitehandler(getActivity());
         Cursor res = Db.getAllData();
+        String[] Mname = new String[0];
         String[] dose = new String[0];
         if (res.getCount() != 0) {
             int j = 0;
@@ -62,18 +64,23 @@ public class SetNotification extends Fragment {
             }
             res.moveToFirst();
             final String[] id = new String[j];
+            Mname = new String[j];
             dose = new String[j];
+            Mname[0] = res.getString(1);
             dose[0] = res.getString(2);
 
             int l = 1;
             while (res.moveToNext()) {
+                Mname[l] = res.getString(1);
                 dose[l] = res.getString(2);
                 l++;
             }
         }
+        final String medicinename= Mname[Index];
         MyDose = dose[Index];
-
+        final int[] id = new int[1];
         final int Doses = Integer.parseInt(MyDose);
+        //final int Doses =480;
         start_alarm.setOnClickListener(new View.OnClickListener() {
             @TargetApi(Build.VERSION_CODES.M)
 
@@ -84,9 +91,10 @@ public class SetNotification extends Fragment {
                 final int minute = alarmTimePicker.getCurrentMinute();
                 calendar.set(Calendar.HOUR_OF_DAY, alarmTimePicker.getCurrentHour());
                 calendar.set(Calendar.MINUTE, alarmTimePicker.getCurrentMinute());
-                final int id = (int) System.currentTimeMillis();
+                id[0] = (int) System.currentTimeMillis();
                 myIntent.putExtra("extra", "alarm on");
-                pending_intent = PendingIntent.getBroadcast(getActivity(), id, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                myIntent.putExtra("medicine name", medicinename);
+                pending_intent = PendingIntent.getBroadcast(getActivity(), id[0], myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
                 alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 60*60*24/Doses , pending_intent);
                 intentArray.add(pending_intent);
 
@@ -101,7 +109,10 @@ public class SetNotification extends Fragment {
             public void onClick(View v) {
 
                 myIntent.putExtra("extra", "alarm off");
-                getActivity().sendBroadcast(myIntent);
+                //Audio.stopAudio();
+             //   getActivity().sendBroadcast(myIntent);
+                pending_intent = PendingIntent.getBroadcast(getActivity(), id[0], myIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+                //alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 60*60*24/Doses , pending_intent);
                 alarmManager.cancel(pending_intent);
                 Toast.makeText(getActivity(), "alarm canceled", Toast.LENGTH_SHORT).show();
             }

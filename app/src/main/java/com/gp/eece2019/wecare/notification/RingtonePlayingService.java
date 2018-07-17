@@ -41,10 +41,10 @@ public class RingtonePlayingService extends Service {
 
         Intent intent1 = new Intent(this,Soundstopping.class);
         PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent1, 0);
-
+        String medicinename = intent.getExtras().getString("medicine name");
         Notification mNotify  = new Notification.Builder(this)
                 .setContentTitle("Your medicine's time")
-                .setContentText("Click me!")
+                .setContentText("Take your" +" "+ medicinename + " "+ "dose" )
                 .setSmallIcon(R.drawable.ic_notifications_active_black_24dp)
                 .setContentIntent(pIntent)
                 .setAutoCancel(true)
@@ -84,7 +84,6 @@ public class RingtonePlayingService extends Service {
         }
         else {
             Audio.stopAudio();
-
             this.isRunning = false;
             this.startId = 0;
         }

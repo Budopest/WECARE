@@ -41,9 +41,11 @@ public class MedicinesList extends Fragment {
 
         MSQL = new MedicineSQLhandler(getActivity());
         MSQL.execute(username);
-
-
         Db = new Medicinesqllitehandler(getActivity());
+       //Db.insertData("Cataflam",3);
+       /* Db.insertData("Betacor",2);
+        Db.insertData("CARDEX",1);
+        Db.insertData("ALDACTONE",3);*/
         Cursor res = Db.getAllData();
         if(res.getCount() != 0){
             int j = 0;
@@ -64,6 +66,7 @@ public class MedicinesList extends Fragment {
                     getActivity(), android.R.layout.simple_list_item_1, A);
             listView.setAdapter(adapter);
             registerForContextMenu(listView);
+
         }
         else {
             //showMessage("Error", "Nothing found");

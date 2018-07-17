@@ -107,15 +107,15 @@ public class MedicineSQLhandler extends AsyncTask<String,Void,String> {
                 if(result.charAt(i)==',') {
                     if(halfc<num) {name[c1]=result.substring(indexstart,i); c1++; indexstart=i+1; halfc++; }
                     else {
-                       try{
-                        dose[c2]=Integer.parseInt(result.substring(indexstart,i)); }
+                        try{
+                            dose[c2]=Integer.parseInt(result.substring(indexstart,i)); }
                         catch (Exception e){return;}
                         c2++; indexstart=i+1; halfc++;
                     }
                 }
                 if(i==result.length()-1) {
-                   try{
-                    dose[c2]=Integer.parseInt(result.substring(indexstart,i));}
+                    try{
+                        dose[c2]=Integer.parseInt(result.substring(indexstart,i));}
                     catch (Exception e){return;}
                 }
 
@@ -164,9 +164,9 @@ public class MedicineSQLhandler extends AsyncTask<String,Void,String> {
                     else c=0;
                 }
                 if(note>0){
-                alertDialog.setMessage(updatemessage);
-                alertDialog.show();
-                updatemessage="";}
+                    alertDialog.setMessage(updatemessage);
+                    alertDialog.show();
+                    updatemessage="";}
 
                 Cursor res = MSQL.getAllData();
                 String s1;
